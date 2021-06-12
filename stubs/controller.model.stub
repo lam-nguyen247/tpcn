@@ -1,0 +1,95 @@
+<?php
+
+namespace {{namespace}};
+
+use {{rootNamespace}}Http\Controllers\Controller;
+use {{rootNamespace}}Http\Requests\{{model}}Request;
+use {{namespacedModel}};
+use Exception;
+use Illuminate\Http\Response;
+
+class {{class}} extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
+    public function index()
+    {
+        ${{modelVariable}}List = {{model}}::all();
+        return view('admin.{{modelPath}}.index', compact('{{modelVariable}}List'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return Response
+     */
+    public function create()
+    {
+        ${{modelVariable}}List = {{model}}::all();
+        return view('admin.{{modelPath}}.index', compact('{{modelVariable}}List'));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param {{model}}Request ${{modelVariable}}Request
+     * @return Response
+     */
+    public function store({{model}}Request ${{modelVariable}}Request)
+    {
+        {{model}}::create(${{modelVariable}}Request->all());
+        return back()->with('success', trans('Saved successfully'));
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param {{model}} ${{modelVariable}}
+     * @return Response
+     */
+    public function show({{model}} ${{modelVariable}})
+    {
+        return view('admin.{{modelPath}}.show', compact('{{modelVariable}}'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param {{model}} ${{modelVariable}}
+     * @return Response
+     */
+    public function edit({{model}} ${{modelVariable}})
+    {
+        ${{modelVariable}}List = {{model}}::all();
+        return view('admin.{{modelPath}}.index', compact('{{modelVariable}}', '{{modelVariable}}List'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param {{model}}Request ${{modelVariable}}Request
+     * @param {{model}} ${{modelVariable}}
+     * @return Response
+     */
+    public function update({{model}}Request ${{modelVariable}}Request, {{model}} ${{modelVariable}})
+    {
+        ${{modelVariable}}->update(${{modelVariable}}Request->all());
+        return redirect()->route('{{modelPath}}.index')->with('success', trans('Updated successfully'));
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param {{model}} ${{modelVariable}}
+     * @return Response
+     * @throws Exception
+     */
+    public function destroy({{model}} ${{modelVariable}})
+    {
+        ${{modelVariable}}->delete();
+        return redirect()->route('{{modelPath}}.index')->with('success', trans('Deleted successfully'));
+    }
+}

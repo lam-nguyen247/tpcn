@@ -1,0 +1,7 @@
+/.idea
+/node_modules
+/public/images/upload
+/public/mix-manifest.json
+/storage/*.key
+/vendor
+.env
