@@ -17,7 +17,7 @@
                             <div class="col-sm-12 col-md-8 col-xl-9 d-flex align-items-center mb-2">
                                 <div class="card card-body px-0 mb-0">
                                     @if(Route::has('category.index'))
-                                    <x-select name="category_id" label="Categories" :option-list="$categoryList" required />
+                                        <x-select name="category_id" label="Categories" :option-list="$categoryList" required />
                                     @endif
                                     <x-input name="name" label="Title" class="no" required />
                                 </div>

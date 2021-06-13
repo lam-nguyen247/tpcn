@@ -76,7 +76,8 @@
                                         <a href="{{ route('product-category.edit', $productCategory->id) }}" class="text-inverse pr-2" data-toggle="tooltip" title="Chỉnh sửa">
                                             <i class="ti-marker-alt"></i>
                                         </a>
-                                        <a href="{{ route('admin.product-category.order', $productCategory->id) }}" class="text-inverse pr-2" data-toggle="tooltip" title="Sắp xếp danh mục con">
+                                        {{--{{ route('admin.product-category.order', $productCategory->id) }}--}}
+                                        <a href="#" class="text-inverse pr-2" data-toggle="tooltip" title="Sắp xếp danh mục con">
                                             <i class="ti-layers-alt"></i>
                                         </a>
                                         @csrf
@@ -85,7 +86,7 @@
                                     </form>
                                 </td>
                             </tr>
-                                
+
                             @empty
                             @endforelse
                             </tbody>

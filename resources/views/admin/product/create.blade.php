@@ -129,47 +129,7 @@
                         <textarea id="information" name="information" class="js-summernote form-material"></textarea>
                         <span for="description">Mô tả sản phẩm</span>
                         <textarea id="description" name="description" class="js-summernote form-material"></textarea>
-                        
-                        <div class="col-md-12">
-                            <span class="mb-5">Địa chỉ</span>
-                            <div class="row">
-                                <div class="form-group mb-5 col-md-3">
-                                    <select class="form-control p-0"  onchange="selectProvince()" id="province" required>
-                                        @forelse($provinces as $province)
-                                            <option value="{{$province->id}}" @if($province->name == old('province')) selected @endif>{{$province->name}}</option>
-                                        @empty
-                                        @endforelse
-                                    </select>
-                                </div>
-                                
-                                <div class="form-group mb-5 col-md-3" id="prov">
-                                    @forelse($districts as $district)
-                                    <option style="display: none"  class="province{{$district->province_id}}" value="{{$district->id}}" @if($district->name == old('district')) selected @endif>{{$district->prefix}} {{$district->name}}</option>
-                                    @empty
-                                    @endforelse
-                                    <select class="form-control p-0"   onchange="selectDistrict()" id="district" required>
-                                       
-                                    </select>
-                                </div>
-                             
-                                <div class="form-group mb-5 col-md-3" id="dis">
-                                    @forelse($wards as $ward)
-                                    <option style="display: none" class="district{{$ward->district_id}}" value="{{$ward->id}}" @if($ward->name == old('ward')) selected @endif>{{$ward->prefix}} {{$ward->name}}</option>
-                                    @empty
-                                    @endforelse
-                                    <select class="form-control p-0" onchange="setAddress()"  id="ward" required>
-                                     
-                                    </select>
-                                </div>
-                                <div class="form-group mb-5 col-md-3" id="stre">
-                                    <input id="street" type="text"  onchange="setAddress()" class="form-control @error('street') is-invalid @enderror" value="{{old('street')}}" required>
-                                    <span class="bar"></span>
-                                    <label for="street">Đường</label>
-                                </div>
-                                <input type="hidden" name="address" id="address">
-                            </div>
-                        </div>
-                      
+
                         <div class="col-md-12 mb-5">
                             <p class="mr-2" >Thể loại sản phẩm</p>
                             <div class="row">
@@ -186,31 +146,11 @@
                                 @endforeach
                             </div>
                         </div>
-                        <div class="col-md-12 ">
-                            <div id="pro" class="form-group mb-5 focused @error('name') has-error @enderror">
-                                <p>Khu vực được giao hàng</p>
-                                <div class="input-group w-25 mb-3">
-                                    <select class="form-control p-0"  id="ship" required>
-                                        @forelse($provinces as $province)
-                                            <option value="{{$province->name}}" @if($province->name == old('ship')) selected @endif>{{$province->name}}</option>
-                                        @empty
-                                        @endforelse
-                                    </select>
-                                    <div class="input-group-append">
-                                        <button class="btn btn-info" onclick="addShip()" type="button">Thêm</button>
-                                    </div>
-                                </div>
-                            
-                                <div id="ships" class="row">
-                                  
-                                </div>
-                            </div>
-                        </div>
                         {{-- <div class="col-md-12 mt-5">
                             <p class="mr-2" >Sản phẩm mua cùng</p>
                             <div class="row" id="list">
                             </div>
-                            <button type="button" class="btn btn-info mt-2" data-toggle="modal" onclick="addProduct()" data-target="#info-header-modal">Thêm sản phẩm</button>  
+                            <button type="button" class="btn btn-info mt-2" data-toggle="modal" onclick="addProduct()" data-target="#info-header-modal">Thêm sản phẩm</button>
                         </div> --}}
                         <button type="submit" id="save" class="btn btn-success waves-effect waves-light mr-2 mt-5">Lưu</button>
                     </form>
@@ -272,7 +212,7 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog --> --}}
     </div>
-    
+
 @endsection
 
 @section('css')
@@ -286,32 +226,15 @@
         #sort_description button['aria-label=Picture']{
             display:none;
         }
+        .card-header {
+            z-index: 0 !important;
+        }
     </style>
 @endsection
 
 @section('js')
 <script>
     let ships = new Array();
-    function addShip(){
-        let val = $("#ship").val();
-        if(val != '' && !ships.includes(val)){
-            ships.push(val);
-            let str = `
-            <div class="col-md-2">
-                <div class="input-group mb-3">
-                    <input type="text" name="ships[]" readOnly class="form-control p-1" value="${val}" placeholder="" aria-label="" aria-describedby="basic-addon1">
-                    <div class="input-group-append">
-                        <button class="btn btn-info" type="button" onclick="removeShip(this)">Xóa</button>
-                    </div>
-                </div>
-            </div>
-            `;
-            $("#ships").append(str);
-        }
-    }
-    function removeShip(ele){
-        $(ele).parent().parent().parent().remove();
-    }
     function selectCategory(){
         $(".proper").css('display','none');
         let parent_id = $("#product_category option:selected").attr('data-parent');
@@ -321,11 +244,6 @@
 
     selectCategory();
 
-    function setAddress(){
-        let address = $("#street").val() + ', ' + $("#ward option:selected" ).text() + ', '+ $("#district option:selected" ).text()+ ', ' + $("#province option:selected" ).text();
-        $("#address").val(address);
-    }
-
     function changePrice(){
         if(parseInt($("#price").val())<= parseInt($("#sale").val())){
             alert("Giá khuyến mãi phải nhỏ hơn giá gốc!");
@@ -334,35 +252,6 @@
             $("#save").removeAttr('disabled');
         }
     }
-
-    function selectProvince(){
-        $("#district").html('');
-        list =  $(".province"+$("#province").val());
-    
-        for( let i = 0 ; i < list.length ; i++){
-            str = `
-             <option value='${list.eq(i).attr('value')}'> ${list.eq(i).html()}  </option>
-            `
-            $("#district").append(str);
-        }
-        selectDistrict();
-    }
-
-    function selectDistrict(){
-        $("#ward").html('');
-        list =  $(".district"+$("#district").val());
-    
-        for( let i = 0 ; i < list.length ; i++){
-            str = `
-             <option value='${list.eq(i).attr('value')}'> ${list.eq(i).html()}  </option>
-            `
-            $("#ward").append(str);
-        }
-        $("#street").val('');
-        setAddress();
-    }
-
-    selectProvince();
 
     function removeProduct(ele){
         $(ele).parent().parent().parent().remove();
@@ -376,7 +265,7 @@
                 count++;
                 alert('Sản phẩm này đã được liên kết');
                 return;
-               
+
             }
         }
         if(count==0){
@@ -387,7 +276,7 @@
                             <div class="input-group-append">
                                 <button class="btn btn-outline-secondary" type="button" onclick="removeProduct(this)">Xoá</button>
                             </div>
-                        </div>  
+                        </div>
                     </div> `
             $("#list").append(str);
         }
@@ -404,6 +293,7 @@
                 ['para', ['ul', 'ol', 'paragraph']],
                 ['height', ['height']]
             ],
+            followingToolbar: false,
             height: 300, // set editor height
             minHeight: null, // set minimum height of editor
             maxHeight: null, // set maximum height of editor

@@ -170,6 +170,26 @@
                                 </ul>
                             </li>
                         @endif
+                        @if(Route::has('product.index'))
+                            <li class="sidebar-item">
+                                <a class="sidebar-link waves-effect waves-dark has-arrow" href="javascript:void(0)" aria-expanded="false">
+                                    <i class="ti-receipt"></i><span class="hide-menu">@lang('Product')</span>
+                                </a>
+                                <ul aria-expanded="false" class="collapse first-level">
+                                    <li class="sidebar-item"><a href="{{route('product.index')}}" class="sidebar-link">
+                                            <i class="mdi mdi-octagram"></i><span class="hide-menu">@lang('All Posts')</span></a>
+                                    </li>
+                                    <li class="sidebar-item"><a href="{{route('product.create')}}" class="sidebar-link">
+                                            <i class="mdi mdi-octagram"></i><span class="hide-menu">@lang('Add New')</span></a>
+                                    </li>
+                                    @if(Route::has('product-category.index'))
+                                        <li class="sidebar-item"><a href="{{route('product-category.index')}}" class="sidebar-link">
+                                            <i class="mdi mdi-octagram"></i><span class="hide-menu">@lang('Categories')</span></a>
+                                        </li>
+                                    @endif
+                                </ul>
+                            </li>
+                        @endif
                         @if(Route::has('page.index'))
                             <li class="sidebar-item">
                                 <a class="sidebar-link waves-effect waves-dark has-arrow" href="javascript:void(0)" aria-expanded="false">
