@@ -44,6 +44,7 @@ Route::resource('post', PostController::class);
 Route::resource('product', ProductController::class);
 Route::resource('product-category', ProductCategoryController::class);
 Route::get('product-category/order/{id}',[ProductCategoryController::class, 'order'])->name('product-category.order');
+Route::get('/product/commentList/{id}',[ProductController::class, 'commentList'])->name('product.commentList');
 Route::resource('page', PageController::class);
 Route::resource('slide', SlideController::class);
 Route::post('slide/order', [SlideController::class, 'order']);

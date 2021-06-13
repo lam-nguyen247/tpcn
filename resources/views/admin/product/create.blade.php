@@ -137,80 +137,23 @@
                                     @php
                                         $list = empty($productPropertyItem->properties)?[]:json_decode($productPropertyItem->properties, false, 512, JSON_UNESCAPED_UNICODE);
                                     @endphp
-                                    @foreach ($list as $key => $item)
-                                        <div style="display: none;" class="col-md-3 proper properties{{$productPropertyItem->parent_id>0?$productPropertyItem->parent_id:$productPropertyItem->id}}" >
-                                            <input type="checkbox" id="properties_{{$productPropertyItem->id}}_{{$key}}" name="properties[]" value="{{$item}}" class="material-inputs chk-col-red">
-                                            <label for="properties_{{$productPropertyItem->id}}_{{$key}}">{{$item}}</label>
-                                        </div>
-                                    @endforeach
+                                    @if(!empty($list))
+                                        @foreach ($list as $key => $item)
+                                            <div style="display: none;" class="col-md-3 proper properties{{$productPropertyItem->parent_id>0?$productPropertyItem->parent_id:$productPropertyItem->id}}" >
+                                                <input type="checkbox" id="properties_{{$productPropertyItem->id}}_{{$key}}" name="properties[]" value="{{$item}}" class="material-inputs chk-col-red">
+                                                <label for="properties_{{$productPropertyItem->id}}_{{$key}}">{{$item}}</label>
+                                            </div>
+                                        @endforeach
+                                    @endif
                                 @endforeach
                             </div>
                         </div>
-                        {{-- <div class="col-md-12 mt-5">
-                            <p class="mr-2" >Sản phẩm mua cùng</p>
-                            <div class="row" id="list">
-                            </div>
-                            <button type="button" class="btn btn-info mt-2" data-toggle="modal" onclick="addProduct()" data-target="#info-header-modal">Thêm sản phẩm</button>
-                        </div> --}}
                         <button type="submit" id="save" class="btn btn-success waves-effect waves-light mr-2 mt-5">Lưu</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-    {{-- <div id="info-header-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="info-header-modalLabel" aria-modal="true">
-        <div class="modal-dialog modal-dialog-centered modal-full-width">
-            <div class="modal-content">
-                <div class="modal-header modal-colored-header bg-info">
-                    <h4 class="modal-title text-white" id="info-header-modalLabel">Modal
-                        Heading</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h4 class="card-title">Danh Sách Sản Phẩm</h4>
-                                    <input type="hidden" id="index">
-                                    <h6 class="card-subtitle">&nbsp;</h6>
-                                    <div class="table-responsive">
-                                        <table class="table table-striped table-bordered display js-datatable w-100">
-                                            <thead>
-                                            <tr>
-                                                <th></th>
-                                                <th></th>
-                                                @if(Route::has('product-category.index'))<th>Danh mục sản phẩm</th>@endif
-                                                <th>Tên Sản Phẩm</th>
-                                                <th></th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            @forelse($productList as $product)
-                                                <tr>
-                                                    <td>{{$product->id}}</td>
-                                                    <td><img src="{{$product->image}}" width="80" /></td>
-                                                    @if(Route::has('product-category.index'))<td>{{$product->productCategory->name}}</td>@endif
-                                                    <td>{{$product->title}}</td>
-                                                    <td>
-                                                        <button type="button" class="btn btn-info" onclick="chooseProduct({{$product->id}},'{{$product->title}}')" data-id="{{$product->id}}" data-dismiss="modal">Chọn</button>
-                                                    </td>
-                                                </tr>
-                                            @empty
-                                            @endforelse
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
-                </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog --> --}}
     </div>
 
 @endsection
@@ -238,7 +181,6 @@
     function selectCategory(){
         $(".proper").css('display','none');
         let parent_id = $("#product_category option:selected").attr('data-parent');
-        console.log(parent_id);
         $(".properties" + parent_id).css('display', 'block');
     }
 
@@ -385,6 +327,7 @@
 
     }
     sortOder();
+
     $('.sab-btn-remove-item').click(function(event) {
         let index_rm = $(this).closest('.sab-item').attr('data-index');
         var list_rm= $("#list_remove").val();

@@ -42,7 +42,7 @@ class Product extends Model
     public function getSrcAttribute()
     {
         return '/' . $this->image;
-    
+
     }
     public function getLimitContentAttribute()
     {
@@ -59,17 +59,7 @@ class Product extends Model
         }
         return '/san-pham/' . $slug;
     }
-
-    // public function getQtyAttribute()
-    // {
-    //     $property = Property::where('product_id',$this->id)->first();
-    //     if($property != null){
-    //         if(count($property->productProperties)>0){
-    //             return $property->productProperties[0]->qty;
-    //         }
-    //     }
-    //     $this->qty;
-    // }
+    
 
     public function getPricevnAttribute(){
         if($this->price != null && $this->price > 0){

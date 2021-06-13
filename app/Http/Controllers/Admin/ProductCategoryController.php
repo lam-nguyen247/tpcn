@@ -41,7 +41,7 @@ class ProductCategoryController extends Controller
         $request->request->add($arr_add);
         $productCategory  = ProductCategory::create($request->except(['image', 'banner','properties']));
         if(isset($request->properties) && count($request->properties)>0){
-            $productCategory->properties = json_encode($request->properties, JSON_UNESCAPED_UNICODE);
+            $productCategory->properties = implode($request->properties, ",");
         }
         if($request->image){
             $productCategory->image = $imageService->store($request->image, config('constants.folder.productcategory') . $productCategory->id . '/');
@@ -60,7 +60,7 @@ class ProductCategoryController extends Controller
         foreach($productCategoryList as $key=>$item){
             $productCategoryList[$key]->childs = ProductCategory::where('parent_id',$item->id)->orderBy('id','asc')->get();
         }
-       
+
         return view('admin.productcategory.index', compact('productCategory', 'productCategoryList'));
     }
 
@@ -73,12 +73,12 @@ class ProductCategoryController extends Controller
      */
     public function update(ProductCategoryRequest $request, ProductCategory $productCategory, ImageService $imageService)
     {
-        
+
         if($productCategory->parent_id==0 && $request->parent_id !=0){
             DB::statement('UPDATE product_categories SET parent_id = 0 WHERE parent_id = '.$productCategory->id);
         }
         $request->request->add(['slug' => Str::slug($request->name)]);
-       
+
         if($request->image){
             $productCategory->image = $imageService->store($request->image, config('constants.folder.productcategory') . $productCategory->id . '/');
         }

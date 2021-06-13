@@ -23,6 +23,94 @@
     <link href="/css/admin/sweetalert2.min.css" rel="stylesheet">
     <link href="/css/admin/app.min.css" rel="stylesheet">
     @yield('css')
+    <style>
+        #sortable{
+            list-style: none;
+        }
+
+        .sab-item {
+            width: 32%;
+            float: left;
+            margin: 5px;
+            background: #fff;
+        }
+
+        .sab-item-template {
+            display: none !important;
+        }
+
+        .sab-item-header {
+            position: relative;
+            background: #EEEEEE;
+            border: 1px solid #D3D3D3;
+            font-weight: bold;
+            cursor: move;
+        }
+
+        .sab-item-header button {
+            position: absolute;
+            top: 1px;
+            right: 1px;
+            height: 34px;
+            width: 34px;
+            background: #444;
+            border: none;
+            border-radius: 4px;
+            font-weight: 900;
+            font-size: 24px;
+            color: #EEEEEE;
+            cursor: pointer;
+        }
+
+        .sab-item-row {
+            clear: both;
+            position: relative;
+        }
+
+        .sab-item-cell-left {
+            background: #EEEEEE;
+            border: #D3D3D3;
+            font-weight: bold;
+            width: 100px;
+            float: left;
+            text-align: center;
+            vertical-align: middle;
+            position: absolute;
+            height: calc(100% - 2px);
+            border: 1px solid #D3D3D3;
+        }
+
+        .sab-item-cell-right {
+            width: calc(100% - 112px);
+            text-align: center;
+            border: 1px solid #ddd;
+            float: right;
+            padding: 5px;
+        }
+
+        .lb_multi_image {
+            cursor: pointer;
+            display: inline-block;
+            text-align: center;
+            color: white !important;
+        }
+
+        .image_device {
+            width: 125px;
+            height: 125px;
+            left: 0;
+            z-index: 2;
+            opacity: 0;
+            cursor: pointer;
+            position: absolute;
+            left: 50%;
+            top: 1px;
+        }
+
+        .btn_multi_image {
+            opacity: 0;
+        }
+    </style>
 </head>
 <body>
     <div class="preloader">
@@ -173,7 +261,7 @@
                         @if(Route::has('product.index'))
                             <li class="sidebar-item">
                                 <a class="sidebar-link waves-effect waves-dark has-arrow" href="javascript:void(0)" aria-expanded="false">
-                                    <i class="ti-receipt"></i><span class="hide-menu">@lang('Product')</span>
+                                    <i class="ti-gift"></i><span class="hide-menu">@lang('Product')</span>
                                 </a>
                                 <ul aria-expanded="false" class="collapse first-level">
                                     <li class="sidebar-item"><a href="{{route('product.index')}}" class="sidebar-link">

@@ -77,10 +77,7 @@ class ProductController extends Controller
         $list_img = json_encode($images);
         $request->request->add(['album' => $list_img, 'slug' => Str::slug($request->title), 'property_category'=> null]);
         $combo_product_id = $request->combo_product_id;
-        $listShip = '';
-        if(isset($request->ships) && count($request->ships)>0){
-            $listShip = json_encode($request->ships, JSON_UNESCAPED_UNICODE);
-        }
+
         $data_insert = [
             'product_category_id' => $request->product_category_id,
             'code' => $request->code,
@@ -97,8 +94,6 @@ class ProductController extends Controller
             'qty' => $request->qty,
             'property_category'=>'',
             'image' => '',
-            'listShip' =>  $listShip,
-            'store_name' => env("APP_NAME"),
             'slug' => Str::slug($request->title)
         ];
         $product = Product::create($data_insert);
