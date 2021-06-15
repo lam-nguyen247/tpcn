@@ -26,7 +26,7 @@
                                 <tr>
                                     <td>{{$post->id}}</td>
                                     <td><img @src="{{$post->image}}" width="80" /></td>
-                                    @if(Route::has('category.index'))<td>{{$post->category->first()->name}}</td>@endif
+                                    @if(Route::has('category.index'))<td></td>@endif
                                     <td>{{$post->name}}</td>
                                     <td><x-action route="post" id="{{$post->id}}" /></td>
                                 </tr>

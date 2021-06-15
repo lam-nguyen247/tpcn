@@ -28,7 +28,7 @@
                             @forelse($productList as $product)
                                 <tr>
                                     <td>{{$product->id}}</td>
-                                    <td><img src="{{$product->image}}" width="80" /></td>
+                                    <td><img src="{{asset($product->image)}}" width="80" /></td>
                                     @if(Route::has('product-category.index'))<td>{{$product->productCategory->name}}</td>@endif
                                     <td>{{$product->title}}</td>
                                     <td>
@@ -39,12 +39,13 @@
                                     </td>
                                     <td class="{{$product->status==1?'text-primary':'text-danger'}}">{{$product->statusString}}</td>
                                     <td>
-                                       
+
                                         <form action="{{ route('product.destroy', $product->id) }}" method="POST">
-                                            <a href="{{ route('admin.product.property', $product->id) }}" class="text-inverse pr-2" data-toggle="tooltip" title="Cập nhật thuộc tính">
+{{--                                            {{ route('admin.product.property', $product->id) }}--}}
+                                            <a href="#" class="text-inverse pr-2" data-toggle="tooltip" title="Cập nhật thuộc tính">
                                                 <i class="fab fa-product-hunt"></i>
                                             </a>
-                                            <a href="{{ route('admin.product.commentList', $product->id) }}" class="text-inverse pr-2" data-toggle="tooltip" title="Bình luận">
+                                            <a href="{{ route('product.commentList', $product->id) }}" class="text-inverse pr-2" data-toggle="tooltip" title="Bình luận">
                                                 <i class="ti-comments"></i>
                                             </a>
                                             <a href="{{ route('product.edit', $product->id) }}" class="text-inverse pr-2" data-toggle="tooltip" title="Chỉnh sửa">
@@ -82,9 +83,9 @@
                 }).done(function(res){
                 })
             }
-            
+
         }
     }
 
-</script>    
+</script>
 @endsection

@@ -52,4 +52,4 @@ Route::fallback(function () {
     return redirect('/');
 });
 
-Route::get('key', [ChanelController::class, 'getKey']);
+//Route::get('key', [ChanelController::class, 'getKey']);

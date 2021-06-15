@@ -28,9 +28,14 @@ class CategoryController extends Controller
      */
     public function index(Request $request)
     {
-        $masterCategory = MasterCategory::whereName($request['masterCategory'])->firstOrFail();
-        $categoryList = $masterCategory->rootCategoryList;
-        $categoryFlatList = $masterCategory->categoryList;
+        $masterCategory = MasterCategory::whereName($request['masterCategory'])->first();
+        $categoryList = null;
+        $categoryFlatList = null;
+        if (!empty($masterCategory)) {
+            $categoryList = $masterCategory->rootCategoryList;
+            $categoryFlatList = $masterCategory->categoryList;
+        }
+
         return view('admin.category.index', compact('masterCategory', 'categoryList', 'categoryFlatList'));
     }
 

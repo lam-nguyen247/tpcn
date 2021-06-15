@@ -129,47 +129,7 @@
                         <textarea id="information" name="information" class="js-summernote form-material"></textarea>
                         <span for="description">Mô tả sản phẩm</span>
                         <textarea id="description" name="description" class="js-summernote form-material"></textarea>
-                        
-                        <div class="col-md-12">
-                            <span class="mb-5">Địa chỉ</span>
-                            <div class="row">
-                                <div class="form-group mb-5 col-md-3">
-                                    <select class="form-control p-0"  onchange="selectProvince()" id="province" required>
-                                        @forelse($provinces as $province)
-                                            <option value="{{$province->id}}" @if($province->name == old('province')) selected @endif>{{$province->name}}</option>
-                                        @empty
-                                        @endforelse
-                                    </select>
-                                </div>
-                                
-                                <div class="form-group mb-5 col-md-3" id="prov">
-                                    @forelse($districts as $district)
-                                    <option style="display: none"  class="province{{$district->province_id}}" value="{{$district->id}}" @if($district->name == old('district')) selected @endif>{{$district->prefix}} {{$district->name}}</option>
-                                    @empty
-                                    @endforelse
-                                    <select class="form-control p-0"   onchange="selectDistrict()" id="district" required>
-                                       
-                                    </select>
-                                </div>
-                             
-                                <div class="form-group mb-5 col-md-3" id="dis">
-                                    @forelse($wards as $ward)
-                                    <option style="display: none" class="district{{$ward->district_id}}" value="{{$ward->id}}" @if($ward->name == old('ward')) selected @endif>{{$ward->prefix}} {{$ward->name}}</option>
-                                    @empty
-                                    @endforelse
-                                    <select class="form-control p-0" onchange="setAddress()"  id="ward" required>
-                                     
-                                    </select>
-                                </div>
-                                <div class="form-group mb-5 col-md-3" id="stre">
-                                    <input id="street" type="text"  onchange="setAddress()" class="form-control @error('street') is-invalid @enderror" value="{{old('street')}}" required>
-                                    <span class="bar"></span>
-                                    <label for="street">Đường</label>
-                                </div>
-                                <input type="hidden" name="address" id="address">
-                            </div>
-                        </div>
-                      
+
                         <div class="col-md-12 mb-5">
                             <p class="mr-2" >Thể loại sản phẩm</p>
                             <div class="row">
@@ -177,102 +137,25 @@
                                     @php
                                         $list = empty($productPropertyItem->properties)?[]:json_decode($productPropertyItem->properties, false, 512, JSON_UNESCAPED_UNICODE);
                                     @endphp
-                                    @foreach ($list as $key => $item)
-                                        <div style="display: none;" class="col-md-3 proper properties{{$productPropertyItem->parent_id>0?$productPropertyItem->parent_id:$productPropertyItem->id}}" >
-                                            <input type="checkbox" id="properties_{{$productPropertyItem->id}}_{{$key}}" name="properties[]" value="{{$item}}" class="material-inputs chk-col-red">
-                                            <label for="properties_{{$productPropertyItem->id}}_{{$key}}">{{$item}}</label>
-                                        </div>
-                                    @endforeach
+                                    @if(!empty($list))
+                                        @foreach ($list as $key => $item)
+                                            <div style="display: none;" class="col-md-3 proper properties{{$productPropertyItem->parent_id>0?$productPropertyItem->parent_id:$productPropertyItem->id}}" >
+                                                <input type="checkbox" id="properties_{{$productPropertyItem->id}}_{{$key}}" name="properties[]" value="{{$item}}" class="material-inputs chk-col-red">
+                                                <label for="properties_{{$productPropertyItem->id}}_{{$key}}">{{$item}}</label>
+                                            </div>
+                                        @endforeach
+                                    @endif
                                 @endforeach
                             </div>
                         </div>
-                        <div class="col-md-12 ">
-                            <div id="pro" class="form-group mb-5 focused @error('name') has-error @enderror">
-                                <p>Khu vực được giao hàng</p>
-                                <div class="input-group w-25 mb-3">
-                                    <select class="form-control p-0"  id="ship" required>
-                                        @forelse($provinces as $province)
-                                            <option value="{{$province->name}}" @if($province->name == old('ship')) selected @endif>{{$province->name}}</option>
-                                        @empty
-                                        @endforelse
-                                    </select>
-                                    <div class="input-group-append">
-                                        <button class="btn btn-info" onclick="addShip()" type="button">Thêm</button>
-                                    </div>
-                                </div>
-                            
-                                <div id="ships" class="row">
-                                  
-                                </div>
-                            </div>
-                        </div>
-                        {{-- <div class="col-md-12 mt-5">
-                            <p class="mr-2" >Sản phẩm mua cùng</p>
-                            <div class="row" id="list">
-                            </div>
-                            <button type="button" class="btn btn-info mt-2" data-toggle="modal" onclick="addProduct()" data-target="#info-header-modal">Thêm sản phẩm</button>  
-                        </div> --}}
                         <button type="submit" id="save" class="btn btn-success waves-effect waves-light mr-2 mt-5">Lưu</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-    {{-- <div id="info-header-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="info-header-modalLabel" aria-modal="true">
-        <div class="modal-dialog modal-dialog-centered modal-full-width">
-            <div class="modal-content">
-                <div class="modal-header modal-colored-header bg-info">
-                    <h4 class="modal-title text-white" id="info-header-modalLabel">Modal
-                        Heading</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h4 class="card-title">Danh Sách Sản Phẩm</h4>
-                                    <input type="hidden" id="index">
-                                    <h6 class="card-subtitle">&nbsp;</h6>
-                                    <div class="table-responsive">
-                                        <table class="table table-striped table-bordered display js-datatable w-100">
-                                            <thead>
-                                            <tr>
-                                                <th></th>
-                                                <th></th>
-                                                @if(Route::has('product-category.index'))<th>Danh mục sản phẩm</th>@endif
-                                                <th>Tên Sản Phẩm</th>
-                                                <th></th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            @forelse($productList as $product)
-                                                <tr>
-                                                    <td>{{$product->id}}</td>
-                                                    <td><img src="{{$product->image}}" width="80" /></td>
-                                                    @if(Route::has('product-category.index'))<td>{{$product->productCategory->name}}</td>@endif
-                                                    <td>{{$product->title}}</td>
-                                                    <td>
-                                                        <button type="button" class="btn btn-info" onclick="chooseProduct({{$product->id}},'{{$product->title}}')" data-id="{{$product->id}}" data-dismiss="modal">Chọn</button>
-                                                    </td>
-                                                </tr>
-                                            @empty
-                                            @endforelse
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
-                </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog --> --}}
     </div>
-    
+
 @endsection
 
 @section('css')
@@ -286,45 +169,22 @@
         #sort_description button['aria-label=Picture']{
             display:none;
         }
+        .card-header {
+            z-index: 0 !important;
+        }
     </style>
 @endsection
 
 @section('js')
 <script>
     let ships = new Array();
-    function addShip(){
-        let val = $("#ship").val();
-        if(val != '' && !ships.includes(val)){
-            ships.push(val);
-            let str = `
-            <div class="col-md-2">
-                <div class="input-group mb-3">
-                    <input type="text" name="ships[]" readOnly class="form-control p-1" value="${val}" placeholder="" aria-label="" aria-describedby="basic-addon1">
-                    <div class="input-group-append">
-                        <button class="btn btn-info" type="button" onclick="removeShip(this)">Xóa</button>
-                    </div>
-                </div>
-            </div>
-            `;
-            $("#ships").append(str);
-        }
-    }
-    function removeShip(ele){
-        $(ele).parent().parent().parent().remove();
-    }
     function selectCategory(){
         $(".proper").css('display','none');
         let parent_id = $("#product_category option:selected").attr('data-parent');
-        console.log(parent_id);
         $(".properties" + parent_id).css('display', 'block');
     }
 
     selectCategory();
-
-    function setAddress(){
-        let address = $("#street").val() + ', ' + $("#ward option:selected" ).text() + ', '+ $("#district option:selected" ).text()+ ', ' + $("#province option:selected" ).text();
-        $("#address").val(address);
-    }
 
     function changePrice(){
         if(parseInt($("#price").val())<= parseInt($("#sale").val())){
@@ -334,35 +194,6 @@
             $("#save").removeAttr('disabled');
         }
     }
-
-    function selectProvince(){
-        $("#district").html('');
-        list =  $(".province"+$("#province").val());
-    
-        for( let i = 0 ; i < list.length ; i++){
-            str = `
-             <option value='${list.eq(i).attr('value')}'> ${list.eq(i).html()}  </option>
-            `
-            $("#district").append(str);
-        }
-        selectDistrict();
-    }
-
-    function selectDistrict(){
-        $("#ward").html('');
-        list =  $(".district"+$("#district").val());
-    
-        for( let i = 0 ; i < list.length ; i++){
-            str = `
-             <option value='${list.eq(i).attr('value')}'> ${list.eq(i).html()}  </option>
-            `
-            $("#ward").append(str);
-        }
-        $("#street").val('');
-        setAddress();
-    }
-
-    selectProvince();
 
     function removeProduct(ele){
         $(ele).parent().parent().parent().remove();
@@ -376,7 +207,7 @@
                 count++;
                 alert('Sản phẩm này đã được liên kết');
                 return;
-               
+
             }
         }
         if(count==0){
@@ -387,7 +218,7 @@
                             <div class="input-group-append">
                                 <button class="btn btn-outline-secondary" type="button" onclick="removeProduct(this)">Xoá</button>
                             </div>
-                        </div>  
+                        </div>
                     </div> `
             $("#list").append(str);
         }
@@ -404,6 +235,7 @@
                 ['para', ['ul', 'ol', 'paragraph']],
                 ['height', ['height']]
             ],
+            followingToolbar: false,
             height: 300, // set editor height
             minHeight: null, // set minimum height of editor
             maxHeight: null, // set maximum height of editor
@@ -495,6 +327,7 @@
 
     }
     sortOder();
+
     $('.sab-btn-remove-item').click(function(event) {
         let index_rm = $(this).closest('.sab-item').attr('data-index');
         var list_rm= $("#list_remove").val();

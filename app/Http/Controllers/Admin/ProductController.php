@@ -45,11 +45,8 @@ class ProductController extends Controller
     public function create()
     {
         $productCategoryList = ProductCategory::orderBy('order_display','asc')->get();
-        $districts = District::all();
-        $provinces = Province::all();
-        $wards = Ward::all();
         $productList = Product::all();
-        return view('admin.product.create', compact('productCategoryList', 'productList', 'provinces', 'districts', 'wards'));
+        return view('admin.product.create', compact('productCategoryList', 'productList'));
     }
 
     /**
@@ -80,10 +77,7 @@ class ProductController extends Controller
         $list_img = json_encode($images);
         $request->request->add(['album' => $list_img, 'slug' => Str::slug($request->title), 'property_category'=> null]);
         $combo_product_id = $request->combo_product_id;
-        $listShip = '';
-        if(isset($request->ships) && count($request->ships)>0){
-            $listShip = json_encode($request->ships, JSON_UNESCAPED_UNICODE);
-        }
+
         $data_insert = [
             'product_category_id' => $request->product_category_id,
             'code' => $request->code,
@@ -100,8 +94,6 @@ class ProductController extends Controller
             'qty' => $request->qty,
             'property_category'=>'',
             'image' => '',
-            'listShip' =>  $listShip,
-            'store_name' => env("APP_NAME"),
             'slug' => Str::slug($request->title)
         ];
         $product = Product::create($data_insert);
@@ -138,12 +130,9 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         $productCategoryList = ProductCategory::orderBy('order_display','asc')->get();
-        $districts = District::all();
-        $provinces = Province::all();
-        $wards = Ward::all();
         $productList = Product::where('id','<>', $product->id)->get();
         session(['productList'=>$productList]);
-        return view('admin.product.edit', compact('product', 'productCategoryList', 'productList', 'districts', 'provinces', 'wards'));
+        return view('admin.product.edit', compact('product', 'productCategoryList', 'productList'));
     }
 
     /**
@@ -260,7 +249,7 @@ class ProductController extends Controller
         }
         return view('admin.product.property', compact('productCategoryList', 'product', 'properties'));
     }
-    
+
     public function updateProperty(Request $request, $id=0){
         $data = $request->all();
         if(isset($data['property_name'])){

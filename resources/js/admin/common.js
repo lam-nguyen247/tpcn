@@ -18,6 +18,7 @@ $(function () {
         $(this).summernote({
             placeholder: $(this).attr('placeholder'),
             minHeight: 300,
+            followingToolbar: false,
             callbacks: {
                 onMediaDelete: function (target) {
                     let url = target[0].getAttribute('src');

@@ -29,13 +29,8 @@ class CreateProductsTable extends Migration
             $table->integer('status')->default(1);
             $table->integer('purchase')->nullable()->default(0);
             $table->integer('qty')->nullable()->default(0);
-            $table->float('score',2)->nullable()->default(0);
-            $table->integer('votes')->nullable()->default(0);
-            $table->integer('store_id')->nullable()->default(0);
-            $table->string('address');
+            $table->string('address')->nullable();
             $table->string('property_category')->nullable()->default('');
-            $table->string('store_name')->nullable();
-            $table->string('listShip')->nullable()->default('');
             $table->decimal('online',20,0)->nullable()->default(0);
             $table->timestamps();
 
