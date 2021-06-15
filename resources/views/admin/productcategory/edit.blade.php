@@ -35,7 +35,7 @@
                                     <option value="{{$item->id}}" @if($item->id == $productCategory->parent_id) selected @endif>{{$item->name}}</option>
                                 @endif
                             @empty
-                                
+
                             @endforelse
                         </select>
                         <span class="bar"></span>
@@ -54,17 +54,18 @@
                             @php
                                 $properties = empty($productCategory->properties)?[]:json_decode($productCategory->properties, false, 512, JSON_UNESCAPED_UNICODE);
                             @endphp
-                            @foreach ($properties as $item)
-                            <div class="col-md-2">
-                                <div class="input-group mb-3">
-                                    <input type="text" name="properties[]" class="form-control pro" value="{{$item}}" placeholder="" aria-label="" aria-describedby="basic-addon1">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-info" onclick="removeProperty(this)" type="button">Xóa</button>
+                            @if(!empty($properties))
+                                @foreach ($properties as $item)
+                                <div class="col-md-2">
+                                    <div class="input-group mb-3">
+                                        <input type="text" name="properties[]" class="form-control pro" value="{{$item}}" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-info" onclick="removeProperty(this)" type="button">Xóa</button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            @endforeach
-                            
+                                @endforeach
+                            @endif
                         </div>
                     </div>
                     <div class="row">

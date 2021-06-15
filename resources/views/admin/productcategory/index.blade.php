@@ -77,9 +77,9 @@
                                             <i class="ti-marker-alt"></i>
                                         </a>
                                         {{--{{ route('admin.product-category.order', $productCategory->id) }}--}}
-                                        <a href="#" class="text-inverse pr-2" data-toggle="tooltip" title="Sắp xếp danh mục con">
-                                            <i class="ti-layers-alt"></i>
-                                        </a>
+{{--                                        <a href="#" class="text-inverse pr-2" data-toggle="tooltip" title="Sắp xếp danh mục con">--}}
+{{--                                            <i class="ti-layers-alt"></i>--}}
+{{--                                        </a>--}}
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn p-0 text-inverse js-delete-sweetalert" title="Xóa" data-toggle="tooltip"><i class="ti-trash"></i></button>

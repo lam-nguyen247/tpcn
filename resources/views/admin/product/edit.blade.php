@@ -1,5 +1,5 @@
 @extends('admin.layouts.app')
-<?php 
+<?php
     function getTitleById($id){
         $title = '';
         foreach(session('productList') as $item){
@@ -192,24 +192,24 @@
                                         @endforelse
                                     </select>
                                 </div>
-                                
+
                                 <div class="form-group mb-5 col-md-3" id="prov">
                                     @forelse($districts as $district)
                                     <option style="display: none"  class="province{{$district->province_id}}" value="{{$district->id}}" @if($district->name == old('district')) selected @endif>{{$district->prefix}} {{$district->name}}</option>
                                     @empty
                                     @endforelse
                                     <select class="form-control p-0"   onchange="selectDistrict()" id="district" required>
-                                       
+
                                     </select>
                                 </div>
-                             
+
                                 <div class="form-group mb-5 col-md-3" id="dis">
                                     @forelse($wards as $ward)
                                     <option style="display: none" class="district{{$ward->district_id}}" value="{{$ward->id}}" @if($ward->name == old('ward')) selected @endif>{{$ward->prefix}} {{$ward->name}}</option>
                                     @empty
                                     @endforelse
                                     <select class="form-control p-0" onchange="setAddress()"  id="ward" required>
-                                     
+
                                     </select>
                                 </div>
                                 <div class="form-group mb-5 col-md-3" id="stre">
@@ -218,10 +218,10 @@
                                     <label for="street">Đường</label>
                                     <input type="hidden" name="address" id="address">
                                 </div>
-                                
+
                             </div>
                         </div>
-                      
+
                         <div class="col-md-12 mb-5">
                             <p class="mr-2" >Thể loại sản phẩm</p>
                             <div class="row">
@@ -254,7 +254,7 @@
                                         <button class="btn btn-info" onclick="addShip()" type="button">Thêm</button>
                                     </div>
                                 </div>
-                            
+
                                 <div id="ships" class="row">
                                     @php
                                         $ships = empty($product->listShip)?[]:json_decode($product->listShip, false, 512, JSON_UNESCAPED_UNICODE);
@@ -283,11 +283,11 @@
                                             <div class="input-group-append">
                                                 <button class="btn btn-outline-secondary" type="button" onclick="removeProduct(this)">Xoá</button>
                                             </div>
-                                        </div>  
+                                        </div>
                                     </div>
                                @endforeach
                             </div>
-                            <button type="button" class="btn btn-info mt-2" data-toggle="modal" onclick="addProduct()" data-target="#info-header-modal">Thêm sản phẩm</button>  
+                            <button type="button" class="btn btn-info mt-2" data-toggle="modal" onclick="addProduct()" data-target="#info-header-modal">Thêm sản phẩm</button>
                         </div> --}}
                         <button type="submit" id="save" class="btn btn-success waves-effect waves-light mr-2 mt-5">Lưu</button>
                     </form>
@@ -360,6 +360,9 @@
         .form-group .note-form-label {
             position: initial;
         }
+        .card-header {
+            z-index: 0 !important;
+        }
     </style>
 @endsection
 
@@ -418,7 +421,7 @@
     function selectProvince(){
         $("#district").html('');
         list =  $(".province"+$("#province").val());
-    
+
         for( let i = 0 ; i < list.length ; i++){
             str = `
              <option value='${list.eq(i).attr('value')}'> ${list.eq(i).html()}  </option>
@@ -431,7 +434,7 @@
     function selectDistrict(){
         $("#ward").html('');
         list =  $(".district"+$("#district").val());
-    
+
         for( let i = 0 ; i < list.length ; i++){
             str = `
              <option value='${list.eq(i).attr('value')}'> ${list.eq(i).html()}  </option>
@@ -472,7 +475,7 @@
                 count++;
                 alert('Sản phẩm này đã được liên kết');
                 return;
-               
+
             }
         }
         if(count==0){
@@ -483,7 +486,7 @@
                             <div class="input-group-append">
                                 <button class="btn btn-outline-secondary" type="button" onclick="removeProduct(this)">Xoá</button>
                             </div>
-                        </div>  
+                        </div>
                     </div> `
             $("#list").append(str);
         }
@@ -501,7 +504,7 @@
                 count++;
                 alert('Sản phẩm này đã được liên kết');
                 return;
-               
+
             }
         }
         if(count==0){
@@ -512,7 +515,7 @@
                             <div class="input-group-append">
                                 <button class="btn btn-outline-secondary" type="button" onclick="removeProduct(this)">Xoá</button>
                             </div>
-                        </div>  
+                        </div>
                     </div> `
             $("#list").append(str);
         }

@@ -130,12 +130,9 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         $productCategoryList = ProductCategory::orderBy('order_display','asc')->get();
-        $districts = District::all();
-        $provinces = Province::all();
-        $wards = Ward::all();
         $productList = Product::where('id','<>', $product->id)->get();
         session(['productList'=>$productList]);
-        return view('admin.product.edit', compact('product', 'productCategoryList', 'productList', 'districts', 'provinces', 'wards'));
+        return view('admin.product.edit', compact('product', 'productCategoryList', 'productList'));
     }
 
     /**

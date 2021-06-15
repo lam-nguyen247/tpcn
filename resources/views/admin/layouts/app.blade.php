@@ -231,13 +231,15 @@
                             </a>
                         </li>
                         @endif
-                        {{-- @if(Route::has('slide.index'))
+
+                        @if(Route::has('slide.index'))
                             <li class="sidebar-item">
                                 <a class="sidebar-link waves-effect waves-dark" href="{{route('slide.index')}}" aria-expanded="false">
                                     <i class="ti-layout-slider-alt"></i><span class="hide-menu">@lang('Slide')</span>
                                 </a>
                             </li>
-                        @endif --}}
+                        @endif
+
                         @if(Route::has('post.index'))
                             <li class="sidebar-item">
                                 <a class="sidebar-link waves-effect waves-dark has-arrow" href="javascript:void(0)" aria-expanded="false">
@@ -298,13 +300,18 @@
                                 <i class="ti-write"></i><span class="hide-menu">@lang('CMS')</span>
                             </a>
                         </li>
-                        {{-- @if(Route::has('visitor.index'))
+                        @if(Route::has('question-answer.index'))
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark" href="{{route('visitor.index')}}" aria-expanded="false">
-                                <i class="ti-world"></i><span class="hide-menu">@lang('Visitor')</span>
+                            <a class="sidebar-link waves-effect waves-dark has-arrow" href="javascript:void(0)" aria-expanded="false">
+                                <i class="ti-layout-cta-left"></i><span class="hide-menu">@lang('Question answer')</span>
                             </a>
+                            <ul aria-expanded="false" class="collapse first-level">
+                                <li class="sidebar-item"><a href="{{route('question-answer.index')}}" class="sidebar-link">
+                                        <i class="ti-help-alt"></i><span class="hide-menu">@lang('List Question')</span></a>
+                                </li>
+                            </ul>
                         </li>
-                        @endif --}}
+                        @endif
                         <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark has-arrow" href="javascript:void(0)">
                                 <i class="ti-settings"></i><span class="hide-menu">@lang('Account Setting')</span>
