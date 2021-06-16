@@ -16,11 +16,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UserSeeder::class,
             ConfigurationSeeder::class,
-//            VisitorSeeder::class,
             MasterCategorySeeder::class,
-//            CategorySeeder::class,
-//            PostSeeder::class,
-//            PageSeeder::class
         ]);
     }
 }
