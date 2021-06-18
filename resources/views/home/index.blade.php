@@ -57,6 +57,15 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-3" id="column_left">
+            @includeIf('home.sidebar.filter')
+            @includeIf('home.sidebar.register-memership')
+        </div>
+        <div class="col-md-9">
+            @includeIf('home.product.index')
+        </div>
+    </div>
 </div>
 @endsection
 

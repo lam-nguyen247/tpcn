@@ -25,19 +25,19 @@
                                     <input type="text" class="input-block-level search-query" name="search" placeholder="Tìm kiếm sản phẩm" id="search_query" value="" />
                                     <div class="search-cat">
                                         <select name="category_id" class="form-control">
-                                            <option value="0">Tất cả danh mục</option>
-                                            <option value="62">Qik</option>
-                                            <option value="60">QIK (FOR MEN)</option>
-                                            <option value="61">QIK (FOR WOMEN)</option>
-                                            <option value="63">RiTANA</option>
-                                            <option value="20">Alipas</option>
-                                            <option value="18">Angela Gold</option>
-                                            <option value="25">Hewel</option>
-                                            <option value="57">Wit</option>
-                                            <option value="17">Jex Max</option>
-                                            <option value="24">Lic</option>
-                                            <option value="33">Otiv</option>
-                                            <option value="34">Faz</option>
+                                                <option value="0">Tất cả danh mục</option>
+                                                <option value="62">Qik</option>
+                                                <option value="60">QIK (FOR MEN)</option>
+                                                <option value="61">QIK (FOR WOMEN)</option>
+                                                <option value="63">RiTANA</option>
+                                                <option value="20">Alipas</option>
+                                                <option value="18">Angela Gold</option>
+                                                <option value="25">Hewel</option>
+                                                <option value="57">Wit</option>
+                                                <option value="17">Jex Max</option>
+                                                <option value="24">Lic</option>
+                                                <option value="33">Otiv</option>
+                                                <option value="34">Faz</option>
                                         </select>
                                     </div>
                                 </div>
@@ -184,44 +184,32 @@
                                             </a>
                                             <div class="sub-menu" style="width:250px;right: auto">
                                                 <div class="content" >
-                                                    <div class="row">
-                                                        <div class="col-sm-12  mobile-enabled">
+                                                    @if (!empty($productCategory))
+                                                        @foreach($productCategory as $item)
                                                             <div class="row">
-                                                                <div class="col-sm-12 hover-menu">
-                                                                    <div class="menu">
-                                                                        <ul>
-                                                                            <li>
-                                                                                <a href="ritana.html" onclick="window.location = 'ritana.html';" class="main-menu ">RiTANA</a>
-                                                                                <a target="_blank" class="spicon" href="https://ritana.com.vn/">
-                                                                                    <img src="image/catalog/0icon/ritana.jpg">
-                                                                                </a>
-                                                                            </li>
-                                                                        </ul>
+                                                                <div class="col-sm-12  mobile-enabled">
+                                                                    <div class="row">
+                                                                        <div class="col-sm-12 hover-menu">
+                                                                            <div class="menu">
+                                                                                <ul>
+                                                                                    <li>
+                                                                                        <a href="#" class="main-menu ">{{ $item->name }}</a>
+                                                                                        <a target="_blank" class="spicon" href="#">
+                                                                                            <img src="{{ url($item->image) }}">
+                                                                                        </a>
+                                                                                    </li>
+                                                                                </ul>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="border">
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-sm-12  mobile-enabled">
-                                                            <div class="row">
-                                                                <div class="col-sm-12 hover-menu">
-                                                                    <div class="menu">
-                                                                        <ul>
-                                                                            <li>
-                                                                                <a href="qik.html" onclick="window.location = 'qik.html';" class="main-menu ">Qik</a>
-                                                                                <a target="_blank" class="spicon" href="https://qik.com.vn/qik.html">
-                                                                                    <img src="image/catalog/0icon/qik-men.jpg">
-                                                                                </a>
-                                                                            </li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
+                                                            <div class="border">
                                                             </div>
-                                                        </div>
-                                                    </div>
+                                                        @endforeach
+                                                    @endif
+                                                </div>
+                                            </div>
                                         <li class='mnu_pro' >
                                             <p class='close-menu'></p>
                                             <p class='open-menu'></p>
@@ -264,28 +252,24 @@
                                             </a>
                                             <div class="sub-menu" style="width:250px;right:auto">
                                                 <div class="content" >
-                                                    <div class="row">
-                                                        <div class="col-sm-12  mobile-enabled">
-                                                            <a href="suc-khoe-sinh-ly-nu.html">Sức khỏe sinh lý nữ</a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="border"></div>
-                                                    <div class="row">
-                                                        <div class="col-sm-12  mobile-enabled">
-                                                            <a href="lam-dep-da.html">Làm đẹp da</a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="border"></div>
-                                                    <div class="row">
-                                                        <div class="col-sm-12  mobile-enabled">
-                                                            <a href="suc-khoe-sinh-ly-nam.html">Sức khỏe sinh lý nam</a>
-                                                        </div>
-                                                    </div>
+                                                    @if(!empty($categoryPost))
+                                                        @foreach($categoryPost as $item)
+                                                            <div class="row">
+                                                                <div class="col-sm-12  mobile-enabled">
+                                                                    <a href="#">{{  \Illuminate\Support\Str::upper($item->name) }}</a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="border"></div>
+                                                        @endforeach
+                                                    @endif
+                                                </div>
                                         <li class='' >
                                             <p class='close-menu'></p>
                                             <p class='open-menu'></p>
                                             <a href='tel:+1800556889' class='clearfix' >
-                                                <span><strong>HOTLINE 1800 556 889</strong></span></a></li>
+                                                <span><strong>HOTLINE 1800 556 889</strong></span>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>

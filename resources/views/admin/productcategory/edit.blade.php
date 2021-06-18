@@ -73,14 +73,14 @@
                             <div class="form-group mb-5">
                                 <span>Ảnh icon</span>
                                 <div class="form-group mb-sm-4">
-                                    <input type="file" class="form-control js-dropify" id="image" name="image"  data-default-file="{{$productCategory->image}}" accept="image/*" data-show-remove="false"/>
+                                    <input type="file" class="form-control js-dropify" id="image" name="image"  data-default-file="{{url($productCategory->image)}}" accept="image/*" data-show-remove="false"/>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-9">
                             <div class="form-group mb-5">
                                 <span>Ảnh bìa trang chủ</span>
-                                <input type="file" class="form-control js-dropify" id="banner" name="banner" data-default-file="{{$productCategory->banner}}" accept="image/*" data-show-remove="false"/>
+                                <input type="file" class="form-control js-dropify" id="banner" name="banner" data-default-file="{{url($productCategory->banner)}}" accept="image/*" data-show-remove="false"/>
                             </div>
                         </div>
                     </div>

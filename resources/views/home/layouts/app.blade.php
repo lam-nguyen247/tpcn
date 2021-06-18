@@ -40,6 +40,9 @@
             'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
         })(window,document,'script','dataLayer','GTM-PZ6T4PS');</script>
     <!-- End Google Tag Manager -->
+    <script type="text/javascript">
+        var responsive_design = 'yes';
+    </script>
     @yield('css')
 </head>
 <body class="common-home">
@@ -62,10 +65,11 @@
                 </div>
             </div>
         </div>
+        @includeIf('home.footer.index')
+        @includeIf('home.footer.info-question')
+        @includeIf('home.footer.copy-right')
     </div>
 </div>
-
-
 
 <script src="/js/home/jquery-2.1.1.min.js" crossorigin="anonymous"></script>
 <script src="/js/home/jquery-migrate-1.2.1.min.js" crossorigin="anonymous"></script>
@@ -81,6 +85,26 @@
 <script src="/js/home/jquery-ui-1.10.4.custom.min.js" crossorigin="anonymous"></script>
 <script src="/js/home/jquery.magnific-popup.min.js" crossorigin="anonymous"></script>
 <script type="text/javascript">
+    $(document).ready(function() {
+        var owl1 = $(".box #carousel1");
+        $(document).on("click","#carousel1_next",function() {
+            owl1.trigger('owl.next');
+            return false;
+        });
+
+        $(document).on("click","#carousel1_prev",function() {
+            owl1.trigger('owl.prev');
+            return false;
+        });
+
+        owl1.owlCarousel({
+            items: 7,
+            autoPlay: 6000,
+            navigation: true,
+            navigationText: false,
+            pagination: true,
+        });
+    });
     $(function() {
         $(window).load(function(){
             var css_tpl = '<style type="text/css">';
@@ -111,5 +135,6 @@
     });
 </script>
 @yield('js')
+<script type="text/javascript" src="/js/home/megamenu.js"></script>
 </body>
 </html>
