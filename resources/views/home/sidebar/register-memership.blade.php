@@ -1,6 +1,6 @@
 <div class="hst fadeIn"><div class="row banners hidden-xs hidden-sm" style="margin-bottom: 20px">
-        <div class="col-sm-12"> <a href="duoc-si-tu-van.html">
-                <img width="100%" height="auto" src="image/catalog/dstv.jpg" alt="Image">
+        <div class="col-sm-12"> <a href="#">
+                <img width="100%" height="auto" src="{{ url('/images/home/dstv.jpg') }}" alt="Image">
                 <div style="color:#2368CF; text-align: center; padding:12px;">
                     HỎI CHUYÊN GIA
                 </div>

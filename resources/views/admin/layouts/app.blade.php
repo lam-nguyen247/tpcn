@@ -110,6 +110,9 @@
         .btn_multi_image {
             opacity: 0;
         }
+        .topbar {
+            z-index: 9999 !important;
+        }
     </style>
 </head>
 <body>

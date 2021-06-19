@@ -14,30 +14,35 @@
                                         <div class="row">
                                             <div class="block col-sm-3 col-xs-6 col-mobile-12  ">
                                                 <!-- Product -->
-                                                <div id="idpr_92" class="product product_wg clearfix product-hover">
-                                                    <div class="left">
-                                                        <div class="image ">
-                                                            <a class="sss" href="ritana-60v.html">
-                                                                <img src="image/cache/catalog/product/eco-ritana-120x220.jpg" title="Viên uống trắng da RiTANA 60V" alt="Viên uống trắng da RiTANA 60V" class="">
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="right">
-                                                        <div class="price">
-                                                            650.000<sup>đ</sup>
-                                                        </div>
-                                                        <div class="name" style="height: 50px;">
-                                                            <div class="label-discount green saleclear">
+                                                @if (!empty($products))
+                                                    @foreach($products as $product)
+                                                        <div id="idpr_{{ $product->id }}" class="product product_wg clearfix product-hover">
+                                                            <div class="left">
+                                                                <div class="image ">
+                                                                    <a class="sss" href="{{ route('home.product', $product->id) }}">
+                                                                        <img src="{{ url($product->image) }}" title="{{ $product->title }}" alt="{{ $product->title }}" class="">
+                                                                    </a>
+                                                                </div>
                                                             </div>
-                                                            <a href="ritana-60v.html">Viên uống hỗ trợ trắng da RiTANA 60V</a>
-                                                            <div class="row"><div class="row"><div class="prnote"></div></div></div>
-                                                            <div class="brand">Giá 450 - 675</div>
+                                                            <div class="right">
+                                                                <div class="price">
+                                                                    {{number_format($product->price,0,",",".")}}<sup>đ</sup>
+                                                                </div>
+                                                                <div class="name" style="height: 50px;">
+                                                                    <div class="label-discount green saleclear">
+                                                                    </div>
+                                                                    <a href="#">{{ $product->title }}</a>
+                                                                    <div class="row"><div class="row"><div class="prnote"></div></div></div>
+{{--                                                                    <div class="brand">Giá 450 - 675</div>--}}
+                                                                </div>
+                                                                <div class="only-hover">
+                                                                    <a class="button">Mua hàng</a>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                        <div class="only-hover">
-                                                            <a onclick="cart.add('92');" class="button">Mua hàng</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                    @endforeach
+                                                @endif
+                                                {{ $products->links('home.includes.pagination') }}
                                             </div>
                                         </div>
                                     </div>

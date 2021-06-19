@@ -56,18 +56,7 @@
         @includeIf('home.includes.header')
         <!-- MAIN CONTENT ================================================== -->
         @yield('breadcrumb')
-        <div class="main-content full-width home">
-            <div class="background-content"></div>
-            <div class="background">
-                <div class="shadow"></div>
-                <div class="pattern">
-                    @yield('content')
-                </div>
-            </div>
-        </div>
-        @includeIf('home.footer.index')
-        @includeIf('home.footer.info-question')
-        @includeIf('home.footer.copy-right')
+        @yield('content')
     </div>
 </div>
 

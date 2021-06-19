@@ -5,9 +5,11 @@
             <ul class="dropdown-menu">
                 @if (!empty($productCategory))
                     @foreach($productCategory as $item)
-                        <li>
-                            <a href="#">{{ \Illuminate\Support\Str::upper($item->name) }}</a>
-                        </li>
+                        @if ($item->parent_id == 0)
+                            <li>
+                                <a href="#">{{ \Illuminate\Support\Str::upper($item->name) }}</a>
+                            </li>
+                        @endif
                     @endforeach
                 @endif
             </ul>

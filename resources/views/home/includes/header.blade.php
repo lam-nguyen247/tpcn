@@ -164,14 +164,14 @@
                                         <li class='mnu_home' >
                                             <p class='close-menu'></p>
                                             <p class='open-menu'></p>
-                                            <a href='index.html' class='clearfix' >
+                                            <a href="{{ route('home.index') }}" class='clearfix' >
                                                 <span><strong>Trang chủ</strong></span>
                                             </a>
                                         </li>
                                         <li class='mnu_about' >
                                             <p class='close-menu'></p>
                                             <p class='open-menu'></p>
-                                            <a href='ve-ecogreen.html' class='clearfix' >
+                                            <a href='#' class='clearfix' >
                                                 <span><strong>Về Ecogreen</strong>
                                                 </span>
                                             </a>
@@ -186,26 +186,28 @@
                                                 <div class="content" >
                                                     @if (!empty($productCategory))
                                                         @foreach($productCategory as $item)
-                                                            <div class="row">
-                                                                <div class="col-sm-12  mobile-enabled">
-                                                                    <div class="row">
-                                                                        <div class="col-sm-12 hover-menu">
-                                                                            <div class="menu">
-                                                                                <ul>
-                                                                                    <li>
-                                                                                        <a href="#" class="main-menu ">{{ $item->name }}</a>
-                                                                                        <a target="_blank" class="spicon" href="#">
-                                                                                            <img src="{{ url($item->image) }}">
-                                                                                        </a>
-                                                                                    </li>
-                                                                                </ul>
+                                                                @if ($item->parent_id == 0)
+                                                                <div class="row">
+                                                                    <div class="col-sm-12  mobile-enabled">
+                                                                        <div class="row">
+                                                                            <div class="col-sm-12 hover-menu">
+                                                                                <div class="menu">
+                                                                                    <ul>
+                                                                                        <li>
+                                                                                            <a href="#" class="main-menu ">{{ \Illuminate\Support\Str::upper($item->name) }}</a>
+                                                                                            <a target="_blank" class="spicon" href="#">
+                                                                                                <img src="{{ url($item->image) }}">
+                                                                                            </a>
+                                                                                        </li>
+                                                                                    </ul>
+                                                                                </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                            <div class="border">
-                                                            </div>
+                                                                <div class="border">
+                                                                </div>
+                                                            @endif
                                                         @endforeach
                                                     @endif
                                                 </div>

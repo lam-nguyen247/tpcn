@@ -16,7 +16,7 @@ class HeaderComposers
      */
     public function compose(View $view)
     {
-        $productCategory = ProductCategory::where('display_home', 1)->where('parent_id',0)->orderBy('order_display','asc')->get();
+        $productCategory = ProductCategory::where('display_home', 1)->orderBy('order_display','asc')->get();
         $categoryPost = Category::where('master_category_id', 1)->orderBy('id','DESC')->get();
         $view->with([
             'productCategory' => $productCategory,
