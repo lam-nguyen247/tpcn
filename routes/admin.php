@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\SeoController;
 use App\Http\Controllers\Admin\SlideController;
 use App\Http\Controllers\Admin\VisitorController;
 use App\Http\Controllers\Admin\QuestionAnswerController;
+use App\Http\Controllers\Admin\DiseaseController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -52,7 +53,7 @@ Route::post('slide/order', [SlideController::class, 'order']);
 Route::post('image/destroy', [ImageController::class, 'destroy']);
 Route::resource('seo', SeoController::class);
 Route::resource('question-answer', QuestionAnswerController::class);
-
+Route::resource('diseases', DiseaseController::class);
 
 Route::group([
     'namespace'  => 'Admin',

@@ -108,6 +108,32 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div id="tabs" class=" htabs">
+                                        <a href="#tab-description" class="selected">Chi tiết sản phẩm</a>
+                                        <a href="#giaohang_thanhtoan">Giao hàng - Thanh toán</a>
+                                        <a href="#camket">Cam kết từ Ecogreen</a>
+                                        <a href="#tab-review">Đánh giá {{ count($product->comments) ? count($product->comments) : '' }}</a>
+                                    </div>
+                                    <div id="tab-description" class="tab-content">
+                                        <div class="col-md-12">
+                                            {!! $product->description !!}
+                                        </div>
+                                        <div class="product-info">
+                                            <div class="cart">
+                                                <div class="add-to-cart clearfix">
+                                                    <p>Số lượng</p>
+                                                    <div class="quantity">
+                                                        <input type="text" name="quantity" disabled="" id="quantity_wanted" size="2" value="1">
+                                                    </div>
+                                                    <input type="hidden" name="product_id" size="2" value="30">
+                                                    <input type="button" value="Mua hàng" class="button button-cart" rel="30" data-loading-text="Đang Xử lý...">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @includeIf('home.product.include.paypal')
+                                    @includeIf('home.product.include.commit')
+                                    @includeIf('home.product.include.comments')
                                 </div>
                             </div>
                         </div>
@@ -147,7 +173,7 @@
 
         setTimeout(function(){$('.rtl .zoomContainer').addClass('zoom-left')}, 500);
       }
-      $(document).ready(function(){
+      $(document).ready(function() {
         if($(window).width() > 992) {
           initZoom();
           var z_index = 0;
@@ -177,6 +203,64 @@
             [768, 3],
             [1200, 3]
           ],
+        });
+
+        $.fn.tabs = function() {
+          var selector = this;
+          this.each(function() {
+            var obj = $(this);
+            $(obj.attr('href')).hide();
+            $(obj).click(function() {
+              $(selector).removeClass('selected');
+              $(selector).each(function(i, element) {
+                $($(element).attr('href')).hide();
+              });
+
+              $(this).addClass('selected');
+
+              $($(this).attr('href')).show();
+              return false;
+            });
+          });
+
+          $(this).show();
+          $(this).first().click();
+        };
+
+        $('#tabs a').tabs();
+      });
+    </script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $('.set-rating i').hover(function(){
+          var rate = $(this).data('value');
+          var i = 0;
+          $('.set-rating i').each(function(){
+            i++;
+            if(i <= rate){
+              $(this).addClass('active');
+            }else{
+              $(this).removeClass('active');
+            }
+          })
+        })
+
+        $('.set-rating i').mouseleave(function(){
+          var rate = $('input[name="rating"]:checked').val();
+          rate = parseInt(rate);
+          i = 0;
+          $('.set-rating i').each(function(){
+            i++;
+            if(i <= rate){
+              $(this).addClass('active');
+            }else{
+              $(this).removeClass('active');
+            }
+          })
+        })
+
+        $('.set-rating i').click(function(){
+          $('input[name="rating"]:nth('+ ($(this).data('value')-1) +')').prop('checked', true);
         });
       });
     </script>

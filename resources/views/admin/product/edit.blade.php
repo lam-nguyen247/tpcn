@@ -178,6 +178,21 @@
                         <textarea id="information" name="information" class="js-summernote form-material">{{$product->information}}</textarea>
                         <span for="description">Mô tả sản phẩm</span>
                         <textarea id="description" name="description" class="js-summernote form-material">{{$product->description}}</textarea>
+                        <div class="col-md-12 mb-5">
+                            <p class="mr-2" >Loại Bệnh</p>
+                            <div class="row">
+                                @php
+                                    $list = empty($product->disease_id)?[]:json_decode($product->disease_id, false, 512, JSON_UNESCAPED_UNICODE);
+                                @endphp
+                                @if(!empty($diseases))
+                                    @foreach($diseases as $key => $val)
+                                        <div class="col-md-3 proper desease{{$val->id}}" >
+                                            <input type="checkbox" id="desease_{{$val->id}}_{{$key}}" {{ in_array($val->id, $list) ? 'checked' : '' }} name="disease_id[]" value="{{$val->id}}" class="material-inputs chk-col-red">
+                                            <label for="desease_{{$val->id}}_{{$key}}">{{$val->name}}</label>
+                                        </div>
+                                    @endforeach
+                                @endif
+                            </div>
                         <button type="submit" id="save" class="btn btn-success waves-effect waves-light mr-2 mt-5">Lưu</button>
                     </form>
                 </div>
@@ -195,9 +210,6 @@
         .form-group .note-form-label {
             position: initial;
         }
-        .card-header {
-            z-index: 0 !important;
-        }
     </style>
 @endsection
 
@@ -211,18 +223,6 @@
             $("#save").removeAttr('disabled');
         }
     }
-
-    function selectCategory(){
-        var parent = $('#product_category option:selected').attr('data-parent');
-        if(parent == 0 ){
-            parent = $("#product_category").val();
-        }
-        $(".proper").css('display','none');
-        $(".properties" + parent).css('display', 'block');
-        console.log(".properties" + parent);
-    }
-
-    selectCategory();
 
     function removeProduct(ele){
         $(ele).parent().parent().parent().remove();

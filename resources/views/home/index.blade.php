@@ -76,8 +76,6 @@
         </div>
     </div>
     @includeIf('home.footer.index')
-    @includeIf('home.footer.info-question')
-    @includeIf('home.footer.copy-right')
 @endsection
 
 @section('js')

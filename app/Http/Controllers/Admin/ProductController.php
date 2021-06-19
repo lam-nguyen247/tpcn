@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Disease;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\ProductProperty;
@@ -45,8 +46,9 @@ class ProductController extends Controller
     public function create()
     {
         $productCategoryList = ProductCategory::orderBy('order_display','asc')->get();
+        $diseases = Disease::all();
         $productList = Product::all();
-        return view('admin.product.create', compact('productCategoryList', 'productList'));
+        return view('admin.product.create', compact('productCategoryList', 'productList', 'diseases'));
     }
 
     /**
@@ -105,20 +107,9 @@ class ProductController extends Controller
         $product->image = $imageService->store($request->file, config('constants.folder.product') . $product->id . '/');
         $product->information = empty($request['information'])?$request['information']:$imageService->transformAll($request['information'], config('constants.folder.product') . $product->id . '/', 1024);
         $product->description = empty($request['description'])?$request['description']:$imageService->transformAll($request['description'], config('constants.folder.product') . $product->id . '/', 1024);
-        $product->property_category = json_encode($request->properties, JSON_UNESCAPED_UNICODE);
+        $product->disease_id = json_encode($request->desease, JSON_UNESCAPED_UNICODE);
         $product->save();
         return redirect()->route('product.create')->with('success', 'Lưu thành công');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     * @return void
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -131,8 +122,9 @@ class ProductController extends Controller
     {
         $productCategoryList = ProductCategory::orderBy('order_display','asc')->get();
         $productList = Product::where('id','<>', $product->id)->get();
+        $diseases = Disease::all();
         session(['productList'=>$productList]);
-        return view('admin.product.edit', compact('product', 'productCategoryList', 'productList'));
+        return view('admin.product.edit', compact('product', 'productCategoryList', 'productList', 'diseases'));
     }
 
     /**
@@ -210,13 +202,9 @@ class ProductController extends Controller
         }
         $request->request->remove('number_device');
         $request->request->remove('list_remove');
-        if(isset($request->ships) && count($request->ships)>0){
-            $product->listShip = json_encode($request->ships, JSON_UNESCAPED_UNICODE);
-        }
-        $except[] = 'ships';
         $product->update($request->except($except));
         // dd($request->properties);
-        $product->property_category = json_encode($request->properties, JSON_UNESCAPED_UNICODE);
+        $product->disease_id = json_encode($request->disease_id, JSON_UNESCAPED_UNICODE);
         $product->save();
         return redirect()->route('product.index')->with('success', 'Sửa thành công');
     }
@@ -231,10 +219,10 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         $images = json_decode($product->album);
-        // foreach ($images as $value) {
-        //     File::delete($this->folder . '/' . $value);
-        //     Log::info('ProductController.destroy() delete' . $value);
-        // }
+         foreach ($images as $value) {
+             File::delete($this->folder . '/' . $value);
+             Log::info('ProductController.destroy() delete' . $value);
+         }
         $product->delete();
         return redirect()->route('product.index');
     }

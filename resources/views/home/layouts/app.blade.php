@@ -57,6 +57,8 @@
         <!-- MAIN CONTENT ================================================== -->
         @yield('breadcrumb')
         @yield('content')
+        @includeIf('home.footer.info-question')
+        @includeIf('home.footer.copy-right')
     </div>
 </div>
 

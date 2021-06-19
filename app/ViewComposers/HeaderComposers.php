@@ -3,6 +3,7 @@
 namespace App\ViewComposers;
 
 use App\Models\Category;
+use App\Models\Disease;
 use App\Models\ProductCategory;
 use Illuminate\View\View;
 
@@ -18,9 +19,11 @@ class HeaderComposers
     {
         $productCategory = ProductCategory::where('display_home', 1)->orderBy('order_display','asc')->get();
         $categoryPost = Category::where('master_category_id', 1)->orderBy('id','DESC')->get();
+        $disease = Disease::where('display_home', 1)->get();
         $view->with([
             'productCategory' => $productCategory,
-            'categoryPost' => $categoryPost
+            'categoryPost' => $categoryPost,
+            'disease' => $disease
         ]);
     }
 }

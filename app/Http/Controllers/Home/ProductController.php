@@ -21,10 +21,16 @@ class ProductController extends Controller
 
     public function show($id)
     {
-        $product = Product::find($id);
+        $product = Product::with('comments')->find($id);
 
         return view('home.product.detail', compact(
             'product',
         ));
+    }
+
+
+    public function searchProduct(Request $request)
+    {
+        $products = $this->productService->search($request->all());
     }
 }

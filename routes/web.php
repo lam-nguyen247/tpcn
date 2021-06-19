@@ -20,6 +20,7 @@ Route::get('info', function() { phpinfo(); });
 
 Route::get('', [HomeController::class, 'index'])->name('home.index');
 Route::get('product/{id}',  [ProductController::class, 'show'])->name('home.product');
+Route::get('search',  [ProductController::class, 'searchProduct'])->name('home.search');
 
 Route::get('{locale}', [LocalizationController::class, 'set'])->name('locale')->where('locale', 'en|vi');
 //Route::get('{provider}/login', [LoginController::class, 'redirectToProvider'])->name('social');

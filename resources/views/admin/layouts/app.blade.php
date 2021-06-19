@@ -280,6 +280,11 @@
                                             <i class="mdi mdi-octagram"></i><span class="hide-menu">@lang('Categories')</span></a>
                                         </li>
                                     @endif
+                                    @if(Route::has('diseases.index'))
+                                        <li class="sidebar-item"><a href="{{route('diseases.index')}}" class="sidebar-link">
+                                                <i class="mdi mdi-octagram"></i><span class="hide-menu">@lang('Kind Disease')</span></a>
+                                        </li>
+                                    @endif
                                 </ul>
                             </li>
                         @endif

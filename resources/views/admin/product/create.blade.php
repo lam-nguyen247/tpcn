@@ -131,21 +131,16 @@
                         <textarea id="description" name="description" class="js-summernote form-material"></textarea>
 
                         <div class="col-md-12 mb-5">
-                            <p class="mr-2" >Thể loại sản phẩm</p>
+                            <p class="mr-2" >Loại Bệnh</p>
                             <div class="row">
-                                @foreach ($productCategoryList as $productPropertyItem)
-                                    @php
-                                        $list = empty($productPropertyItem->properties)?[]:json_decode($productPropertyItem->properties, false, 512, JSON_UNESCAPED_UNICODE);
-                                    @endphp
-                                    @if(!empty($list))
-                                        @foreach ($list as $key => $item)
-                                            <div style="display: none;" class="col-md-3 proper properties{{$productPropertyItem->parent_id>0?$productPropertyItem->parent_id:$productPropertyItem->id}}" >
-                                                <input type="checkbox" id="properties_{{$productPropertyItem->id}}_{{$key}}" name="properties[]" value="{{$item}}" class="material-inputs chk-col-red">
-                                                <label for="properties_{{$productPropertyItem->id}}_{{$key}}">{{$item}}</label>
-                                            </div>
-                                        @endforeach
-                                    @endif
-                                @endforeach
+                                @if(!empty($diseases))
+                                    @foreach($diseases as $key => $val)
+                                        <div class="col-md-3 proper desease{{$val->id}}" >
+                                            <input type="checkbox" id="desease_{{$val->id}}_{{$key}}" name="disease_id[]" value="{{$val->id}}" class="material-inputs chk-col-red">
+                                            <label for="desease_{{$val->id}}_{{$key}}">{{$val->name}}</label>
+                                        </div>
+                                    @endforeach
+                                @endif
                             </div>
                         </div>
                         <button type="submit" id="save" class="btn btn-success waves-effect waves-light mr-2 mt-5">Lưu</button>
@@ -169,23 +164,11 @@
         #sort_description button['aria-label=Picture']{
             display:none;
         }
-        .card-header {
-            z-index: 0 !important;
-        }
     </style>
 @endsection
 
 @section('js')
 <script>
-    let ships = new Array();
-    function selectCategory(){
-        $(".proper").css('display','none');
-        let parent_id = $("#product_category option:selected").attr('data-parent');
-        $(".properties" + parent_id).css('display', 'block');
-    }
-
-    selectCategory();
-
     function changePrice(){
         if(parseInt($("#price").val())<= parseInt($("#sale").val())){
             alert("Giá khuyến mãi phải nhỏ hơn giá gốc!");

@@ -74,4 +74,9 @@ class ProductService
         $post->category()->sync($request->category_id);
         $this->seoService->save($post, $request);
     }
+
+    public function search($request)
+    {
+
+    }
 }
