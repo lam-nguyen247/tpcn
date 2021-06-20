@@ -22,24 +22,9 @@
                             <div class="search_form">
                                 <div class="search_box">
                                     <div class="button-search"></div>
-                                    <input type="text" class="input-block-level search-query" name="search" placeholder="Tìm kiếm sản phẩm" id="search_query" value="" />
-                                    <div class="search-cat">
-                                        <select name="category_id" class="form-control">
-                                                <option value="0">Tất cả danh mục</option>
-                                                <option value="62">Qik</option>
-                                                <option value="60">QIK (FOR MEN)</option>
-                                                <option value="61">QIK (FOR WOMEN)</option>
-                                                <option value="63">RiTANA</option>
-                                                <option value="20">Alipas</option>
-                                                <option value="18">Angela Gold</option>
-                                                <option value="25">Hewel</option>
-                                                <option value="57">Wit</option>
-                                                <option value="17">Jex Max</option>
-                                                <option value="24">Lic</option>
-                                                <option value="33">Otiv</option>
-                                                <option value="34">Faz</option>
-                                        </select>
-                                    </div>
+                                    <form method="GET" action="{{ route('home.search') }}" class="form-search mt-2">
+                                        <input type="text" class="input-block-level search-query" name="name" placeholder="Tìm kiếm sản phẩm" id="search_query" value="{{ isset($_GET['name']) ? $_GET['name'] : '' }}" />
+                                    </form>
                                 </div>
                                 <div id="autocomplete-results" class="autocomplete-results"></div>
                                 <div class="clearfix"></div>
@@ -258,7 +243,7 @@
                                                         @foreach($categoryPost as $item)
                                                             <div class="row">
                                                                 <div class="col-sm-12  mobile-enabled">
-                                                                    <a href="#">{{  \Illuminate\Support\Str::upper($item->name) }}</a>
+                                                                    <a href="{{ route('home.category-post'). '?categoryPost='.$item->slug }}">{{  \Illuminate\Support\Str::upper($item->name) }}</a>
                                                                 </div>
                                                             </div>
                                                             <div class="border"></div>

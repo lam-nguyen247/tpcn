@@ -31,6 +31,10 @@ class ProductController extends Controller
 
     public function searchProduct(Request $request)
     {
-        $products = $this->productService->search($request->all());
+        $products = $this->productService->search($request);
+
+        return view('home.product.search', compact(
+            'products',
+        ));
     }
 }

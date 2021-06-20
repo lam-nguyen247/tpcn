@@ -26,7 +26,9 @@ class ComposerServiceProvider extends ServiceProvider
     {
         View::composer([
             'home.includes.header',
-            'home.sidebar.filter'
+            'home.sidebar.filter',
+            'home.sidebar.category',
+            'home.sidebar.category-post',
         ], 'App\ViewComposers\HeaderComposers');
     }
 }

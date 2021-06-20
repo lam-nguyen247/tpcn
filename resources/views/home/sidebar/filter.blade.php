@@ -1,13 +1,14 @@
 <div class="hst fadeIn"><div class="box_filter">
         <div class="btn-group">
-            <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">TÌM THEO THƯƠNG HIỆU <span class="caret"></span>
+            <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{ isset($_GET['category']) ?  \Illuminate\Support\Str::upper($_GET['category']) : 'TÌM THEO THƯƠNG HIỆU' }}<span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
                 @if (!empty($productCategory))
                     @foreach($productCategory as $item)
                         @if ($item->parent_id == 0)
                             <li>
-                                <a href="#">{{ \Illuminate\Support\Str::upper($item->name) }}</a>
+                                <a href="{{ route('home.search') .'?category='.$item->slug  }}">{{ \Illuminate\Support\Str::upper($item->name) }}</a>
                             </li>
                         @endif
                     @endforeach
@@ -15,13 +16,14 @@
             </ul>
         </div>
         <div class="btn-group">
-            <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">TÌM THEO BỆNH<span class="caret"></span>
+            <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{ isset($_GET['sick']) ?  \Illuminate\Support\Str::upper($_GET['sick']) : 'TÌM THEO BỆNH' }}<span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
                 @if (!empty($disease))
                     @foreach($disease as $value)
                         <li>
-                            <a href="#">{{ \Illuminate\Support\Str::upper($value->name) }}</a>
+                            <a href="{{ route('home.search') .'?sick='.$item->slug  }}">{{ \Illuminate\Support\Str::upper($value->name) }}</a>
                         </li>
                     @endforeach
                 @endif

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Post;
 use App\Services\ImageService;
 use App\Services\PostService;
+use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
@@ -40,5 +41,12 @@ class PostController extends Controller
         // dd($menuList);
         $postList = $this->postService->getPostList()->limit(5)->get();
         return view('home.post.detail', compact('menuList', 'post', 'seo', 'postList'));
+    }
+
+    public function searchPost(Request $request)
+    {
+        $postList = $this->postService->getPostList($request->all())->simplePaginate(12);
+
+        return view('home.post.list-post', compact('postList'));
     }
 }

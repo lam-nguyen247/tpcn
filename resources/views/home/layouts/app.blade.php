@@ -95,6 +95,11 @@
             navigationText: false,
             pagination: true,
         });
+
+        $('.button-search').click(function (event) {
+            event.preventDefault();
+            $( ".form-search" ).submit();
+        });
     });
     $(function() {
         $(window).load(function(){

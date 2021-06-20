@@ -6,6 +6,7 @@ use App\Http\Requests\PostRequest;
 use App\Models\MasterCategory;
 use App\Models\Post;
 use App\Models\Seo;
+use Illuminate\Support\Str;
 
 class PostService
 {
@@ -25,9 +26,16 @@ class PostService
         $this->seoService = $seoService;
     }
 
-    public function getPostList()
+    public function getPostList($params = null)
     {
-        return Post::where('language', app()->getLocale())->latest();
+        if (empty($params)) {
+            return Post::where('language', app()->getLocale())->latest();
+        }
+
+        return Post::with(['category' => function($query) use ($params) {
+            $slugParam = Str::slug($params['categoryPost']);
+            return $query->where('slug', $slugParam);
+        }]);
     }
 
     public function getCategoryList()

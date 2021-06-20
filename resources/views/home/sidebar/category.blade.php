@@ -7,7 +7,9 @@
                 @if (!empty($productCategory))
                     @foreach($productCategory as $item)
                         <li class="panels">
-                            <a href="#">{{ \Illuminate\Support\Str::upper($item->name) }}</a>
+                            <a href="{{ route('home.search') .'?category='.$item->slug  }}"
+                                class="{{ (isset($_GET['category']) && $_GET['category'] == $item->slug) ? 'active' : '' }}"
+                            >{{ \Illuminate\Support\Str::upper($item->name) }}</a>
                         </li>
                     @endforeach
                 @endif
