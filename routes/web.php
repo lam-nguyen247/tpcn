@@ -23,6 +23,8 @@ Route::get('', [HomeController::class, 'index'])->name('home.index');
 Route::get('product/{id}', [ProductController::class, 'show'])->name('home.product');
 Route::get('search',  [ProductController::class, 'searchProduct'])->name('home.search');
 Route::get('post', [PostController::class, 'searchPost'])->name('home.category-post');
+Route::get('post-group-category', [PostController::class, 'groupPostCategory'])->name('home.group-post-category');
+Route::get('post/{id}', [PostController::class, 'detailPost'])->name('home.detail-post');
 
 Route::get('{locale}', [LocalizationController::class, 'set'])->name('locale')->where('locale', 'en|vi');
 Auth::routes(['register' => false, 'reset' => false, 'verify' => true]);

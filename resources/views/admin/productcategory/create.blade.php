@@ -39,19 +39,6 @@
                         <span class="bar"></span>
                         <label for="category">Danh mục cha</label>
                     </div>
-{{--                    <div id="pro" class="form-group mb-5 focused @error('name') has-error @enderror">--}}
-{{--                        <div class="input-group w-25 mb-3">--}}
-{{--                            <input type="text" id="property" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">--}}
-{{--                            <div class="input-group-append">--}}
-{{--                                <button class="btn btn-info" onclick="addProperty()" type="button">Thêm</button>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                        <span class="bar"></span>--}}
-{{--                        <label for="property">Thuộc tính danh mục</label>--}}
-{{--                        <div id="properties" class="row">--}}
-
-{{--                        </div>--}}
-{{--                    </div>--}}
                     <div class="row">
                         <div class="col-md-3">
                             <div class="form-group mb-5">

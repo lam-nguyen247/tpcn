@@ -3,6 +3,13 @@
 @section('title', 'Sức Khỏe')
 @section('description', null)
 @section('css')
+    <link href="/css/home/blog.css" rel="stylesheet">
+    <style>
+        .box_imgs .tit_cat h3{
+            color: #fff !important;
+            padding : 0px !important;
+        }
+    </style>
 @endsection
 
 @section('breadcrumb')
@@ -29,7 +36,9 @@
                             @includeIf('home.sidebar.register-memership')
                         </div>
                         <div class="col-md-9">
-
+                            @includeWhen(isset($postList), 'home.post.list-post')
+                            @includeWhen(isset($groupPostCategory), 'home.post.group-post-category')
+                            @includeWhen(isset($detailPost), 'home.post.post-detail')
                         </div>
                     </div>
                 </div>

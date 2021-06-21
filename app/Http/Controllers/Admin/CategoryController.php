@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
 use App\Models\MasterCategory;
+use App\Services\ImageService;
 use Exception;
 use GuzzleHttp\Utils;
 use Illuminate\Http\Request;
@@ -55,9 +56,13 @@ class CategoryController extends Controller
      * @param CategoryRequest $request
      * @return Response
      */
-    public function store(CategoryRequest $request)
+    public function store(CategoryRequest $request,  ImageService $imageService)
     {
-        Category::create($request->all());
+        $category = Category::create($request->except(['banner']));
+        if($request->banner){
+            $category->banner = $imageService->store($request->banner, config('constants.folder.category') . $category->id . '/');
+        }
+        $category->save();
         return back()->with('success', trans('Saved successfully'));
     }
 
@@ -93,9 +98,17 @@ class CategoryController extends Controller
      * @param Category $category
      * @return Response
      */
-    public function update(CategoryRequest $request, Category $category)
+    public function update(CategoryRequest $request, Category $category, ImageService $imageService)
     {
-        $category->update($request->all());
+        if($request->banner){
+            unlink($category->banner);
+            $category->banner = $imageService->store($request->banner, config('constants.folder.category') . $category->id . '/');
+        }
+        $category->name = $request->name;
+        $category->slug = $request->slug;
+        $category->content = $request->get('content');
+        $category->save();
+
         return redirect()->route('master.category', $category->masterCategory->name)->with('success', trans('Updated successfully'));
     }
 
@@ -108,6 +121,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
+        unlink($category->banner);
         $category->delete();
         return redirect()->route('master.category', $category->masterCategory->name)->with('success', trans('Deleted successfully'));
     }

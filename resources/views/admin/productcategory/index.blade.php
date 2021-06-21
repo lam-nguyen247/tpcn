@@ -142,28 +142,4 @@
         }
         isParent();
     </script>
-
-    {{-- <script>
-        function isHome(){
-            console.log(1)
-            if($('#display_home').val() == 1){
-                $("#banner").attr('required', 'true');
-            }else{
-                $("#banner").removeAttr('required')
-            }
-        }
-
-        function isParent(){
-            console.log(1)
-            if($('#parent_id').val() != 0){
-                $("#banner").attr('required', 'true');
-            }else{
-                $("#banner").removeAttr('required')
-            }
-        }
-        $(document).ready(function(){
-            isHome();
-            isParent();
-        })
-    </script> --}}
 @endsection

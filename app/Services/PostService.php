@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Http\Requests\PostRequest;
+use App\Models\Category;
 use App\Models\MasterCategory;
 use App\Models\Post;
 use App\Models\Seo;
@@ -26,16 +27,9 @@ class PostService
         $this->seoService = $seoService;
     }
 
-    public function getPostList($params = null)
+    public function getPostList()
     {
-        if (empty($params)) {
-            return Post::where('language', app()->getLocale())->latest();
-        }
-
-        return Post::with(['category' => function($query) use ($params) {
-            $slugParam = Str::slug($params['categoryPost']);
-            return $query->where('slug', $slugParam);
-        }]);
+        return Post::where('language', app()->getLocale())->latest();
     }
 
     public function getCategoryList()
@@ -81,5 +75,20 @@ class PostService
         $post->save();
         $post->category()->sync($request->category_id);
         $this->seoService->save($post, $request);
+    }
+
+    public function getPostListCategory($params)
+    {
+        return Post::whereHas('category' , function($query) use ($params) {
+            $slugParam = Str::slug($params['categoryPost']);
+            return $query->where('slug', $slugParam);
+        })->with('category');
+    }
+
+    public function getGroupPost()
+    {
+        return Category::with(['postList' => function($query) {
+            return $query->orderBy('id', 'DESC');
+        }])->get();
     }
 }

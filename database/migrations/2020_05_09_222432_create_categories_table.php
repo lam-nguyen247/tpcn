@@ -22,6 +22,7 @@ class CreateCategoriesTable extends Migration
             $table->string('slug')->unique();
             $table->integer('order')->nullable();
             $table->string('content')->nullable();
+            $table->string('banner')->nullable()->default('');
             $table->timestamps();
         });
     }

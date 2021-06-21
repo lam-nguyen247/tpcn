@@ -7,7 +7,7 @@
                 @if(!empty($categoryPost))
                     @foreach($categoryPost as $item)
                         <li class="panels">
-                            <a href="#">{{ $item->name }}</a>
+                            <a href="{{ route('home.category-post').'/?categoryPost='.$item->slug }}">{{ $item->name }}</a>
                         </li>
                     @endforeach
                 @endif

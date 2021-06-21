@@ -223,7 +223,7 @@
                                                     <div class="border"></div>
                                                     <div class="row">
                                                         <div class="col-sm-12  mobile-enabled">
-                                                            <a href="cau-hoi-thuong-gap.html">Câu hỏi thường gặp</a>
+                                                            <a href="#">Câu hỏi thường gặp</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -232,7 +232,7 @@
                                         <li class='mnu_news with-sub-menu hover' >
                                             <p class='close-menu'></p>
                                             <p class='open-menu'></p>
-                                            <a href='chu-de-suc-khoe.html' class='clearfix' >
+                                            <a href='{{ route('home.group-post-category') }}' class='clearfix' >
                                                 <span>
                                                     <strong>Chủ đề sức khỏe</strong>
                                                 </span>

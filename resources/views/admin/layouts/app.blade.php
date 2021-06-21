@@ -288,6 +288,12 @@
                                 </ul>
                             </li>
                         @endif
+                        @if(Route::has('banner.index'))
+                            <li class="sidebar-item">
+                                <a class="sidebar-link  waves-effect waves-dark" href="{{route('banner.index')}}" aria-expanded="false">
+                                    <i class="ti-image"></i><span class="hide-menu">@lang('Banner')</span></a>
+                            </li>
+                        @endif
                         @if(Route::has('page.index'))
                             <li class="sidebar-item">
                                 <a class="sidebar-link waves-effect waves-dark has-arrow" href="javascript:void(0)" aria-expanded="false">
