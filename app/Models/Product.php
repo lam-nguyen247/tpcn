@@ -49,18 +49,6 @@ class Product extends Model
         return Str::limit(strip_tags(html_entity_decode($this->content)), 200, '');
     }
 
-    public function getSlugAttribute($slug)
-    {
-        $property = Property::where('product_id',$this->id)->first();
-        if($property != null){
-            if(count($property->productProperties)>0){
-                return '/san-pham/' . $slug. '?index='.$property->productProperties[0]->id;
-            }
-        }
-        return '/san-pham/' . $slug;
-    }
-    
-
     public function getPricevnAttribute(){
         if($this->price != null && $this->price > 0){
             return number_format($this->price,0,".",",");

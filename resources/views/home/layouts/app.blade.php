@@ -75,6 +75,7 @@
 <script src="/js/home/owl.carousel.min.js" crossorigin="anonymous"></script>
 <script src="/js/home/jquery-ui-1.10.4.custom.min.js" crossorigin="anonymous"></script>
 <script src="/js/home/jquery.magnific-popup.min.js" crossorigin="anonymous"></script>
+<script src="/js/home/order.js" crossorigin="anonymous"></script>
 <script type="text/javascript">
     $(document).ready(function() {
         var owl1 = $(".box #carousel1");

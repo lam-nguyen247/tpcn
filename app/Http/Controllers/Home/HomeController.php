@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use http\Env\Request;
 use Jenssegers\Agent\Agent;
 
 class HomeController extends Controller
@@ -16,5 +17,15 @@ class HomeController extends Controller
             'agent',
             'products'
         ));
+    }
+
+    public function cart()
+    {
+        return view('home.cart.checkout');
+    }
+
+    public function pay()
+    {
+        return view('home.cart.pay');
     }
 }

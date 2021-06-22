@@ -96,7 +96,7 @@
                                                 <li class='mnu_muahang' >
                                                     <p class='close-menu'></p>
                                                     <p class='open-menu'></p>
-                                                    <a href='#' class='clearfix' >
+                                                    <a href='{{ route('home.cart') }}' class='clearfix' >
                                                         <span>
                                                             <strong>
                                                                 <img src="{{url('/images/home/ico-order.png')}}" alt="">Giỏ hàng
@@ -121,11 +121,11 @@
                                         <img src="{{url('/images/home/icon-cart.png')}}" alt="">
                                     </div>
                                 </div>
-                                <div class="dropdown-menu" id="cart_content">
-                                    <div id="cart_content_ajax">
-                                        <div class="empty">Không có sản phẩm trong Đơn hàng!</div>
-                                    </div>
-                                </div>
+{{--                                <div class="dropdown-menu" id="cart_content">--}}
+{{--                                    <div id="cart_content_ajax">--}}
+{{--                                        <div class="empty">Không có sản phẩm trong Đơn hàng!</div>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
                             </div>
                         </div>
                     </div>

@@ -3,6 +3,8 @@
 use App\Http\Controllers\Home\HomeController;
 use App\Http\Controllers\Home\ProductController;
 use App\Http\Controllers\Home\PostController;
+use App\Http\Controllers\Home\CmsController;
+use App\Http\Controllers\Home\PaymentController;
 use App\Http\Controllers\Home\LocalizationController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -25,8 +27,12 @@ Route::get('search',  [ProductController::class, 'searchProduct'])->name('home.s
 Route::get('post', [PostController::class, 'searchPost'])->name('home.category-post');
 Route::get('post-group-category', [PostController::class, 'groupPostCategory'])->name('home.group-post-category');
 Route::get('post/{id}', [PostController::class, 'detailPost'])->name('home.detail-post');
+Route::get('gio-hang', [HomeController::class, 'cart'])->name('home.cart');
+Route::get('thanh-toan', [HomeController::class, 'pay'])->name('home.pay');
+Route::post('/payment', [PaymentController::class, 'pay'])->name('pay.create-pay');
 
 Route::get('{locale}', [LocalizationController::class, 'set'])->name('locale')->where('locale', 'en|vi');
+Route::post('/cms', [CmsController::class, 'index']);
 Auth::routes(['register' => false, 'reset' => false, 'verify' => true]);
 
 Route::fallback(function () {
