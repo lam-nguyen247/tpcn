@@ -121,11 +121,36 @@
                                         <img src="{{url('/images/home/icon-cart.png')}}" alt="">
                                     </div>
                                 </div>
-{{--                                <div class="dropdown-menu" id="cart_content">--}}
-{{--                                    <div id="cart_content_ajax">--}}
-{{--                                        <div class="empty">Không có sản phẩm trong Đơn hàng!</div>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
+                                <div class="dropdown-menu" id="cart_content">
+                                    <div id="cart_content_ajax">
+                                        <div class="mini-cart-info">
+                                            <table>
+                                                <tbody>
+{{--                                                <tr>--}}
+{{--                                                    <td class="image">--}}
+{{--                                                        <a href="https://www.ecogreen.com.vn/ritana-60v.html"><img src="image/cache/catalog/product/eco-ritana-47x47.jpg" alt="Viên uống hỗ trợ trắng da RiTANA 60V" title="Viên uống hỗ trợ trắng da RiTANA 60V"></a>--}}
+{{--                                                    </td>--}}
+{{--                                                    <td class="name">--}}
+{{--                                                        <span class="quantity">1&nbsp;x&nbsp;</span>--}}
+{{--                                                        <a href="https://www.ecogreen.com.vn/ritana-60v.html">Viên uống hỗ trợ trắng da RiTANA 60V</a>--}}
+{{--                                                        <div>--}}
+{{--                                                            <div class="price">650.000<sup>đ</sup></div>--}}
+{{--                                                        </div>--}}
+{{--                                                    </td>--}}
+{{--                                                    <td class="remove"><a href="javascript:;" onclick="cart.remove('599466');" title="Loại bỏ"></a></td>--}}
+{{--                                                </tr>--}}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="checkout">
+                                            <a href="{{ route('home.cart') }}" class="button btn-checkout">Giỏ hàng</a>
+                                            <a href="{{ route('home.pay') }}" class="button btn-checkout">Thanh toán</a>
+                                        </div>
+                                    </div>
+                                    <div id="cart_content_empty" class="hidden">
+                                        <div class="empty">Không có sản phẩm trong Đơn hàng!</div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

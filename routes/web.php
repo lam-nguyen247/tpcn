@@ -6,6 +6,7 @@ use App\Http\Controllers\Home\PostController;
 use App\Http\Controllers\Home\CmsController;
 use App\Http\Controllers\Home\PaymentController;
 use App\Http\Controllers\Home\LocalizationController;
+use App\Http\Controllers\Home\CustomerController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -34,6 +35,10 @@ Route::post('/payment', [PaymentController::class, 'pay'])->name('pay.create-pay
 Route::get('{locale}', [LocalizationController::class, 'set'])->name('locale')->where('locale', 'en|vi');
 Route::post('/cms', [CmsController::class, 'index']);
 Auth::routes(['register' => false, 'reset' => false, 'verify' => true]);
+
+Route::group(['middleware' => ['web']], function () {
+    Route::post('register-member', [CustomerController::class, 'registerMember'])->name('home.register-member');
+});
 
 Route::fallback(function () {
     return redirect('/');

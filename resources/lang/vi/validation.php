@@ -160,4 +160,13 @@ return [
         'new_password_confirmation' => 'Xác nhận mật khẩu mới'
     ],
 
+    'first_name_required' => 'Vui Lòng Nhập Tên.',
+    'first_name_max' => 'Ký tự Tên không quá 50 kí tự.',
+    'last_name_required' => 'Vui lòng nhập tên và tên lót',
+    'last_name_max' => 'Ký tự Tên không quá 50 kí tự.',
+    'password_required' => 'Vui lòng nhập mật khẩu.',
+    'password_min' => 'Mật khẩu phải lớn hơn 6 ki tự',
+    'password_confirmation_min' => 'Mật khẩu phải lớn hơn 6 ki tự'
+
+
 ];

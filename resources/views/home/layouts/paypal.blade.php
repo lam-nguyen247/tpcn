@@ -45,7 +45,7 @@
     </script>
     @yield('css')
 </head>
-<body class="common-home">
+<body class="checkout-checkout">
 <noscript>
     <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PZ6T4PS"
             height="0" width="0" style="display:none;visibility:hidden">
@@ -53,12 +53,30 @@
 </noscript>
 <div class="standard-body">
     <div id="main" rel="mediacenter" class="header-type-2">
-        @includeIf('home.includes.header')
-        <!-- MAIN CONTENT ================================================== -->
-        @yield('breadcrumb')
+    <!-- MAIN CONTENT ================================================== -->
         @yield('content')
-        @includeIf('home.footer.info-question')
-        @includeIf('home.footer.copy-right')
+    </div>
+    <div class="copyright full-width">
+        <div class="background-copyright"></div>
+        <div class="background">
+            <div class="shadow"></div>
+            <div class="pattern">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-sm-9">
+                            CÔNG TY CỔ PHẦN DƯỢC PHẨM ECO<br>
+                            Giấy chứng nhận ĐKKD số 0102637020 do sở Kế hoạch và Đầu tư TP. Hà Nội cấp ngày 29/01/2008<br>
+                            Địa chỉ: 148 Hoàng Hoa Thám, phường 12, quận Tân Bình, TP.Hồ Chí Minh<br>
+                            Số 180 Trường Chinh, phường Khương Thượng, quận Đống Đa, TP. Hà Nội<br>
+                            Điện thoại: (84 28) 62936629 - 62936630 - Email: cskh@ecogreen.com.vn<br>
+                        </div>
+                        <div class="col-sm-3 text-right">
+                            <br>Bản quyền © 2014 thuộc về ECO PHARMA</div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -76,70 +94,6 @@
 <script src="/js/home/jquery-ui-1.10.4.custom.min.js" crossorigin="anonymous"></script>
 <script src="/js/home/jquery.magnific-popup.min.js" crossorigin="anonymous"></script>
 <script src="/js/home/order.js" crossorigin="anonymous"></script>
-<script type="text/javascript">
-    $(document).ready(function() {
-        if (localStorage.getItem("cart") !== null && JSON.parse(localStorage.getItem("cart")).length > 0) {
-            $('#cart_content_ajax').removeClass('hidden');
-            $('#cart_content_empty').addClass('hidden');
-        } else {
-            $('#cart_content_ajax').addClass('hidden');
-            $('#cart_content_empty').removeClass('hidden');
-        }
-
-        var owl1 = $(".box #carousel1");
-        $(document).on("click","#carousel1_next",function() {
-            owl1.trigger('owl.next');
-            return false;
-        });
-
-        $(document).on("click","#carousel1_prev",function() {
-            owl1.trigger('owl.prev');
-            return false;
-        });
-
-        owl1.owlCarousel({
-            items: 7,
-            autoPlay: 6000,
-            navigation: true,
-            navigationText: false,
-            pagination: true,
-        });
-
-        $('.button-search').click(function (event) {
-            event.preventDefault();
-            $( ".form-search" ).submit();
-        });
-    });
-    $(function() {
-        $(window).load(function(){
-            var css_tpl = '<style type="text/css">';
-            css_tpl += '#megamenu_77651154 ul.megamenu > li > .sub-menu > .content {';
-            css_tpl += '-webkit-transition: all 500ms ease-out !important;';
-            css_tpl += '-moz-transition: all 500ms ease-out !important;';
-            css_tpl += '-o-transition: all 500ms ease-out !important;';
-            css_tpl += '-ms-transition: all 500ms ease-out !important;';
-            css_tpl += 'transition: all 500ms ease-out !important;';
-            css_tpl += '}</style>'
-            $("head").append(css_tpl);
-        });
-
-        $('.mnu_home a').addClass("active");
-
-        $(".with-sub-menu").hover(function(){
-            $(this).addClass('active');
-        }, function(){
-            $(this).removeClass('active');
-        });
-
-        var pgurl = window.location.href.substr(window.location.href
-            .lastIndexOf("/")+1);
-        $(".megamenu li a").each(function(){
-            if($(this).attr("href") == pgurl || $(this).attr("href") == '' )
-                $(this).addClass("active");
-        })
-    });
-</script>
 @yield('js')
-<script type="text/javascript" src="/js/home/megamenu.js"></script>
 </body>
 </html>

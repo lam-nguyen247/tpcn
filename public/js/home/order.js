@@ -25,12 +25,45 @@ function addToCart(product_id, url, code, price, image, qty, title, slug, max){
             }else{
                 alert('Sản phẩm này chỉ còn '+ max + ' sản phẩm ');
             }
+            $(`#item_${product_id} .quantity`).html(cart[check].qty);
         }else{
+            let li = `<tr id="item_${product_id}">
+                  <td class="image">
+                      <a href="${url}"><img src="${image}" alt="${title}" title="${title}"></a>
+                  </td>
+                  <td class="name">
+                      <span class="quantity">1<span>&nbsp;x&nbsp;</span></span>
+                      <a href="${url}">${title}</a>
+                      <div>
+                          <div class="price">${price}<sup>đ</sup></div>
+                      </div>
+                  </td>
+                  <td class="remove"><a href="javascript:;" onclick="removeItem(${product_id});" title="Loại bỏ"></a></td>
+              </tr>`;
+            $(".mini-cart-info table tbody").prepend(li);
+            $('#cart_content_ajax').removeClass('hidden');
+            $('#cart_content_empty').addClass('hidden');
             count_item += qty;
             cart.push(item);
         }
     }else{
         cart = new Array();
+        let li = `<tr id="item_${product_id}">
+                  <td class="image">
+                      <a href="${url}"><img src="${image}" alt="${title}" title="${title}"></a>
+                  </td>
+                  <td class="name">
+                      <span class="quantity">${qty}<span>&nbsp;x&nbsp;</span></span>
+                      <a href="${url}">${title}</a>
+                      <div>
+                          <div class="price">${price}<sup>đ</sup></div>
+                      </div>
+                  </td>
+                  <td class="remove"><a href="javascript:;" onclick="removeItem(${product_id});" title="Loại bỏ"></a></td>
+              </tr>`;
+        $(".mini-cart-info table tbody").prepend(li);
+        $('#cart_content_ajax').removeClass('hidden');
+        $('#cart_content_empty').addClass('hidden');
         cart.push(item);
         count_item += qty;
     }
@@ -62,6 +95,27 @@ function removeItem(product_id){
     }
 }
 
+function initToCart(product_id, url, code, price, image, qty, title){
+    let count_item = 0;
+    price = parseInt(price);
+    let cart = JSON.parse(localStorage.getItem('cart'));
+    let li = `<tr id="item_${product_id}">
+                  <td class="image">
+                      <a href="${url}"><img src="${image}" alt="${title}" title="${title}"></a>
+                  </td>
+                  <td class="name">
+                      <span class="quantity">${qty}<span>&nbsp;x&nbsp;</span></span>
+                      <a href="${url}">${title}</a>
+                      <div>
+                          <div class="price">${formatMoney(price,0)}<sup>đ</sup></div>
+                      </div>
+                  </td>
+                  <td class="remove"><a href="javascript:;" onclick="removeItem(${product_id});" title="Loại bỏ"></a></td>
+              </tr>`;
+
+    $(".mini-cart-info table tbody").prepend(li);
+}
+
 function reset(){
     $('#cart_count').html(0);
 }
@@ -73,6 +127,7 @@ function init(){
         $(".no-items").css('display','none');
         for( i = 0 ; i<cart.length; i++){
             count_item += parseInt(cart[i].qty);
+            initToCart(cart[i].product_id, cart[i].url, cart[i].code, cart[i].price, cart[i].image, cart[i].qty, cart[i].title);
         }
         $(".has-items").css('display','block');
     }
