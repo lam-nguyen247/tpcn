@@ -15,22 +15,16 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->string('address');
-            $table->string('phone');
-            $table->string('email');
+            $table->string('name');
+            $table->string('address')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('city')->nullable();
             $table->text('note')->nullable();
             $table->decimal('subTotal',20,0)->nullable();
             $table->decimal('ship',20,0)->nullable();
-            $table->integer('payment')->default(1);
+            $table->integer('payment')->default(0);
             $table->integer('status')->default(1);
             $table->string('method')->nullable();
-            $table->string('vnp_BankCode')->nullable();
-            $table->string('vnp_BankTranNo')->nullable();
-            $table->string('vnp_CardType')->nullable();
-            $table->string('vnp_TransactionNo')->nullable();
-            $table->string('vnp_ResponseCode')->nullable();
             $table->timestamps();
 
         });

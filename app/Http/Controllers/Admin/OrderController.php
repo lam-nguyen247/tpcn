@@ -15,20 +15,23 @@ class OrderController extends Controller
         return view('admin.order.index', compact('listOrder'));
     }
 
-    public function detail($id){
-        $order = Order::find($id);
-        $details = OrderDetail::where('order_id', $id)->get();
-        return view('admin.order.detail', compact('order', 'details'));
+    public function show($id){
+        $order = Order::find($id)->load('addressShipping', 'listDetail', 'listDetail.product')->toArray();
+        return view('admin.order.detail', compact('order'));
     }
 
-    public function updateStatus(Request $request, $id){
+    public function updateStatusOrder(Request $request, $id){
         $order = Order::find($id);
         if($request->status == 3){
             $order->payment = 1;
         }
         $order->status = $request->status;
         $order->save();
-        return $order->color;
+
+        return response()->json([
+            'success' => true,
+            'color' => $order->color
+        ]);
     }
 
     public function updateDetailStatus(Request $request, $id){

@@ -8,9 +8,16 @@ class Order extends Model
 {
     protected $guarded = [];
 
+    protected $appends = ['color'];
+
     public function listDetail(){
         return $this->hasMany(OrderDetail::class);
     }
+
+    public function addressShipping(){
+        return $this->hasOne(AddressPaypal::class);
+    }
+
     public function getPaymentStringAttribute(){
         return $this->payment==1?'Đã thanh toán':'Chưa thanh toán';
     }

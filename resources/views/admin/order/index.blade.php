@@ -7,7 +7,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <a class="btn btn-sm btn-outline-success float-right" href="{{ route('admin.order.exportAll') }}"><i class="fas fa-plus-circle"></i>Xuất tất cả</a>
+{{--                    <a class="btn btn-sm btn-outline-success float-right" href="{{ route('admin.order.exportAll') }}"><i class="fas fa-plus-circle"></i>Xuất tất cả</a>--}}
                     <h4 class="card-title">Danh Sách Đơn hàng</h4>
                     <h6 class="card-subtitle">&nbsp;</h6>
                     <div class="table-responsive">
@@ -29,10 +29,10 @@
                             @forelse($listOrder as $key=>$order)
                                 <tr>
                                     <td>{{$order->id}}</td>
-                                    <td>{{$order->first_name}} {{$order->last_name}}</td>
+                                    <td>{{$order->name }}</td>
                                     <td>{{$order->phone}}</td>
                                     <td>{{number_format($order->subTotal+$order->ship,0,'.',',')}}đ</td>
-                                    <td>{{$order->method}}</td>
+                                    <td>{{config('constants.method-payments')[$order->method] ?? null }}</td>
                                     <td class="{{$order->payment==1?'text-warning':'text-danger'}}">{{$order->paymentString}}</td>
                                     <td>
                                         <select onchange="updateStatus({{$order->id}})" style="color: {{$order->color}}"  name="status_{{$order->id}}" id="status_{{$order->id}}">
@@ -46,12 +46,12 @@
                                     <td>{{date('d-m-Y', strtotime($order->created_at))}}</td>
                                     <td>
                                         <form action="{{ route('order.destroy', $order->id) }}" method="POST">
-                                            <a href="{{ route('admin.order.detail', $order->id) }}" class="text-inverse pr-2" data-toggle="tooltip" title="Chi tiết đơn hàng">
+                                            <a href="{{ route('order.show', $order->id) }}" class="text-inverse pr-2" data-toggle="tooltip" title="Chi tiết đơn hàng">
                                                 <i class="fas fa-bullseye"></i>
                                             </a>
-                                            <a href="{{ route('admin.order.export', $order->id) }}" class="text-inverse pr-2" data-toggle="tooltip" title="Xuất Excel">
-                                                <i class="fas fa-file-excel"></i>
-                                            </a>
+{{--                                            <a href="{{ route('admin.order.export', $order->id) }}" class="text-inverse pr-2" data-toggle="tooltip" title="Xuất Excel">--}}
+{{--                                                <i class="fas fa-file-excel"></i>--}}
+{{--                                            </a>--}}
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn p-0 text-inverse js-delete-sweetalert" title="Xóa" data-toggle="tooltip"><i class="ti-trash"></i></button>

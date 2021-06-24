@@ -227,6 +227,12 @@
                             </ul>
                         </li>
                         @endif
+                        @if(Route::has('order.index'))
+                            <li class="sidebar-item">
+                                <a class="sidebar-link waves-effect waves-dark" href="{{route('order.index')}}" aria-expanded="false">
+                                    <i class="mdi mdi-cart-outline"></i><span class="hide-menu">Đơn hàng</span></a>
+                            </li>
+                        @endif
                         @if(Route::has('customer.index'))
                         <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark" href="{{route('customer.index')}}" aria-expanded="false">

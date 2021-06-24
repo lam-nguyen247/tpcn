@@ -17,6 +17,13 @@ return [
         'post' => '/tin-tuc/'
     ],
 
+    'method-payments' => [
+      "1" => "COD",
+      "2" => "Internet Banking",
+      "3" => "VISA, MASTERCARD",
+      "4" => "Chuyển Khoản Ngân Hàng"
+    ],
+
     'country' => [
         '1' => "An Giang",
         '6' => "Bà Rịa–Vũng Tàu",

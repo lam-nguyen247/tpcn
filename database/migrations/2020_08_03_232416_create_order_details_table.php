@@ -17,7 +17,6 @@ class CreateOrderDetailsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('order_id');
             $table->unsignedBigInteger('product_id');
-            $table->unsignedBigInteger('product_property_id');
             $table->unsignedBigInteger('qty');
             $table->integer('store_id')->default(0);
             $table->integer('status')->default(1);

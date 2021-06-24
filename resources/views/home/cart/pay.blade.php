@@ -63,8 +63,7 @@
                         <div id="ar-left-2">
                             <div class="panel-body"><header>
                                 </header>
-                                <form id="update" action="#" method="post" enctype="multipart/form-data">
-                                    @csrf
+                                <form id="products-form" action="#" method="post" enctype="multipart/form-data">
                                     <div class="table-responsive cart-info">
                                         <table class="cart-i">
                                             <tbody>
@@ -73,7 +72,7 @@
                                     </div>
                                 </form>
                                 <div class="cart-total">
-                                    <table class="table">
+                                    <table class="table" id="info-paypal">
                                         <tbody>
                                         <tr>
                                             <td class="text-left">
@@ -82,11 +81,29 @@
                                             <td class="text-right"><span class="bk-cart-subtotal-price"></span><sup>đ</sup>
                                             </td>
                                         </tr>
+                                        <tr class="hidden">
+                                            <td class="text-left">
+                                                Phí vận chuyển giao hàng
+                                                <button type="button" class="note_ship_cmd" data-toggle="modal" data-target=".bs-example-modal-sm"><span>(?)</span></button>
+
+                                                <div class="modal box_note_ship_cmd fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+                                                    <div class="modal-dialog modal-sm" role="document">
+                                                        <div class="modal-content">
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+
+                                                            - Phí ship chỉ 10k.<br>
+                                                            - Miễn phí giao hàng cho đơn hàng sử dụng Mã khuyến mãi.
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="text-right">10.000<sup>đ</sup></td>
+                                        </tr>
                                         <tr>
                                             <td class="text-left">
                                                 Tổng cộng
                                             </td>
-                                            <td class="text-right"><span class="bk-cart-subtotal-price"></span><sup>đ</sup>
+                                            <td class="text-right"><span class="bk-cart-subtotal-price total-add-ship"></span><sup>đ</sup>
                                             </td>
                                         </tr>
                                         </tbody>
@@ -149,6 +166,7 @@
                                 @includeIf('home.cart.include.resgister-member')
                                 @includeIf('home.cart.include.login')
                                 @includeIf('home.cart.include.address-pay')
+                                @includeIf('home.cart.include.payments')
                             </div>
                         </div>
                     </div>
@@ -160,8 +178,28 @@
 
 @section('js')
     <script type="text/javascript">
+        // same address
+        $('input[name=same_address]').on('change', function() {
+            var same_address = $(this).is(':checked');
+
+            if (same_address) {
+                $('#payment-address legend').html('Địa chỉ nhận hàng & thanh toán');
+
+                $('#payment-address').parent().removeClass('col-sm-6');
+                $('#payment-address').parent().addClass('col-sm-12');
+                $('#shipping-address').parent().removeClass('col-sm-6');
+                $('#shipping-address').parent().hide();
+            }
+            else {
+                $('#payment-address legend').html('Địa chỉ thanh toán');
+
+                $('#payment-address').parent().removeClass('col-sm-12');
+                $('#payment-address').parent().addClass('col-sm-6');
+                $('#shipping-address').parent().addClass('col-sm-6');
+                $('#shipping-address').parent().show();
+            }
+        });
         // Account
-        initCheckout();
         $(document).on('change', 'input[name=ar-account-name]:checked', function() {
             var checkout_select = $(this).attr('value');
 
@@ -250,28 +288,10 @@
                 complete: function() {
                     $('#button-register').button('reset');
                 },
-                success: function(json) {
-                    // if (json['redirect']) {
-                    //     alert('redirect');
-                    //     location = json['redirect'];
-                    // } else {
-                    //     $('#ar-step-account').find('.fa-stack').addClass('checkout-pointer');
-                    //     $('#ar-step-account').find('.fa-title').addClass('checkout-pointer');
-                    //     //$('#ar-step-account').removeClass('text-primary');
-                    //     $('#ar-step-account').addClass('text-muted');
-                    //     $('#ar-step-address').removeClass('text-muted');
-                    //     $('#ar-step-address').addClass('text-primary');
-                    //
-                    //     $('#ar-account-select').parent().hide();
-                    //
-                    //     $('#ar-left-1').parent().show();
-                    //
-                    //     $('#ar-right-1').parent().find('.panel-heading .panel-title').html('Thông tin giao hàng');
-                    //
-                    //     loadAddress();
-                    //
-                    //     $('html, body').animate({ scrollTop: 0 }, 'slow');
-                    // }
+                success: function(res) {
+                   if (res.success) {
+                       setStepAddress();
+                   }
                 },
                 error: function(xhr, ajaxOptions, thrownError) {
                     $('.alert, .text-danger').remove();
@@ -290,12 +310,34 @@
                 }
             });
         });
-
+        
         // Guest save
         $(document).on('click', '#button-guest', function() {
             $('#button-guest').button('loading');
             setStepAddress();
             $('#button-guest').button('reset');
+        });
+
+        $(document).on('click', '#button-address', function() {
+            $('#button-address').button('loading');
+            var phone1 = $('#input-payment-custom-field1').val().trim();
+            var name1 = $('#input-payment-firstname').val().trim();
+            if ($('.icheckbox input[name=same_address]:checked').length < 1) {
+                var nameShipping = $('#input-shipping-firstname').val().trim();
+                var phoneShipping = $('#input-shipping-custom-field1').val().trim();
+                if (nameShipping == "" || phoneShipping == "") {
+                    alert('Vui lòng nhập đầy đủ thông tin');
+                    $('#button-address').button('reset');
+                    return;
+                }
+            }
+            if (phone1 == "" || name1 == "") {
+                alert('Vui lòng nhập đầy đủ thông tin');
+            } else {
+                saveAddressMethod();
+                setStepPayments();
+            }
+            $('#button-address').button('reset');
         });
 
         function hiddenModal()
@@ -312,6 +354,15 @@
             localStorage.setItem('checkout-step', 2);
         }
 
+        function setStepPayments()
+        {
+            hiddenModal();
+            $('#address-form').addClass('hidden');
+            $('.div-payments').removeClass('hidden');
+            $('#ar-step-payment').removeClass('text-muted').after().addClass('text-primary');
+            localStorage.setItem('checkout-step', 3);
+        }
+
         function initCheckout() {
             var step = localStorage.getItem('checkout-step');
             if (step !== null) {
@@ -319,432 +370,105 @@
                     hiddenModal();
                     $('#address-form').removeClass('hidden');
                     $('#ar-step-address').removeClass('text-muted').after().addClass('text-primary');
+                    $('#info-paypal tr').eq(1).removeClass('hidden');
+                    var price = parseInt($('.bk-cart-subtotal-price').attr('data-addShip'));
+                    $('.total-add-ship').html(formatMoney(price,0));
                 }
 
                 if (step == 3) {
-                    // ToDo
+                    hiddenModal();
+                    $('.div-payments').removeClass('hidden');
+                    $('#ar-step-address').removeClass('text-muted').after().addClass('text-primary');
+                    $('#ar-step-payment').removeClass('text-muted').after().addClass('text-primary');
+                    $('#info-paypal tr').eq(1).removeClass('hidden');
+                    var price = parseInt($('.bk-cart-subtotal-price').attr('data-addShip'));
+                    $('.total-add-ship').html(formatMoney(price,0));
                 }
             }
         }
-//
-//         // Address save
-//         $(document).on('click', '#button-address', function() {
-//             $.ajax({
-//                 url: 'index.php?route=checkout/address/save',
-//                 type: 'post',
-//                 data: $('#ar-left-1 input[type=\'radio\']:checked, #ar-right-1 input[type=\'text\'], #ar-right-1 input[type=\'date\'], #ar-right-1 input[type=\'datetime-local\'], #ar-right-1 input[type=\'time\'], #ar-right-1 input[type=\'password\'], #ar-right-1 input[type=\'checkbox\']:checked, #ar-right-1 input[type=\'radio\']:checked, #ar-right-1 input[type=\'hidden\'], #ar-right-1 textarea, #ar-right-1 select'),
-//                 dataType: 'json',
-//                 beforeSend: function() {
-//                     $('#button-address').button('loading');
-//                 },
-//                 complete: function() {
-//                     $('#button-address').button('reset');
-//                 },
-//                 success: function(json) {
-//                     $('.alert, .text-danger').remove();
-//
-//                     if (json['redirect']) {
-//                         location = json['redirect'];
-//                     } else if (json['error']) {
-//                         if (json['error']['warning']) {
-//                             $('#ar-right-1 .panel-body').prepend('<div class="alert alert-warning">' + json['error']['warning'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
-//                         }
-//
-//                         for (i in json['error']) {
-//                             var element = $('#input-' + i.replace(/_/g, '-'));
-//
-//                             if ($(element).parent().hasClass('input-group')) {
-//                                 $(element).parent().after('<div class="text-danger">' + json['error'][i] + '</div>');
-//                             } else {
-//                                 $(element).after('<div class="text-danger">' + json['error'][i] + '</div>');
-//                             }
-//                         }
-//
-//                         // Highlight any found errors
-//                         $('.text-danger').parent().addClass('has-error');
-//                     } else {
-// //                $('#ar-left-2').parent().parent().hide();
-// //                $('#ar-left-1').parent().parent().removeClass('col-sm-8');
-// //                $('#ar-left-1').parent().parent().addClass('col-sm-12');
-//                         $('#ar-step-address').find('.fa-stack').addClass('checkout-pointer');
-//                         $('#ar-step-address').find('.fa-title').addClass('checkout-pointer');
-//                         $('#ar-step-account').addClass('text-muted');
-//                         // $('#ar-step-address').removeClass('text-primary');
-//                         $('#ar-step-address').addClass('text-muted');
-//                         $('#ar-step-payment').addClass('text-primary');
-//
-//                         $('#ar-right-1').parent().find('.panel-heading .panel-title').html('Xác nhận đơn hàng');
-//                         $('#ar-left-1').parent().find('.panel-heading .panel-title').html('Phương thức thanh toán');
-//
-//                         $('#ar-right-1 .panel-body').html('<div class="text-center"><i class="fa fa-spinner fa-spin checkout-spin"></i></div>');
-//
-//                         $('#ar-left-1').parent().show();
-//
-//                         loadTotalsByAddressFields();
-//                         //$('#ar-left-2').parent().hide();
-//
-//                         loadPaymentMethodsByAddressId($('select[name=\'address_id\']').val());
-//
-//                         $('html, body').animate({ scrollTop: 0 }, 'slow');
-//                     }
-//                 },
-//                 error: function(xhr, ajaxOptions, thrownError) {
-//                     alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-//                 }
-//             });
-//         });
-//
-//         // ToS control
-//         $(document).on('submit', '#ar-right-1 form', function(event) {
-//             if (!checkTerms()) {
-//                 event.preventDefault();
-//                 event.stopPropagation();
-//                 return false;
-//             }
-//         });
-//
-//         $(document).on('click', '#button-confirm', function(event) {
-//             if (!checkTerms()) {
-//                 event.preventDefault();
-//                 event.stopPropagation();
-//                 return false;
-//             }
-//         });
-//
-//         // Steps
-//         $(document).on('click', '.checkout-pointer', function() {
-//             var checkout_step = $(this).parent().attr('id');
-//             if (checkout_step == 'ar-step-account_s') {
-//                 $('#ar-step-payment').removeClass('text-primary');
-//                 $('#ar-step-payment').addClass('text-muted');
-//                 $('#ar-step-address').removeClass('text-muted');
-//                 $('#ar-step-address').removeClass('text-primary');
-//                 $('#ar-step-address').addClass('text-muted');
-//                 $('#ar-step-address').find('.fa-stack').removeClass('checkout-pointer');
-//                 $('#ar-step-address').find('.fa-title').removeClass('checkout-pointer');
-//                 $('#ar-step-account').removeClass('text-muted');
-//                 $('#ar-step-account').addClass('text-primary');
-//                 $('#ar-step-account').find('.fa-stack').removeClass('checkout-pointer');
-//                 $('#ar-step-account').find('.fa-title').removeClass('checkout-pointer');
-//
-//                 $('#ar-account-select').parent().show();
-//                 $('#ar-left-1').parent().hide();
-//                 $('#ar-left-2').parent().find('.panel-heading .panel-title').html('Giỏ hàng');
-//
-//                 $('input[name=\'ar-account-name\']:checked').trigger('change');
-//
-//                 loadTotals();
-//             }
-//             else if (checkout_step == 'ar-step-address_s') {
-//                 $('#ar-step-address').find('.fa-stack').removeClass('checkout-pointer');
-//                 $('#ar-step-address').find('.fa-title').removeClass('checkout-pointer');
-//                 $('#ar-step-address').removeClass('text-muted');
-//                 $('#ar-step-address').addClass('text-primary');
-//                 $('#ar-step-payment').removeClass('text-primary');
-//                 $('#ar-step-payment').addClass('text-muted');
-//
-//                 $('#ar-right-1').parent().find('.panel-heading .panel-title').html('Thông tin giao hàng');
-//
-//
-//                 $('#ar-left-2').parent().find('.panel-heading .panel-title').html('Giỏ hàng');
-//                 $('#ar-left-2').parent().show();
-//
-//                 loadAddress();
-//             }
-//         });
-//
-//         // Check ToS box
-//         function checkTerms() {
-//             return true;
-//
-//             if (!$('input[name=\'agree\']').is(':checked')) {
-//                 if(!$('.alert').length) {
-//                     $('#ar-right-1 .panel-body').prepend('<div class="alert alert-danger">Lỗi: Bạn phải đồng ý với điều khoản Điều khoản sử dụng!<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
-//                 }
-//
-//                 return false;
-//             }
-//             else {
-//                 $('.alert').remove();
-//
-//                 return true;
-//             }
-//         }
-//
-//         // Load totals
-//         function loadTotals() {
-//             $.ajax({
-//                 url: 'index.php?route=checkout/totals',
-//                 type: 'post',
-//                 dataType: 'html',
-//                 cache: false,
-//                 beforeSend: function() {
-//                     $('#ar-left-2 .panel-body').html('<div class="text-center"><i class="fa fa-spinner fa-spin checkout-spin"></i></div>');
-//                 },
-//                 success: function(html) {
-//                     $('#ar-left-2 .panel-body').html(html);
-//                 },
-//                 error: function(xhr, ajaxOptions, thrownError) {
-//                     alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-//                 }
-//             });
-//         }
-//
-//         // Load totals by address id
-//         function loadTotalsByAddressId(address_id) {
-//             $.ajax({
-//                 url: 'index.php?route=checkout/totals',
-//                 type: 'post',
-//                 data: {address_id: address_id},
-//                 dataType: 'html',
-//                 cache: false,
-//                 beforeSend: function() {
-//                     $('#ar-left-2 .panel-body').html('<div class="text-center"><i class="fa fa-spinner fa-spin checkout-spin"></i></div>');
-//                 },
-//                 success: function(html) {
-//                     $('#ar-left-2 .panel-body').html(html);
-//                 },
-//                 error: function(xhr, ajaxOptions, thrownError) {
-//                     alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-//                 }
-//             });
-//         }
-//
-//         // Load totals by new address fields
-//         function loadTotalsByAddressFields(address_type, address_country_id, address_zone_id, address_city, address_postcode) {
-//             $.ajax({
-//                 url: 'index.php?route=checkout/totals',
-//                 type: 'post',
-//                 data: {address_type: address_type, address_country_id: address_country_id, address_zone_id: address_zone_id, address_city: address_city, address_postcode: address_postcode},
-//                 dataType: 'html',
-//                 cache: false,
-//                 beforeSend: function() {
-//                     $('#ar-left-2 .panel-body').html('<div class="text-center"><i class="fa fa-spinner fa-spin checkout-spin"></i></div>');
-//                 },
-//                 success: function(html) {
-//                     $('#ar-left-2 .panel-body').html(html);
-//                 },
-//                 error: function(xhr, ajaxOptions, thrownError) {
-//                     alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-//                 }
-//             });
-//         }
-//
-//         // Load address
-//         function loadAddress() {
-//             $.ajax({
-//                 url: 'index.php?route=checkout/address',
-//                 type: 'post',
-//                 dataType: 'html',
-//                 cache: false,
-//                 beforeSend: function() {
-//                     $('#ar-right-1 .panel-body').html('<div class="text-center"><i class="fa fa-spinner fa-spin checkout-spin"></i></div>');
-//                 },
-//                 success: function(html) {
-//                     $('#ar-right-1 .panel-body').html(html);
-//                 },
-//                 error: function(xhr, ajaxOptions, thrownError) {
-//                     alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-//                 }
-//             });
-//         }
-//
-//         // Methods related with shipping
-//
-//         // Load shipping methods
-//         function loadShippingMethods() {
-//             $.ajax({
-//                 url: 'index.php?route=checkout/shipping_method',
-//                 type: 'post',
-//                 dataType: 'html',
-//                 cache: false,
-//                 beforeSend: function() {
-//                     $('#ar-left-1 .panel-body').html('<div class="text-center"><i class="fa fa-spinner fa-spin checkout-spin"></i></div>');
-//                 },
-//                 success: function(html) {
-//                     $('#ar-left-1 .panel-body').html(html);
-//                     saveShippingMethod();
-//                 },
-//                 error: function(xhr, ajaxOptions, thrownError) {
-//                     alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-//                 }
-//             });
-//         }
-//
-//         // Load shipping methods by addresss id
-//         function loadShippingMethodsByAddressId(address_id) {
-//             $.ajax({
-//                 url: 'index.php?route=checkout/shipping_method',
-//                 type: 'post',
-//                 data: {address_id: address_id},
-//                 dataType: 'html',
-//                 cache: false,
-//                 beforeSend: function() {
-//                     $('#ar-left-1 .panel-body').html('<div class="text-center"><i class="fa fa-spinner fa-spin checkout-spin"></i></div>');
-//                 },
-//                 success: function(html) {
-//                     $('#ar-left-1 .panel-body').html(html);
-//                     saveShippingMethod();
-//                 },
-//                 error: function(xhr, ajaxOptions, thrownError) {
-//                     alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-//                 }
-//             });
-//         }
-//
-//         // Load shipping methods by new address fields
-//         function loadShippingMethodsByAddressFields(address_type, address_country_id, address_zone_id, address_city, address_postcode) {
-//             $.ajax({
-//                 url: 'index.php?route=checkout/shipping_method',
-//                 type: 'post',
-//                 data: {address_type: address_type, address_country_id: address_country_id, address_zone_id: address_zone_id, address_city: address_city, address_postcode: address_postcode},
-//                 dataType: 'html',
-//                 cache: false,
-//                 beforeSend: function() {
-//                     $('#ar-left-1 .panel-body').html('<div class="text-center"><i class="fa fa-spinner fa-spin checkout-spin"></i></div>');
-//                 },
-//                 success: function(html) {
-//                     $('#ar-left-1 .panel-body').html(html);
-//                     saveShippingMethod();
-//                 },
-//                 error: function(xhr, ajaxOptions, thrownError) {
-//                     alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-//                 }
-//             });
-//         }
-//
-//         // Save the selected shipping method
-//         function saveShippingMethod() {
-//             var shipping_method = $('input[name=\'shipping_method\']:checked').attr('value');
-//
-//             if (shipping_method == undefined) {
-//                 shipping_method = 0;
-//             }
-//
-//             $.ajax({
-//                 url: 'index.php?route=checkout/shipping_method/save',
-//                 type: 'post',
-//                 data: {shipping_method: shipping_method},
-//                 dataType: 'html',
-//                 cache: false,
-//                 success: function(json) {
-//                     if (json['redirect']) {
-//                         location = json['redirect'];
-//                     } else if (json['error']) {
-//                         if (json['error']['warning']) {
-//                             $('#ar-left-1 .panel-body').prepend('<div class="alert alert-warning">' + json['error']['warning'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
-//                         }
-//                     } else {
-//                         loadTotals();
-//                     }
-//                 },
-//                 error: function(xhr, ajaxOptions, thrownError) {
-//                     alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-//                 }
-//             });
-//         }
-//
-//         // Load payment methods
-//         function loadPaymentMethods() {
-//             $.ajax({
-//                 url: 'index.php?route=checkout/payment_method',
-//                 type: 'post',
-//                 dataType: 'html',
-//                 cache: false,
-//                 beforeSend: function() {
-//                     $('#ar-left-1 .panel-body').html('<div class="text-center"><i class="fa fa-spinner fa-spin checkout-spin"></i></div>');
-//                 },
-//                 success: function(html) {
-//                     $('#ar-left-1 .panel-body').html(html);
-//                     savePaymentMethod();
-//                 },
-//                 error: function(xhr, ajaxOptions, thrownError) {
-//                     alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-//                 }
-//             });
-//         }
-//
-//         // Load payment methods by addresss id
-//         function loadPaymentMethodsByAddressId(address_id) {
-//             $.ajax({
-//                 url: 'index.php?route=checkout/payment_method',
-//                 type: 'post',
-//                 data: {address_id: address_id},
-//                 dataType: 'html',
-//                 cache: false,
-//                 beforeSend: function() {
-//                     $('#ar-left-1 .panel-body').html('<div class="text-center"><i class="fa fa-spinner fa-spin checkout-spin"></i></div>');
-//                 },
-//                 success: function(html) {
-//                     $('#ar-left-1 .panel-body').html(html);
-//                     savePaymentMethod();
-//                 },
-//                 error: function(xhr, ajaxOptions, thrownError) {
-//                     alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-//                 }
-//             });
-//         }
-//
-//         // Save the selected payment method
-//         function savePaymentMethod() {
-//             var payment_method = $('input[name=\'payment_method\']:checked').attr('value');
-//
-//             if (payment_method == undefined) {
-//                 payment_method = 0;
-//             }
-//
-//             $.ajax({
-//                 url: 'index.php?route=checkout/payment_method/save',
-//                 type: 'post',
-//                 data: {payment_method: payment_method},
-//                 dataType: 'html',
-//                 cache: false,
-//                 beforeSend: function() {
-//                     $('#ar-right-1 .panel-body').html('<div class="text-center"><i class="fa fa-spinner fa-spin checkout-spin"></i></div>');
-//                 },
-//                 success: function(json) {
-//                     if (json['redirect']) {
-//                         location = json['redirect'];
-//                     } else if (json['error']) {
-//                         if (json['error']['warning']) {
-//                             $('#ar-left-1 .panel-body').prepend('<div class="alert alert-warning">' + json['error']['warning'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
-//                         }
-//                     } else {
-//                         loadConfirm();
-//                     }
-//                 },
-//                 error: function(xhr, ajaxOptions, thrownError) {
-//                     alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-//                 }
-//             });
-//         }
-//
-//         // Load confirm page
-//         function loadConfirm() {
-//             $.ajax({
-//                 url: 'index.php?route=checkout/confirm',
-//                 type: 'post',
-//                 dataType: 'html',
-//                 cache: false,
-//                 success: function(html) {
-//                     $('#ar-right-1 .panel-body').html(html);
-//                 },
-//                 error: function(xhr, ajaxOptions, thrownError) {
-//                     alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-//                 }
-//             });
-//         }
-//
-//         // Initial actions
-//         $('#ar-left-1').parent().hide();
-//
-//         $('#ar-step-account').addClass('text-primary');
-//         $('#ar-step-address').addClass('text-muted');
-//         $('#ar-step-payment').addClass('text-muted');
-//
-//         $('input[name=\'ar-account-name\']:checked').trigger('change');
-//
-//         loadTotals();
+
+        // Save the address method
+        function saveAddressMethod() {
+            let item =  {
+                payment_name: $('#input-payment-firstname').val(),
+                payment_phone: $('#input-payment-custom-field1').val(),
+                payment_city: $('#input-payment-country').val(),
+                payment_address: $("#input-payment-address-1").val(),
+                shipping_same_payment: $('.icheckbox input[name=same_address]:checked').length < 1 ? 0 : 1,
+                shipping_name: $('#input-shipping-firstname').val(),
+                shipping_phone: $('#input-shipping-custom-field1').val(),
+                shipping_city: $('#input-shipping-country').val(),
+                shipping_zone: $('#input-shipping-zone').val(),
+                shipping_address: $('#input-shipping-address-1').val(),
+                note: $('#textarea-note').val()
+            };
+            localStorage.setItem('info-address',JSON.stringify(item))
+        }
+
+        $(document).on('click', '#button-confirm', function(event) {
+            if (!checkTerms()) {
+                event.preventDefault();
+                event.stopPropagation();
+                return false;
+            }
+            $('#button-confirm').button('loading');
+            submitOrderProducts();
+        });
+
+        // Check ToS box
+        function checkTerms() {
+            return true;
+
+            if (!$('input[name=agree]').is(':checked')) {
+                if(!$('.alert').length) {
+                    $('#ar-right-1 .panel-body').prepend('<div class="alert alert-danger">Lỗi: Bạn phải đồng ý với điều khoản Điều khoản sử dụng!<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+                }
+                return false;
+            }
+            else {
+                $('.alert').remove();
+                return true;
+            }
+        }
+
+        // submit ajax orderProduct
+        function submitOrderProducts() {
+            var dataCustomer = JSON.parse(localStorage.getItem('info-address'));
+            dataCustomer.products = localStorage.getItem('cart');
+            dataCustomer.payment = $('.payment').val();
+            $.ajax({
+                headers: {
+                    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: '{{route('pay.create-pay')}}',
+                type: 'post',
+                data: dataCustomer,
+                dataType: 'json',
+                cache: false,
+                beforeSend: function() {
+                    $('#ar-left-2 .panel-body').html('<div class="text-center"><i class="fa fa-spinner fa-spin checkout-spin"></i></div>');
+                },
+                success: function(respone) {
+                    if (respone.success) {
+                        alert('Cảm ơn quý khác đã mua sản phẩm');
+                        localStorage.removeItem('checkout-step');
+                        localStorage.removeItem('info-address');
+                        localStorage.removeItem('cart');
+                        window.location.href = '{{ route('home.index') }}';
+                    }
+                },
+                error: function(e) {
+                    console.log(e)
+                }
+            });
+        }
+
+        // Initial actions
+        $('#ar-left-1').parent().hide();
+
+        $('#ar-step-account').addClass('text-primary');
+        $('#ar-step-address').addClass('text-muted');
+        $('#ar-step-payment').addClass('text-muted');
 
     </script>
     <script>
@@ -779,7 +503,7 @@
                           </a>
                       </td>
                       <td class="text-center">
-                          <input class="upc_popup" type="text" name="product[${item.product_id}][quantity]" value="${item.qty}" size="1">
+                          <input class="upc_popup" type="text" id="qty_${item.product_id }" data-max="${item.max}"  onblur="updateCart(${item.product_id});" name="product[${item.product_id}][quantity]" value="${item.qty}" size="1">
                           &nbsp;
                           &nbsp;<a class="rmc_popup" onclick="deleteItem(this,${item.product_id},${item.price});">
                             <img src="${__urlRemove}" alt="Loại bỏ" title="Loại bỏ">
@@ -792,7 +516,9 @@
         }
 
         $(".bk-cart-subtotal-price").html(formatMoney(sum,0));
-        $(".bk-cart-subtotal-price").attr('data-val',sum)
+        $(".bk-cart-subtotal-price").attr('data-val',sum);
+        $(".bk-cart-subtotal-price").attr('data-addShip',(sum + 10000));
+        initCheckout();
 
         function updateQty(product_id){
             if($(`#qty_${product_id}`).val() <= parseInt($(`#qty_${product_id}`).attr('data-max'))){
@@ -805,8 +531,16 @@
                 });
 
                 $(`#total_${product_id}`).text(formatMoney(cart[index].price*cart[index].qty,0));
+                var step = localStorage.getItem('checkout-step');
                 $(".bk-cart-subtotal-price").html(formatMoney(sum,0));
+                if (step !== null) {
+                    if (step > 1)
+                    {
+                        $(".bk-cart-subtotal-price").html(formatMoney(sum + 10000,0));
+                    }
+                }
                 $(".bk-cart-subtotal-price").attr('data-val',sum)
+                $(".bk-cart-subtotal-price").attr('data-addShip',(sum + 10000));
                 localStorage.setItem("cart",JSON.stringify(cart));
                 reset();
                 init();

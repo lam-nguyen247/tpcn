@@ -17,7 +17,14 @@ class CustomerController extends Controller
     {
         $params = $request->all();
         $params['password'] = Hash::make($params['password']);
-        $customer = Customer::create($request->all());
+        $customer = Customer::create([
+            'first_name' => $params['first_name'],
+            'last_name' => $params['last_name'],
+            'phone' => $params['phone'],
+            'email' => $params['email'],
+            'is_news_letter' => $params['is_news_letter'],
+            'password' => $params['password']
+        ]);
         try{
             // send mail
             // Notification::route('mail', 'mrkiengmcc@gmail.com')->notify(new CustomerNotification($customer));

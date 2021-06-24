@@ -36,9 +36,7 @@ Route::get('{locale}', [LocalizationController::class, 'set'])->name('locale')->
 Route::post('/cms', [CmsController::class, 'index']);
 Auth::routes(['register' => false, 'reset' => false, 'verify' => true]);
 
-Route::group(['middleware' => ['web']], function () {
-    Route::post('register-member', [CustomerController::class, 'registerMember'])->name('home.register-member');
-});
+Route::post('register-member', [CustomerController::class, 'registerMember'])->name('home.register-member');
 
 Route::fallback(function () {
     return redirect('/');

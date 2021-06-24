@@ -91,6 +91,7 @@ function removeItem(product_id){
     localStorage.setItem('cart',JSON.stringify(cart));
     $(`#item_${product_id}`).remove();
     if(cart.length == 0){
+        localStorage.setItem('checkout-step', 0);
         location.reload();
     }
 }

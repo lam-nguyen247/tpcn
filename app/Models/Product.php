@@ -2,13 +2,12 @@
 
 namespace App\Models;
 
+use App\Models\OrderDetail;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use App\Models\ProductCategory;
 use App\Models\Store;
-use App\Models\Property;
-use App\Models\Commnent;
 
 class Product extends Model
 {
@@ -29,14 +28,14 @@ class Product extends Model
         return $this->hasMany(Comment::class);
     }
 
-    public function store()
-    {
-        return $this->belongsTo(Store::class);
-    }
-
     public function productTogethers()
     {
         return $this->hasMany(ProductTogether::class);
+    }
+
+    public function orderDetails()
+    {
+        return $this->hasMany(OrderDetail::class);
     }
 
     public function getSrcAttribute()
