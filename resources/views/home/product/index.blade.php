@@ -36,7 +36,7 @@
 {{--                                                                    <div class="brand">Giá 450 - 675</div>--}}
                                                                 </div>
                                                                 <div class="only-hover">
-                                                                    <a class="button">Mua hàng</a>
+                                                                    <a class="button add-product">Mua hàng</a>
                                                                 </div>
                                                             </div>
                                                         </div>

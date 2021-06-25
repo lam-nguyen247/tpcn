@@ -241,14 +241,6 @@
                         </li>
                         @endif
 
-                        @if(Route::has('slide.index'))
-                            <li class="sidebar-item">
-                                <a class="sidebar-link waves-effect waves-dark" href="{{route('slide.index')}}" aria-expanded="false">
-                                    <i class="ti-layout-slider-alt"></i><span class="hide-menu">@lang('Slide')</span>
-                                </a>
-                            </li>
-                        @endif
-
                         @if(Route::has('post.index'))
                             <li class="sidebar-item">
                                 <a class="sidebar-link waves-effect waves-dark has-arrow" href="javascript:void(0)" aria-expanded="false">
@@ -300,21 +292,28 @@
                                     <i class="ti-image"></i><span class="hide-menu">@lang('Banner')</span></a>
                             </li>
                         @endif
-                        @if(Route::has('page.index'))
+                        @if(Route::has('slide.index'))
                             <li class="sidebar-item">
-                                <a class="sidebar-link waves-effect waves-dark has-arrow" href="javascript:void(0)" aria-expanded="false">
-                                    <i class="ti-layout-cta-left"></i><span class="hide-menu">@lang('Pages')</span>
+                                <a class="sidebar-link waves-effect waves-dark" href="{{route('slide.index')}}" aria-expanded="false">
+                                    <i class="ti-layout-slider-alt"></i><span class="hide-menu">@lang('Slide')</span>
                                 </a>
-                                <ul aria-expanded="false" class="collapse first-level">
-                                    <li class="sidebar-item"><a href="{{route('page.index')}}" class="sidebar-link">
-                                        <i class="mdi mdi-octagram"></i><span class="hide-menu">@lang('All Pages')</span></a>
-                                    </li>
-                                    <li class="sidebar-item"><a href="{{route('page.create')}}" class="sidebar-link">
-                                        <i class="mdi mdi-octagram"></i><span class="hide-menu">@lang('Add New')</span></a>
-                                    </li>
-                                </ul>
                             </li>
                         @endif
+{{--                        @if(Route::has('page.index'))--}}
+{{--                            <li class="sidebar-item">--}}
+{{--                                <a class="sidebar-link waves-effect waves-dark has-arrow" href="javascript:void(0)" aria-expanded="false">--}}
+{{--                                    <i class="ti-layout-cta-left"></i><span class="hide-menu">@lang('Pages')</span>--}}
+{{--                                </a>--}}
+{{--                                <ul aria-expanded="false" class="collapse first-level">--}}
+{{--                                    <li class="sidebar-item"><a href="{{route('page.index')}}" class="sidebar-link">--}}
+{{--                                        <i class="mdi mdi-octagram"></i><span class="hide-menu">@lang('All Pages')</span></a>--}}
+{{--                                    </li>--}}
+{{--                                    <li class="sidebar-item"><a href="{{route('page.create')}}" class="sidebar-link">--}}
+{{--                                        <i class="mdi mdi-octagram"></i><span class="hide-menu">@lang('Add New')</span></a>--}}
+{{--                                    </li>--}}
+{{--                                </ul>--}}
+{{--                            </li>--}}
+{{--                        @endif--}}
                         <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark" href="{{route('cms.index')}}" aria-expanded="false">
                                 <i class="ti-write"></i><span class="hide-menu">@lang('CMS')</span>

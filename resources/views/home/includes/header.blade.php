@@ -13,7 +13,7 @@
                         <!-- Header Left -->
                         <div class="col-xs-12 col-sm-2 col-md-3 noright" id="header-left">
                             <!-- Logo -->
-                            <div class="logo vvv"><a href="#"><img src="{{url('/images/home/.jpg')}}" title="EcoShop" alt="EcoShop" /></a></div>
+                                <div class="logo vvv"><a href="{{ route('home.index') }}"><img src="{{url('/images/home/logo.png')}}" title="EcoShop" alt="EcoShop" /></a></div>
                         </div>
 
                         <!-- Header Center -->
@@ -204,7 +204,7 @@
                                                                                 <div class="menu">
                                                                                     <ul>
                                                                                         <li>
-                                                                                            <a href="#" class="main-menu ">{{ \Illuminate\Support\Str::upper($item->name) }}</a>
+                                                                                            <a href="{{ route('home.search') .'?category='.$item->slug  }}" class="main-menu ">{{ \Illuminate\Support\Str::upper($item->name) }}</a>
                                                                                             <a target="_blank" class="spicon" href="#">
                                                                                                 <img src="{{ url($item->image) }}">
                                                                                             </a>
@@ -242,7 +242,7 @@
                                                 <div class="content" >
                                                     <div class="row">
                                                         <div class="col-sm-12  mobile-enabled">
-                                                            <a href="duoc-si-tu-van.html">Hỏi đáp - Tư vấn</a>
+                                                            <a href="{{ route('home.question') }}">Hỏi đáp - Tư vấn</a>
                                                         </div>
                                                     </div>
                                                     <div class="border"></div>

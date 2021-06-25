@@ -1,19 +1,23 @@
 @extends('home.layouts.app')
 
-@section('title', 'ECOGREEN')
+@section('title', 'Sức Khỏe')
 @section('description', null)
 @section('css')
-    <link href="/css/home/settings.css" rel="stylesheet">
-    <link href="/css/home/static-captions.css" rel="stylesheet">
-    <link href="/css/home/dynamic-captions.css" rel="stylesheet">
-    <link href="/css/home/captions.css" rel="stylesheet">
-    <link href="/css/home/slider.css" rel="stylesheet">
+    <link href="/css/home/blog.css" rel="stylesheet">
+    <style>
+        .title_f a:before {
+            margin-right: 7px !important;
+        }
+        .title_f a:after {
+            margin-left: 7px !important;
+        }
+        .title_f a{
+            display: flex;
+        }
+    </style>
 @endsection
 
 @section('breadcrumb')
-    <?php
-        $name = isset($_GET['category']) ? $_GET['category'] : '';
-    ?>
     <div class="breadcrumb full-width">
         <div class="background-breadcrumb"></div>
         <div class="background">
@@ -25,11 +29,9 @@
                             <li class="item ">
                                 <a href="{{ route('home.index') }}">Trang chủ</a>
                             </li>
-                            @if (!empty($name))
-                                <li class="item ">
-                                    <a href="{{ route('home.search') .'?category='.$name  }}">{!! ucfirst($name) !!}</a>
-                                </li>
-                            @endif
+                            <li class="item ">
+                                <a href="{{ route('home.question') }}">Tư vấn, giải đáp thắc mắc bởi</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -48,11 +50,17 @@
                     <div class="row">
                         <div class="col-md-3" id="column_left">
                             @includeIf('home.sidebar.filter')
-                            @includeIf('home.sidebar.category')
                             @includeIf('home.sidebar.register-memership')
                         </div>
                         <div class="col-md-9">
-                            @includeIf('home.product.index')
+                            <div class="row">
+                                <div class="col-md-12 center-column " id="content"></div>
+                                <div class="col-xs-12 list_faq">
+                                    <h1 class="title_faq"><span>Gửi câu hỏi của bạn</span></h1>
+                                    @includeIf('home.question.form-submit')
+                                    @includeIf('home.question.list-question')
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -62,7 +70,4 @@
 @endsection
 
 @section('js')
-    <script src="/js/home/jquery.themepunch.tools.min.js" crossorigin="anonymous"></script>
-    <script src="/js/home/jquery.themepunch.revolution.min.js" crossorigin="anonymous"></script>
-    <script src="/js/home/slide.js" crossorigin="anonymous"></script>
 @endsection

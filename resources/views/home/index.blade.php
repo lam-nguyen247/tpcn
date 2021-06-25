@@ -1,6 +1,6 @@
 @extends('home.layouts.app')
 
-@section('title', 'ECOGREEN')
+@section('title', env('NAME_LOGO'))
 @section('description', 'asdfasdf')
 @section('css')
     <link href="/css/home/settings.css" rel="stylesheet">
@@ -78,8 +78,33 @@
     @includeIf('home.footer.index')
 @endsection
 
+@section('modal')
+    @includeIf('home.includes.modal-order')
+@endsection
+
 @section('js')
     <script src="/js/home/jquery.themepunch.tools.min.js" crossorigin="anonymous"></script>
     <script src="/js/home/jquery.themepunch.revolution.min.js" crossorigin="anonymous"></script>
     <script src="/js/home/slide.js" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.add-product').click(function(){
+                let product = {
+
+                };
+                $('#form-order').modal('show');
+
+            });
+        });
+        function add(){
+            if($("#quantity_wanted").val()> parseInt($("#quantity_wanted").attr('data-max'))){
+                alert('Sản phẩm này chỉ còn '+ $("#qty").attr('data-max') + ' sản phẩm ');
+            }else{
+                let qty = parseInt($("#quantity_wanted").val());
+                currentItem.quantity = qty;
+                currentItem.price = $("#price-old").attr('data-val');
+                addToCart(currentItem.product_id, currentItem.url, currentItem.code, currentItem.price, currentItem.image,  currentItem.quantity, currentItem.title, currentItem.slug, currentItem.max);
+            }
+        }
+    </script>
 @endsection

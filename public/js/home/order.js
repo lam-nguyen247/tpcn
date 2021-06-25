@@ -69,6 +69,7 @@ function addToCart(product_id, url, code, price, image, qty, title, slug, max){
     }
     localStorage.setItem('cart',JSON.stringify(cart))
     $('#cart_count').html(count_item);
+    $('.button-cart').button('reset');
 }
 
 function getIndexByProductIdAndPropertyId(cart, product_id){

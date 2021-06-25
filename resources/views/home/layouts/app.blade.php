@@ -43,6 +43,14 @@
     <script type="text/javascript">
         var responsive_design = 'yes';
     </script>
+    <style>
+        .common-home .header-type-2 header {
+            margin: 0px;
+        }
+        .breadcrumb {
+            margin-bottom : 20px;
+        }
+    </style>
     @yield('css')
 </head>
 <body class="common-home">
@@ -59,6 +67,7 @@
         @yield('content')
         @includeIf('home.footer.info-question')
         @includeIf('home.footer.copy-right')
+        @yield('modal')
     </div>
 </div>
 

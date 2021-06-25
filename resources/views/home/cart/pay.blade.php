@@ -179,6 +179,7 @@
 @section('js')
     <script type="text/javascript">
         // same address
+
         $('input[name=same_address]').on('change', function() {
             var same_address = $(this).is(':checked');
 
@@ -226,9 +227,12 @@
                 headers: {
                     'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
                 },
-                url: '{{route('home.register-member')}}',
+                url: '{{route('login')}}',
                 type: 'post',
-                data: JSON.stringify($('#form-register').serialize()),
+                data: {
+                    "email" : $('#input-login-email').val(),
+                    "password" : $('#input-login-password').val()
+                },
                 dataType: 'json',
                 beforeSend: function() {
                     $('#button-login').button('loading');
@@ -236,38 +240,20 @@
                 complete: function() {
                     $('#button-login').button('reset');
                 },
-                success: function(json) {
+                success: function(res) {
                     $('.alert, .text-danger').remove();
                     $('.form-group').removeClass('has-error');
 
-                    if (json['redirect']) {
-                        location = json['redirect'];
-                    } else if (json['error']) {
-                        $('#ar-right-1 .panel-body').prepend('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> ' + json['error']['warning'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
-
-                        // Highlight any found errors
-                        $('input[name=\'email\']').parent().addClass('has-error');
-                        $('input[name=\'password\']').parent().addClass('has-error');
-                    }
-                    else {
-                        $('#ar-step-account').find('.fa-stack').addClass('checkout-pointer');
-                        $('#ar-step-account').find('.fa-title').addClass('checkout-pointer');
-                        $('#ar-step-account').removeClass('text-primary');
-                        //$('#ar-step-account').addClass('text-muted');
-                        $('#ar-step-address').removeClass('text-muted');
-                        $('#ar-step-address').addClass('text-primary');
-
-                        $('#ar-account-select').parent().hide();
-
-                        $('#ar-left-1').parent().show();
-
-                        $('#ar-right-1').parent().find('.panel-heading .panel-title').html('Thông tin giao hàng');
-
-
-                        $('html, body').animate({ scrollTop: 0 }, 'slow');
+                    if (res.success) {
+                        setStepAddress();
                     }
                 },
-                error: function(xhr, ajaxOptions, thrownError) {
+                error: function() {
+                    $('.alert, .text-danger').remove();
+                    $('.form-group').removeClass('has-error');
+                    // Highlight any found errors
+                    $('input[name=email]').parent().addClass('has-error');
+                    $('input[name=password]').parent().addClass('has-error');
                 }
             });
         });
@@ -310,7 +296,7 @@
                 }
             });
         });
-        
+
         // Guest save
         $(document).on('click', '#button-guest', function() {
             $('#button-guest').button('loading');
@@ -351,6 +337,7 @@
             hiddenModal();
             $('#address-form').removeClass('hidden');
             $('#ar-step-address').removeClass('text-muted').after().addClass('text-primary');
+            $('#info-paypal tr').eq(1).removeClass('hidden');
             localStorage.setItem('checkout-step', 2);
         }
 

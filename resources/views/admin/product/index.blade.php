@@ -42,9 +42,9 @@
 
                                         <form action="{{ route('product.destroy', $product->id) }}" method="POST">
 {{--                                            {{ route('admin.product.property', $product->id) }}--}}
-                                            <a href="#" class="text-inverse pr-2" data-toggle="tooltip" title="Cập nhật thuộc tính">
-                                                <i class="fab fa-product-hunt"></i>
-                                            </a>
+{{--                                            <a href="#" class="text-inverse pr-2" data-toggle="tooltip" title="Cập nhật thuộc tính">--}}
+{{--                                                <i class="fab fa-product-hunt"></i>--}}
+{{--                                            </a>--}}
                                             <a href="{{ route('product.commentList', $product->id) }}" class="text-inverse pr-2" data-toggle="tooltip" title="Bình luận">
                                                 <i class="ti-comments"></i>
                                             </a>

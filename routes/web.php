@@ -7,6 +7,7 @@ use App\Http\Controllers\Home\CmsController;
 use App\Http\Controllers\Home\PaymentController;
 use App\Http\Controllers\Home\LocalizationController;
 use App\Http\Controllers\Home\CustomerController;
+use App\Http\Controllers\Home\AuthController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -37,7 +38,9 @@ Route::post('/cms', [CmsController::class, 'index']);
 Auth::routes(['register' => false, 'reset' => false, 'verify' => true]);
 
 Route::post('register-member', [CustomerController::class, 'registerMember'])->name('home.register-member');
-
+Route::post('dang-nhap', [AuthController::class, 'login'])->name('login');
+Route::get('tu-van', [HomeController::class, 'questionIndex'])->name('home.question');
+Route::post('new-question', [HomeController::class, 'addQuestion'])->name('home.new-question');
 Route::fallback(function () {
     return redirect('/');
 });
