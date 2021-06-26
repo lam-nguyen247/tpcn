@@ -182,12 +182,12 @@
                             <p class="mr-2" >Loại Bệnh</p>
                             <div class="row">
                                 @php
-                                    $list = empty($product->disease_id)?[]:json_decode($product->disease_id, false, 512, JSON_UNESCAPED_UNICODE);
+                                    $list = $product->disease_id!=null?[-1]:json_decode($product->disease_id, false, 512, JSON_UNESCAPED_UNICODE);
                                 @endphp
                                 @if(!empty($diseases))
                                     @foreach($diseases as $key => $val)
                                         <div class="col-md-3 proper desease{{$val->id}}" >
-                                            <input type="checkbox" id="desease_{{$val->id}}_{{$key}}" {{ in_array($val->id, $list) ? 'checked' : '' }} name="disease_id[]" value="{{$val->id}}" class="material-inputs chk-col-red">
+                                            <input type="checkbox" id="desease_{{$val->id}}_{{$key}}" {{ in_array($val->id, $list, true) ? 'checked' : '' }} name="disease_id[]" value="{{$val->id}}" class="material-inputs chk-col-red">
                                             <label for="desease_{{$val->id}}_{{$key}}">{{$val->name}}</label>
                                         </div>
                                     @endforeach
