@@ -26,6 +26,9 @@ function addToCart(product_id, url, code, price, image, qty, title, slug, max){
                 alert('Sản phẩm này chỉ còn '+ max + ' sản phẩm ');
             }
             $(`#item_${product_id} .quantity`).html(cart[check].qty);
+            $(`#detail-roder-modal #item_${product_id} #qty_${product_id}`).val(cart[check].qty);
+            $(`#detail-roder-modal #item_${product_id} #total_${product_id}`).attr('data-total', cart[check].qty * cart[check].price);
+            totalPriceModal();
         }else{
             let li = `<tr id="item_${product_id}">
                   <td class="image">
@@ -35,12 +38,14 @@ function addToCart(product_id, url, code, price, image, qty, title, slug, max){
                       <span class="quantity">1<span>&nbsp;x&nbsp;</span></span>
                       <a href="${url}">${title}</a>
                       <div>
-                          <div class="price">${price}<sup>đ</sup></div>
+                          <div class="price">${formatMoney(price,0)}<sup>đ</sup></div>
                       </div>
                   </td>
                   <td class="remove"><a href="javascript:;" onclick="removeItem(${product_id});" title="Loại bỏ"></a></td>
               </tr>`;
             $(".mini-cart-info table tbody").prepend(li);
+            renderProductOrder(product_id, url, code, price, image, qty, title, slug, max);
+            totalPriceModal();
             $('#cart_content_ajax').removeClass('hidden');
             $('#cart_content_empty').addClass('hidden');
             count_item += qty;
@@ -56,11 +61,13 @@ function addToCart(product_id, url, code, price, image, qty, title, slug, max){
                       <span class="quantity">${qty}<span>&nbsp;x&nbsp;</span></span>
                       <a href="${url}">${title}</a>
                       <div>
-                          <div class="price">${price}<sup>đ</sup></div>
+                          <div class="price">${formatMoney(price,0)}<sup>đ</sup></div>
                       </div>
                   </td>
                   <td class="remove"><a href="javascript:;" onclick="removeItem(${product_id});" title="Loại bỏ"></a></td>
               </tr>`;
+        renderProductOrder(product_id, url, code, price, image, qty, title, slug, max);
+        totalPriceModal();
         $(".mini-cart-info table tbody").prepend(li);
         $('#cart_content_ajax').removeClass('hidden');
         $('#cart_content_empty').addClass('hidden');
@@ -116,6 +123,8 @@ function initToCart(product_id, url, code, price, image, qty, title){
               </tr>`;
 
     $(".mini-cart-info table tbody").prepend(li);
+    renderProductOrder(product_id, url, code, price, image, qty, title);
+    totalPriceModal();
 }
 
 function reset(){
@@ -155,4 +164,67 @@ function formatMoney(amount, decimalCount = 2, decimal = ".", thousands = ",") {
     } catch (e) {
       console.log(e)
     }
-  };
+};
+
+function renderProductOrder(product_id, url, code, price, image, qty, title, slug, max) {
+    let li =  `<tr id="item_${product_id}">
+        <td class="text-center" width="100">
+            <a href="${url}">
+                <img src="${image}" alt="${title}" title="${title}" class="img-thumbnail"></a>
+            <div class="visible-xs">
+                <a href="${url}">${title}
+                    <div>
+                    </div>
+                </a>
+            </div>
+        </td>
+        <td width="100" class="text-center hidden-xs">
+            <a class="npr_popup" href="${url}">${title}</a>
+        </td>
+        <td class="text-center">
+            <input type="text" pattern="[0-9]*" disabled id="qty_${product_id}" data-max="${max}" value="${qty}" size="1">
+            &nbsp;<a class="rmc_popup" onclick="removeItem(${product_id});">
+            <img src="${__urlRemove}" alt="Loại bỏ" title="Loại bỏ"></a>
+        </td>
+        <td class="text-right price-total" id="total_${product_id}" data-total="${price*qty}">${formatMoney(price,0)}<sup>đ</sup></td>
+    </tr>`;
+
+    $("#detail-roder-modal table tbody").prepend(li);
+}
+
+// function updateQty($this, product_id){
+//     cart = JSON.parse(localStorage.getItem('cart'));
+//     let index = getIndexByProductIdAndPropertyId(cart, product_id);
+//     cart[index].qty = $this.find(`#qty_${product_id}`).val();
+//     $this.find(`#total_${product_id}`).attr('data-total', cart[index].price*cart[index].qty);
+//     var sum = 0;
+//
+//     $("#detail-roder-modal table tbody .price-total").each(function () {
+//         var priceTotal = parseInt($(this).attr('data-total'));
+//         sum += priceTotal;
+//     });
+//     $('.cart-total .total-modal').html(formatMoney(sum,0));
+//     localStorage.setItem("cart",JSON.stringify(cart));
+//     // reset();
+//     // init();
+// }
+
+// function updateCart(product_id){
+//     var $this  = $(`#detail-roder-modal table tbody`);
+//     var pattern = /^\d+$/;
+//
+//     if (parseInt($this.find(`#qty_${product_id}`).val()) <= 0 || !pattern.test($this.find(`#qty_${product_id}`).val())) {
+//         $this.find(`#qty_${product_id}`).val(1);
+//     }
+//     updateQty($this, product_id);
+// }
+
+function totalPriceModal()
+{
+    var sum = 0;
+    $("#detail-roder-modal table tbody .price-total").each(function () {
+        var priceTotal = parseInt($(this).attr('data-total'));
+        sum += priceTotal;
+    });
+    $('.cart-total .total-modal').html(formatMoney(sum,0))
+}

@@ -70,7 +70,10 @@
         @yield('modal')
     </div>
 </div>
-
+<script>
+    var __urlRemove = '{{ url('/images/home/remove.png') }}';
+    var __urlUpdate = '{{ url('/images/home/update.png') }}';
+</script>
 <script src="/js/home/jquery-2.1.1.min.js" crossorigin="anonymous"></script>
 <script src="/js/home/jquery-migrate-1.2.1.min.js" crossorigin="anonymous"></script>
 <script src="/js/home/jquery.easing.1.3.js" crossorigin="anonymous"></script>

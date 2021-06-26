@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Controller;
+use App\Models\Banner;
+use App\Models\Post;
 use App\Models\Product;
 use App\Models\QuestionAnswer;
+use App\Models\Slide;
 use Illuminate\Http\Request;
 use Jenssegers\Agent\Agent;
 
@@ -14,10 +17,15 @@ class HomeController extends Controller
     {
         $agent = new Agent();
         $products = Product::orderBy('id', 'DESC')->simplePaginate(12);
-//        $post =
+        $slide = Slide::orderBy('order', 'ASC')->get();
+        $banner = Banner::all();
+        $post = Post::orderBy('id', 'DESC')->limit(8)->get();
         return view('home.index', compact(
             'agent',
-            'products'
+            'products',
+            'slide',
+            'banner',
+            'post'
         ));
     }
 

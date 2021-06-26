@@ -23,9 +23,9 @@
                                 <div class="col-sm-5 col-lg-2">
                                     <x-input name="order" type="number" label="Order" class="mb-4" input-class="form-control-sm" />
                                 </div>
-                                <div class="col-sm-7 col-lg-3">
-                                    <x-input name="time" type="number" label="Time" class="mb-4" input-class="form-control-sm" />
-                                </div>
+{{--                                <div class="col-sm-7 col-lg-3">--}}
+{{--                                    <x-input name="time" type="number" label="Time" class="mb-4" input-class="form-control-sm" />--}}
+{{--                                </div>--}}
                             </div>
                             <div class="row">
                                 <div class="col-12">

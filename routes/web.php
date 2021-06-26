@@ -32,13 +32,15 @@ Route::get('post/{id}', [PostController::class, 'detailPost'])->name('home.detai
 Route::get('gio-hang', [HomeController::class, 'cart'])->name('home.cart');
 Route::get('thanh-toan', [HomeController::class, 'pay'])->name('home.pay');
 Route::post('/payment', [PaymentController::class, 'pay'])->name('pay.create-pay');
+Route::post('comments', [ProductController::class, 'postComments'])->name('product.comments');
+Route::post('ajax-comments', [ProductController::class, 'ajaxComments'])->name('product.ajax-comments');
+//Route::post('dang-nhap', [AuthController::class, 'login'])->name('login');
 
 Route::get('{locale}', [LocalizationController::class, 'set'])->name('locale')->where('locale', 'en|vi');
 Route::post('/cms', [CmsController::class, 'index']);
 Auth::routes(['register' => false, 'reset' => false, 'verify' => true]);
 
 Route::post('register-member', [CustomerController::class, 'registerMember'])->name('home.register-member');
-Route::post('dang-nhap', [AuthController::class, 'login'])->name('login');
 Route::get('tu-van', [HomeController::class, 'questionIndex'])->name('home.question');
 Route::post('new-question', [HomeController::class, 'addQuestion'])->name('home.new-question');
 Route::fallback(function () {

@@ -11,6 +11,7 @@ return [
         'product' => '/images/upload/product/',
         'page' => '/images/upload/page/',
         'slide' => '/images/upload/slide/',
+        'banner' => '/images/upload/banner/',
     ],
     'url' => [
         'category' => '/danh-muc/',

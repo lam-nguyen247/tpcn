@@ -29,6 +29,7 @@ class ComposerServiceProvider extends ServiceProvider
             'home.sidebar.filter',
             'home.sidebar.category',
             'home.sidebar.category-post',
+            'home.post.index',
         ], 'App\ViewComposers\HeaderComposers');
     }
 }

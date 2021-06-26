@@ -48,29 +48,29 @@
                                     <div class="megamenu-pattern">
                                         <div class="container">
                                             <ul class="megamenu none">
-                                                <li class='mnu_acc' >
-                                                    <p class='close-menu'></p>
-                                                    <p class='open-menu'></p>
-                                                    <a href='#' class='clearfix' >
-                                                        <span>
-                                                            <strong>
-                                                                <img src="{{url('/images/home/ico-login.png')}}" alt="">
-                                                                Tài khoản
-                                                            </strong>
-                                                        </span>
-                                                    </a>
-                                                </li>
-                                                <li class='mnu_login'>
-                                                    <p class='close-menu'></p>
-                                                    <p class='open-menu'></p>
-                                                    <a href='#' class='clearfix' >
-                                                        <span>
-                                                            <strong>
-                                                                <img src="{{url('/images/home/ico-login.png')}}" alt="">Đăng nhập
-                                                            </strong>
-                                                        </span>
-                                                    </a>
-                                                </li>
+{{--                                                <li class='mnu_acc' >--}}
+{{--                                                    <p class='close-menu'></p>--}}
+{{--                                                    <p class='open-menu'></p>--}}
+{{--                                                    <a href='#' class='clearfix' >--}}
+{{--                                                        <span>--}}
+{{--                                                            <strong>--}}
+{{--                                                                <img src="{{url('/images/home/ico-login.png')}}" alt="">--}}
+{{--                                                                Tài khoản--}}
+{{--                                                            </strong>--}}
+{{--                                                        </span>--}}
+{{--                                                    </a>--}}
+{{--                                                </li>--}}
+{{--                                                <li class='mnu_login'>--}}
+{{--                                                    <p class='close-menu'></p>--}}
+{{--                                                    <p class='open-menu'></p>--}}
+{{--                                                    <a href='#' class='clearfix' >--}}
+{{--                                                        <span>--}}
+{{--                                                            <strong>--}}
+{{--                                                                <img src="{{url('/images/home/ico-login.png')}}" alt="">Đăng nhập--}}
+{{--                                                            </strong>--}}
+{{--                                                        </span>--}}
+{{--                                                    </a>--}}
+{{--                                                </li>--}}
                                                 <li class='mnu_tuvan'>
                                                     <p class='close-menu'></p>
                                                     <p class='open-menu'></p>

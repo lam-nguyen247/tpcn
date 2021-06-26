@@ -16,7 +16,7 @@ class AddBannerTable extends Migration
         Schema::create('banners', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('banner')->nullable()->default('');
+            $table->string('image')->nullable();
             $table->integer('display_home')->default(0);
             $table->timestamps();
         });

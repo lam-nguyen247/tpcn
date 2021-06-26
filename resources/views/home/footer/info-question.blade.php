@@ -27,26 +27,10 @@
                                 <table class="">
                                     <tbody>
                                     <tr>
-                                        <td>
-                                            <a href="tel:+842838115118">
-                                                <img src="image/data/hotline.png" alt="login">
-                                            </a>
-                                        </td>
-                                        <td valign="bottom">
-                                            <a href="#">
-                                                <img src="image/data/i-facebook.png" alt="login"></a>
-                                        </td>
-                                        <td valign="bottom"></td>
-                                        <td valign="bottom"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <a target="_blank" href="http://online.gov.vn/HomePage/CustomWebsiteDisplay.aspx?DocId=30569">
-                                                <img src="image/data/i-ct.png" alt="login"></a>
-                                        </td>
                                         <td colspan="3">
                                             <a href="#">
-                                                <img src="image/data/i-master.png" alt="login"></a>
+                                                <img src="{{ url('/images/home/i-master.png') }}" alt="login">
+                                            </a>
                                         </td>
                                     </tr>
                                     </tbody>

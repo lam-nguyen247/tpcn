@@ -22,7 +22,7 @@
                         <div class="row">
                             <div class="col-sm-12 col-md-4 col-xl-3">
                                 <div class="form-group mb-5">
-                                    <input type="file" class="form-control js-dropify" name="file" accept="image/*" data-default-file="{{$product->image}}" data-show-remove="false" />
+                                    <input type="file" class="form-control js-dropify" name="file" accept="image/*" data-default-file="{{url($product->image)}}" data-show-remove="false" />
                                 </div>
                                 @if(Route::has('product-category.index'))
                                 <div class="form-group mb-5">
@@ -193,6 +193,7 @@
                                     @endforeach
                                 @endif
                             </div>
+{{--                            @createseo--}}
                         <button type="submit" id="save" class="btn btn-success waves-effect waves-light mr-2 mt-5">Lưu</button>
                     </form>
                 </div>

@@ -17,8 +17,6 @@ class AddTableComments extends Migration
             $table->id();
             $table->unsignedBigInteger('product_id');
             $table->string('name');
-            $table->string('phone');
-            $table->string('email');
             $table->text('content')->nullable();
             $table->text('reply')->nullable();
             $table->integer('score')->nullable()->default(0);

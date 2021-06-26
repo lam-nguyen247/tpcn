@@ -16,7 +16,7 @@
                                 </div>
                                 @if(Route::has('product-category.index'))
                                 <div class="form-group mb-5">
-                                    <select class="form-control p-0" name="product_category_id" id="product_category" onchange="selectCategory()" required>
+                                    <select class="form-control p-0" name="product_category_id" id="product_category" required>
                                         @forelse($productCategoryList as $category)
                                             <option value="{{$category->id}}" data-parent="{{$category->parent_id>0?$category->parent_id:$category->id}}" @if($category->id == old('product_category_id')) selected @endif>{{$category->name}}</option>
                                         @empty
@@ -126,9 +126,9 @@
                         </div>
                         <div style="clear: both"></div>
                         <span for="information">Thông tin chi tiết</span>
-                        <textarea id="information" name="information" class="js-summernote form-material"></textarea>
+                        <textarea id="information" name="information" class="js-summernote form-material">{{old('information')}}</textarea>
                         <span for="description">Mô tả sản phẩm</span>
-                        <textarea id="description" name="description" class="js-summernote form-material"></textarea>
+                        <textarea id="description" name="description" class="js-summernote form-material">{{old('description')}}</textarea>
 
                         <div class="col-md-12 mb-5">
                             <p class="mr-2" >Loại Bệnh</p>
@@ -143,6 +143,7 @@
                                 @endif
                             </div>
                         </div>
+{{--                        @createseo--}}
                         <button type="submit" id="save" class="btn btn-success waves-effect waves-light mr-2 mt-5">Lưu</button>
                     </form>
                 </div>

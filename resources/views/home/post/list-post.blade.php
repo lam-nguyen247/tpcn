@@ -8,13 +8,13 @@
             <div class="post-content">
                 <div class="post_box row">
                     <div class="col-xs-12 col-sm-4">
-                        <a href="#" class="title" title="{{ $val->name }}">
+                        <a href="{{ route('home.detail-post', $val->id) }}" class="title" title="{{ $val->name }}">
                             <img alt="{{ $val->name }}" title="{{ $val->name }}" src="{{ url($val->image) }}">
                         </a>
                     </div>
                     <div class="col-xs-12 col-sm-8">
                         <h2 class="post-title">
-                            <a href="#" class="title" title="{{ $val->name }}">
+                            <a href="{{ route('home.detail-post', $val->id) }}" class="title" title="{{ $val->name }}">
                                 {{ $val->name }}
                             </a>
                         </h2>
@@ -23,7 +23,7 @@
                                 {!! shorter($val->content, 100) !!}
                             </p>
                         </div>
-                        <a href="#" title="{{ $val->name }}" class=" more">Xem tiếp </a>
+                        <a href="{{ route('home.detail-post', $val->id) }}" title="{{ $val->name }}" class=" more">Xem tiếp </a>
                     </div>
                     <div class="line_n"><span></span></div>
                 </div>

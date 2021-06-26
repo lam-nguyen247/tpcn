@@ -24,8 +24,8 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-12">
-                            <a href="chu-de-suc-khoe.html" title="blog">
-                                <img src="image/catalog/blog/blog.jpg" style="margin:0px 0 25px;" alt="banner">
+                            <a href="#" title="blog">
+                                <img src="{{ isset($banner[1]) ? url($banner[1]->image) : '' }}" style="margin:0px 0 25px;" alt="banner">
                             </a>
                         </div>
                     </div>

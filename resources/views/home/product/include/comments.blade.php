@@ -1,11 +1,17 @@
 <div id="tab-review" class="tab-content">
     <form class="form-horizontal" id="form-review">
-        <div id="review"></div>
-        <h2 id="review-title">Viết đánh giá</h2>
+        <div id="review">
+        </div>
+        <div class="col-md-12">
+            <div class="row">
+                <h2 id="review-title">Viết đánh giá</h2>
+            </div>
+        </div>
         <div class="form-group required">
             <div class="col-xs-12 col-sm-8">
                 <label class="control-label" for="input-name">Tên bạn:</label>
                 <input type="text" name="name" value="" id="input-name" class="form-control">
+                <input type="hidden" name="product_id" value="{{ $product->id }}">
             </div>
         </div>
         <div class="form-group required">
@@ -36,7 +42,7 @@
         <div class="form-group required">
             <div class="col-xs-12 col-sm-8">
                 <label class="control-label" for="input-review">Đánh giá của bạn:</label>
-                <textarea name="text" rows="5" id="input-review" class="form-control"></textarea>
+                <textarea name="comments" rows="5" id="input-review" class="form-control"></textarea>
                 <div class="help-block"><span style="color: #FF0000;">Lưu ý:</span> không hỗ trợ HTML!</div>
             </div>
         </div>

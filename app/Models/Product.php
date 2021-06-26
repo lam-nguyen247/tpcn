@@ -20,7 +20,7 @@ class Product extends Model
 
     public function comments()
     {
-        return $this->hasMany(Comment::class)->where('comments.status', '1');;
+        return $this->hasMany(Comment::class)->where('comments.status', '1');
     }
 
     public function commentList()

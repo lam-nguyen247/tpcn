@@ -21,13 +21,18 @@
             <div class="pattern">
                 <div class="container">
                     <div class="row">
-                        <div class="col-sm-12 col-md-9">
+                        @php
+                            $isCheckBanner = $banner->filter(function ($item) {
+                                return in_array($item->name, ['banner_left', 'banner_left2']);
+                            });
+                        @endphp
+                        <div class="col-sm-12 {{ count($isCheckBanner) ? 'col-md-9' : 'col-md-12' }}">
                             @includeIf('home.includes.slide')
                         </div>
                         <div class="col-sm-12 col-md-3 noleft10">
                             <div class="hst fadeIn"><div class="hidden-xs hidden-sm">
-                                    <a href="#"><img src="{{url('/images/home/giaohang/banner_ship.jpg')}}" alt="ship" style="margin-bottom:10px;"></a>
-                                    <a href="#"><img src="{{url('/images/home/giaohang/banner_sale3860.jpg')}}" alt="sale"></a>
+                                    <a href="#"><img src="{{ isset($isCheckBanner[2]) ? url($isCheckBanner[2]->image) : ''}}" alt="ship" style="margin-bottom:10px;"></a>
+                                    <a href="#"><img src="{{ isset($isCheckBanner[3]) ? url($isCheckBanner[3]->image) : ''}}" alt="sale"></a>
                                 </div>
                             </div>
                         </div>
@@ -88,23 +93,23 @@
     <script src="/js/home/slide.js" crossorigin="anonymous"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-            $('.add-product').click(function(){
-                let product = {
-
-                };
+                $('.add-product').click(function(){
+                var productId = $(this).attr('data-id');
+                $('#form-order .modal-header .head_c .title').text($(`.product_title_${productId}`).val());
+                $('#form-order .modal-header .head_c .title').attr('href', $(`.product_url_${productId}`).val());
+                add(productId);
                 $('#form-order').modal('show');
-
             });
         });
-        function add(){
-            if($("#quantity_wanted").val()> parseInt($("#quantity_wanted").attr('data-max'))){
-                alert('Sản phẩm này chỉ còn '+ $("#qty").attr('data-max') + ' sản phẩm ');
-            }else{
-                let qty = parseInt($("#quantity_wanted").val());
-                currentItem.quantity = qty;
-                currentItem.price = $("#price-old").attr('data-val');
-                addToCart(currentItem.product_id, currentItem.url, currentItem.code, currentItem.price, currentItem.image,  currentItem.quantity, currentItem.title, currentItem.slug, currentItem.max);
-            }
+        function add(productId){
+            addToCart($(`.product_id_${productId}`).val(),
+                $(`.product_url_${productId}`).val(),
+                $(`.product_code_${productId}`).val(),
+                $(`.product_price_${productId}`).val(),
+                $(`.product_image_${productId}`).val(),
+                1,
+                $(`.product_title_${productId}`).val(),
+                null, $(`.product_max_${productId}`).val());
         }
     </script>
 @endsection
