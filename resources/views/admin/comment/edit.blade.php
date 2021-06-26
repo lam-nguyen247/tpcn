@@ -33,39 +33,10 @@
                                             <input type="text" id="product_name" value="{{$comment->product->title}}"   class="form-control" required="required" placeholder="" aria-label="" aria-describedby="basic-addon1">
                                             <input type="hidden" value="{{$comment->product_id}}" name="product_id" required id="product_id">
                                             <div class="input-group-append">
-                                                <button type="button" class="btn btn-info" data-toggle="modal"  data-target="#info-header-modal">Chọn sản phẩm</button>  
+                                                <button type="button" class="btn btn-info" data-toggle="modal"  data-target="#info-header-modal">Chọn sản phẩm</button>
                                             </div>
                                         </div>
                                         @error('product_id')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-12 col-md-8 col-xl-9 d-flex align-items-center mb-2">
-                                <div class="card card-body px-0 mb-0">
-                                    <div class="form-group focused @error('phone') has-error @enderror">
-                                        <input id="phone" type="tel" value="{{$comment->phone}}" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Định dạng số điện thoại không đúng.' : '');"  pattern="(0{1})([0-9]{1})([0-9]{8})" name="phone" value="{{ old('phone') ?? ''}}"
-                                        class="form-control @error('phone') is-invalid @enderror">
-                                        <span class="bar"></span>
-                                        <label for="phone">Số điện thoại</label>
-                                        @error('phone')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-12 col-md-8 col-xl-9 d-flex align-items-center mb-2">
-                                <div class="card card-body px-0 mb-0">
-                                    <div class="form-group focused @error('email') has-error @enderror">
-                                        <input id="email" type="email" value="{{$comment->email}}" name="email" class="form-control @error('email') is-invalid @enderror" value="{{old('email')}}" required>
-                                        <span class="bar"></span>
-                                        <label for="email">Email</label>
-                                        @error('email')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -104,11 +75,11 @@
                                     <p for="name">Điểm đánh giá</p>
                                     <div class="form-group focused @error('name') has-error @enderror">
                                         <select class="form-control p-1" value="{{$comment->score}}"  name="score" id="score">
-                                            <option value="5">5*</i></option>
-                                            <option value="4">4*</i></option>
-                                            <option value="3">3*</i></option>
-                                            <option value="2">2*</i></option>
-                                            <option value="1">1*</i></option>
+                                            <option value="5" {{$comment->score == 5 ? 'selected' : ''}}>5*</i></option>
+                                            <option value="4" {{$comment->score == 4 ? 'selected' : ''}}>4*</i></option>
+                                            <option value="3" {{$comment->score == 3 ? 'selected' : ''}}>3*</i></option>
+                                            <option value="2" {{$comment->score == 2 ? 'selected' : ''}}>2*</i></option>
+                                            <option value="1" {{$comment->score == 1 ? 'selected' : ''}}>1*</i></option>
                                         </select>
                                         @error('name')
                                         <span  class="invalid-feedback" role="alert">
@@ -135,7 +106,7 @@
                                 </div>
                             </div>
                         </div>
-                       
+
                         <button type="submit" class="btn btn-success waves-effect waves-light mr-2">@lang('Save')</button>
                     </form>
                 </div>

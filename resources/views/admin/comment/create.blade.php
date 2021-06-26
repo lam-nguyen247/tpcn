@@ -32,39 +32,10 @@
                                             <input type="text" id="product_name"   class="form-control" required="required" placeholder="" aria-label="" aria-describedby="basic-addon1">
                                             <input type="hidden" name="product_id" required id="product_id">
                                             <div class="input-group-append">
-                                                <button type="button" class="btn btn-info" data-toggle="modal"  data-target="#info-header-modal">Chọn sản phẩm</button>  
+                                                <button type="button" class="btn btn-info" data-toggle="modal"  data-target="#info-header-modal">Chọn sản phẩm</button>
                                             </div>
                                         </div>
                                         @error('product_id')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-12 col-md-8 col-xl-9 d-flex align-items-center mb-2">
-                                <div class="card card-body px-0 mb-0">
-                                    <div class="form-group focused @error('phone') has-error @enderror">
-                                        <input id="phone" type="tel" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Định dạng số điện thoại không đúng.' : '');"  pattern="(0{1})([0-9]{1})([0-9]{8})" name="phone" value="{{ old('phone') ?? ''}}"
-                                        class="form-control @error('phone') is-invalid @enderror">
-                                        <span class="bar"></span>
-                                        <label for="phone">Số điện thoại</label>
-                                        @error('phone')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-12 col-md-8 col-xl-9 d-flex align-items-center mb-2">
-                                <div class="card card-body px-0 mb-0">
-                                    <div class="form-group focused @error('email') has-error @enderror">
-                                        <input id="email" type="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{old('email')}}" required>
-                                        <span class="bar"></span>
-                                        <label for="email">Email</label>
-                                        @error('email')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -134,7 +105,7 @@
                                 </div>
                             </div>
                         </div>
-                       
+
                         <button type="submit" class="btn btn-success waves-effect waves-light mr-2">@lang('Save')</button>
                     </form>
                 </div>

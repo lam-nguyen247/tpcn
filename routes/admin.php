@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\QuestionAnswerController;
 use App\Http\Controllers\Admin\DiseaseController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\CommentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -58,6 +59,7 @@ Route::resource('question-answer', QuestionAnswerController::class);
 Route::resource('diseases', DiseaseController::class);
 Route::resource('banner', BannerController::class);
 Route::resource('order', OrderController::class);
+Route::resource('comment', CommentController::class);
 Route::post('update-status-order/{id}', [OrderController::class, 'updateStatusOrder'])->name('order.update-status-order');
 
 

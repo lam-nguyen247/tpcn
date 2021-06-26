@@ -29,6 +29,8 @@ class CreateProductsTable extends Migration
             $table->integer('status')->default(1);
             $table->integer('purchase')->nullable()->default(0);
             $table->integer('qty')->nullable()->default(0);
+            $table->float('score',2)->nullable()->default(0);
+            $table->integer('votes')->nullable()->default(0);
             $table->string('address')->nullable();
             $table->string('property_category')->nullable()->default('');
             $table->decimal('online',20,0)->nullable()->default(0);
