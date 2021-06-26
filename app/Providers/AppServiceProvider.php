@@ -78,12 +78,13 @@ class AppServiceProvider extends ServiceProvider
             Session::put('theme', 'light');
         }
         try {
-            if (Cache::has('config')) {
-                $config = Cache::get('config');
-            } else {
-                $config = (object)Configuration::all()->pluck('content', 'name')->toArray();
-                Cache::put('config', $config);
-            }
+            // if (Cache::has('config')) {
+            //     $config = Cache::get('config');
+            // } else {
+               
+            // }
+            $config = (object)Configuration::all()->pluck('content', 'name')->toArray();
+            Cache::put('config', $config);
             View::share('config', $config);
         } catch (Exception $e) {
             // NOP
