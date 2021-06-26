@@ -58,10 +58,10 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="form-group col-sm-12 required">
-                        <label class="control-label" for="input-shipping-zone">Quận / Huyện:</label>
-                        <select name="shipping_zone_id" id="input-shipping-zone" class="form-control" required="" autocomplete="shipping region"><option value=""> --- Chọn --- </option><option value="0" selected="selected"> --- Không --- </option></select>
-                    </div>
+{{--                    <div class="form-group col-sm-12 required">--}}
+{{--                        <label class="control-label" for="input-shipping-zone">Quận / Huyện:</label>--}}
+{{--                        <select name="shipping_zone_id" id="input-shipping-zone" class="form-control" required="" autocomplete="shipping region"><option value=""> --- Chọn --- </option><option value="0" selected="selected"> --- Không --- </option></select>--}}
+{{--                    </div>--}}
                     <div class="form-group col-sm-12 required">
                         <label class="control-label" for="input-shipping-address-1">Địa chỉ:</label>
                         <input type="text" name="shipping_address_1" value="" placeholder="Địa chỉ:" id="input-shipping-address-1" class="form-control" required="" autocomplete="shipping street-address">

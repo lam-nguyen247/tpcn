@@ -21,6 +21,7 @@
                         <h5 class="mb-0 text-white">Địa chỉ nhận hàng</h5> <br>
                         <h5 class="mb-0 text-white">Họ và Tên: {{$order['address_shipping']['name']}}</h5> <br>
                         <h5 class="mb-0 text-white">Số điện thoại : {{$order['address_shipping']['phone']}}</h5> <br>
+                        <h5 class="mb-0 text-white">Tỉnh : {{config('constants.country')[$order['address_shipping']['city']] ?? null}}</h5> <br>
                         <h5 class="mb-0 text-white">Địa chỉ: {{$order['address_shipping']['address']}}</h5> <br>
                     </div>
                 </div>

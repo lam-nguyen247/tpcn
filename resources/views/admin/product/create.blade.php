@@ -41,16 +41,16 @@
                                     <span class="bar"></span>
                                     <label for="price">Giá gốc</label>
                                 </div>
-                                <div class="form-group mb-5 @error('sale') has-error @enderror">
-                                    <input id="sale" onchange="changePrice()" type="number" min="0"  name="sale" step="1000" class="form-control " value="{{old('sale')!=''?old('sale'):0}}">
-                                    <span class="bar"></span>
-                                    <label for="sale">Giá khuyến mãi</label>
-                                </div>
-                                <div class="form-group mb-5 @error('purchase') has-error @enderror">
-                                    <input id="purchase" type="number" min="0" pattern="[0-9]*" name="purchase" class="form-control " value="{{old('purchase')!=''?old('purchase'):0}}">
-                                    <span class="bar"></span>
-                                    <label for="purchase">Lượt mua</label>
-                                </div>
+{{--                                <div class="form-group mb-5 @error('sale') has-error @enderror">--}}
+{{--                                    <input id="sale" onchange="changePrice()" type="number" min="0"  name="sale" step="1000" class="form-control " value="{{old('sale')!=''?old('sale'):0}}">--}}
+{{--                                    <span class="bar"></span>--}}
+{{--                                    <label for="sale">Giá khuyến mãi</label>--}}
+{{--                                </div>--}}
+{{--                                <div class="form-group mb-5 @error('purchase') has-error @enderror">--}}
+{{--                                    <input id="purchase" type="number" min="0" pattern="[0-9]*" name="purchase" class="form-control " value="{{old('purchase')!=''?old('purchase'):0}}">--}}
+{{--                                    <span class="bar"></span>--}}
+{{--                                    <label for="purchase">Lượt mua</label>--}}
+{{--                                </div>--}}
                                 <div class="form-group mb-5 @error('qty') has-error @enderror">
                                     <input id="qty" type="number" min="0" pattern="[0-9]*" name="qty" class="form-control " value="{{old('qty')!=''?old('qty'):0}}">
                                     <span class="bar"></span>

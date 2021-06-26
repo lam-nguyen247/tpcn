@@ -51,16 +51,16 @@
                                     <span class="bar"></span>
                                     <label for="price">Giá gốc</label>
                                 </div>
-                                <div class="form-group focused  mb-5 @error('sale') has-error @enderror">
-                                    <input id="sale" type="number" onchange="changePrice()"  min="0" name="sale" class="form-control " step="1000" min="0"  value="{{old('sale')??$product->sale}}">
-                                    <span class="bar"></span>
-                                    <label for="sale">Giá khuyến mãi</label>
-                                </div>
-                                <div class="form-group focused  mb-5 @error('purchase') has-error @enderror">
-                                    <input id="purchase" type="number" min="0" pattern="[0-9]*" name="purchase" class="form-control " value="{{old('purchase')??$product->purchase}}">
-                                    <span class="bar"></span>
-                                    <label for="purchase">Lượt mua</label>
-                                </div>
+{{--                                <div class="form-group focused  mb-5 @error('sale') has-error @enderror">--}}
+{{--                                    <input id="sale" type="number" onchange="changePrice()"  min="0" name="sale" class="form-control " step="1000" min="0"  value="{{old('sale')??$product->sale}}">--}}
+{{--                                    <span class="bar"></span>--}}
+{{--                                    <label for="sale">Giá khuyến mãi</label>--}}
+{{--                                </div>--}}
+{{--                                <div class="form-group focused  mb-5 @error('purchase') has-error @enderror">--}}
+{{--                                    <input id="purchase" type="number" min="0" pattern="[0-9]*" name="purchase" class="form-control " value="{{old('purchase')??$product->purchase}}">--}}
+{{--                                    <span class="bar"></span>--}}
+{{--                                    <label for="purchase">Lượt mua</label>--}}
+{{--                                </div>--}}
                                 <div class="form-group focused  mb-5 @error('qty') has-error @enderror">
                                     <input id="qty" type="number" min="0" pattern="[0-9]*" name="qty" class="form-control " value="{{old('qty')??$product->qty}}">
                                     <span class="bar"></span>
