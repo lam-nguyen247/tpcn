@@ -6,7 +6,7 @@
                         <!-- SLIDE  -->
                         <li data-transition="random" data-slotamount="7" data-masterspeed="300" data-link="{{ $val->url  }}"   data-saveperformance="off" >
                             <!-- MAIN IMAGE -->
-                            <img src="{{url($val->image)}}"  alt="sap-3t1"  data-bgposition="center top" data-bgfit="cover" data-bgrepeat="no-repeat">
+                            <img src="{{ $val->image ? url($val->image) : defaultImage() }}"  alt="sap-3t1"  data-bgposition="center top" data-bgfit="cover" data-bgrepeat="no-repeat">
                             <!-- LAYERS -->
                         </li>
                 @endforeach

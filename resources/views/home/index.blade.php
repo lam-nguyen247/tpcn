@@ -8,6 +8,12 @@
     <link href="/css/home/dynamic-captions.css" rel="stylesheet">
     <link href="/css/home/captions.css" rel="stylesheet">
     <link href="/css/home/slider.css" rel="stylesheet">
+    <style>
+        .image-right-slider {
+            width: 100%;
+            max-height: 149px;
+        }
+    </style>
 @endsection
 
 @section('breadcrumb')
@@ -26,13 +32,13 @@
                                 return in_array($item->name, ['banner_left', 'banner_left2']);
                             });
                         @endphp
-                        <div class="col-sm-12 {{ count($isCheckBanner) ? 'col-md-9' : 'col-md-12' }}">
+                        <div class="col-sm-12 col-md-9">
                             @includeIf('home.includes.slide')
                         </div>
                         <div class="col-sm-12 col-md-3 noleft10">
                             <div class="hst fadeIn"><div class="hidden-xs hidden-sm">
-                                    <a href="#"><img src="{{ isset($isCheckBanner[2]) ? url($isCheckBanner[2]->image) : ''}}" alt="ship" style="margin-bottom:10px;"></a>
-                                    <a href="#"><img src="{{ isset($isCheckBanner[3]) ? url($isCheckBanner[3]->image) : ''}}" alt="sale"></a>
+                                    <a href="#"><img class="image-right-slider" src="{{ isset($isCheckBanner[2]) ? url($isCheckBanner[2]->image) : defaultImage()}}" alt="ship" style="margin-bottom:10px;"></a>
+                                    <a href="#"><img class="image-right-slider" src="{{ isset($isCheckBanner[3]) ? url($isCheckBanner[3]->image) : defaultImage()}}" alt="sale"></a>
                                 </div>
                             </div>
                         </div>
