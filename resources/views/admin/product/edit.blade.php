@@ -182,7 +182,7 @@
                             <p class="mr-2" >Loại Bệnh</p>
                             <div class="row">
                                 @php
-                                    $list = $product->disease_id!=null?[-1]:json_decode($product->disease_id, false, 512, JSON_UNESCAPED_UNICODE);
+                                    $list = $product->disease_id==null?[-1]:json_decode($product->disease_id, false, 512, JSON_UNESCAPED_UNICODE);
                                 @endphp
                                 @if(!empty($diseases))
                                     @foreach($diseases as $key => $val)
