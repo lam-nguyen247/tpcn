@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\SendMailNewOrder;
 use App\Models\Banner;
 use App\Models\Post;
 use App\Models\Product;

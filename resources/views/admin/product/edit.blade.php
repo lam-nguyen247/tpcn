@@ -153,7 +153,7 @@
                                                 <div style="height:125px;line-height:125px">
                                                     <img class="display_image_device" name="display_image_device_{{$i+1}}"
                                                     id="display_image_device_{{$i+1}}"
-                                                    src="{{asset('storage/images/upload/product/'.$image)}}"
+                                                    src="{{ url($image) }}"
                                                     onError="this.onerror=null;this.src='/images/admin/drag_and_drop.jpg';"
                                                     alt="" style="max-height:110px">
                                                     <input type="file" class="image_device" id="image_device_{{$i+1}}" name="image_device_{{$i+1}}" accept="image/x-png,image/gif,image/jpeg" onchange="writefiles(this.files[0],1)" ondrop="drop(event,this.files[0],1)" ondragover="allowDrop(event)">

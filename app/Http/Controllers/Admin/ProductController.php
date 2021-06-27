@@ -62,12 +62,8 @@ class ProductController extends Controller
     {
         $images = array();
         ///add new image to album
-        if (isset($request->number_device)) {
+            if (isset($request->number_device)) {
             for ($i = 0; $i <= $request->number_device; $i++) {
-                $vari = 'base64_image_device_' . $i;
-                if ($request->$vari != null) {
-                    $images[] = $imageService->saveImgBase64($request->$vari, $this->folder);
-                }
                 $request->request->remove('image_device_current_' . $i);
                 $request->request->remove('path_image_' . $i);
                 $request->request->remove('base64_image_device_' . $i);
@@ -75,7 +71,12 @@ class ProductController extends Controller
                 $request->request->remove('btn_image_multi_' . $i);
             }
         }
-        $request->request->remove('number_device');
+        if (isset($request->multi_img_device_1)) {
+            foreach ($request->multi_img_device_1 as $val) {
+                $images[] = $imageService->store($val, $this->folder .'/' . time() .'/');
+            }
+        }
+        $request->request->remove('arrAdress ');
         $list_img = json_encode($images);
         $request->request->add(['album' => $list_img, 'slug' => Str::slug($request->title), 'property_category'=> null]);
         $combo_product_id = $request->combo_product_id;
@@ -138,7 +139,7 @@ class ProductController extends Controller
     public function update(ProductRequest $request, Product $product, ImageService $imageService)
     {
         if (!is_null($request->file)) {
-            File::delete($product->image);
+            unlink($product->image);
             Log::info('ProductObserver.deleted() ' . $product->image);
             $product->image = $imageService->store($request->file, config('constants.folder.product') . $product->id . '/');
         }
@@ -155,8 +156,7 @@ class ProductController extends Controller
         //remove image
         $images = json_decode($product->album);
         for ($i = 0; $i < count($list_remove) - 1; $i++) {
-            File::delete($this->folder . '/' . $images[$list_remove[$i]]);
-            Log::info('ProductObserver.deleted() ' . $images[$list_remove[$i]]);
+            unlink($images[$list_remove[$i]]);
             unset($images[$list_remove[$i]]);
         }
         //update image
@@ -171,14 +171,6 @@ class ProductController extends Controller
         //add new image to album
         if (isset($request->number_device)) {
             for ($i = 0; $i <= $request->number_device; $i++) {
-                $vari = 'base64_image_device_' . $i;
-                if ($request->$vari != null) {
-                    if (isset($images[$i])) {
-                        File::delete($this->folder . '/' . $images[$i]);
-                        Log::info('ProductController.update() delete ' . $images[$i]);
-                    }
-                    $images[$i] = $imageService->saveImgBase64($request->$vari, $this->folder);
-                }
                 $request->request->remove('image_device_current_' . $i);
                 $request->request->remove('path_image_' . $i);
                 $request->request->remove('base64_image_device_' . $i);
@@ -186,6 +178,13 @@ class ProductController extends Controller
                 $request->request->remove('btn_image_multi_' . $i);
             }
         }
+
+        if (isset($request->multi_img_device_1)) {
+            foreach ($request->multi_img_device_1 as $val) {
+                $images[] = $imageService->store($val, $this->folder .'/' . time() .'/');
+            }
+        }
+
         $images_new = array();
         foreach ($images as $value) {
             $images_new[] = $value;
@@ -220,8 +219,7 @@ class ProductController extends Controller
     {
         $images = json_decode($product->album);
          foreach ($images as $value) {
-             File::delete($this->folder . '/' . $value);
-             Log::info('ProductController.destroy() delete' . $value);
+             unlink($value);
          }
         $product->delete();
         return redirect()->route('product.index');

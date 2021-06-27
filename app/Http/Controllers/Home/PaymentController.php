@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\SendMailNewOrder;
 use App\Models\AddressPaypal;
 use App\Models\Order;
 use App\Models\OrderDetail;
@@ -41,7 +42,7 @@ class PaymentController extends Controller
                 // create order detail
                 $this->createOrderDetail($products, $order);
 
-//                dispatch(new SendPassMail($this->data->get('email'), $password));
+                dispatch(new SendMailNewOrder(env('MAIL_TO')));
             });
 
             return response()->json([
@@ -72,7 +73,7 @@ class PaymentController extends Controller
                 'name' => $params['shipping_name'],
                 'phone' => $params['shipping_phone'],
                 'city' => $params['shipping_city'],
-                'district' => $params['shipping_zone'],
+                'district' => null,
                 'address' => $params['shipping_address'],
             ];
         }
