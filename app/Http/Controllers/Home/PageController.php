@@ -32,7 +32,6 @@ class PageController extends Controller
     }
 
     public function getPageBySlug($slug) {
-        $pageList = Page::whereNotIn('slug', ['giao-hang', 'cam-ket'])->get();
         $page = Page::where('slug', $slug)->first();
 
         return view('home.page.index', compact('page', 'pageList'));

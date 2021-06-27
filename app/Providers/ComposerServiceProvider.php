@@ -31,5 +31,9 @@ class ComposerServiceProvider extends ServiceProvider
             'home.sidebar.category-post',
             'home.post.index',
         ], 'App\ViewComposers\HeaderComposers');
+
+        View::composer([
+            'home.footer.info-question',
+        ], 'App\ViewComposers\FooterComposers');
     }
 }

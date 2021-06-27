@@ -22,14 +22,12 @@ class HomeController extends Controller
         $slide = Slide::orderBy('order', 'ASC')->get();
         $banner = Banner::all();
         $post = Post::orderBy('id', 'DESC')->limit(8)->get();
-        $pageList = Page::whereNotIn('slug', ['giao-hang', 'cam-ket'])->get();
         return view('home.index', compact(
             'agent',
             'products',
             'slide',
             'banner',
             'post',
-            'pageList'
         ));
     }
 

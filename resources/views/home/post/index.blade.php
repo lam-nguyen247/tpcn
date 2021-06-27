@@ -9,6 +9,9 @@
             color: #fff !important;
             padding : 0px !important;
         }
+        .margin-mage {
+            margin-top: -80px;
+        }
     </style>
 @endsection
 

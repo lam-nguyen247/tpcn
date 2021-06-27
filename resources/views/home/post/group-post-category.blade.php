@@ -10,7 +10,7 @@
                                     <div class="box_imgs">
                                         <a title="{{ $val->name }}" href="{{ route('home.category-post').'/?categoryPost='.$val->slug }}" class="tit_cat"><h3>{{ $val->name }}</h3></a>
                                         <a href="{{ route('home.category-post').'/?categoryPost='.$val->slug }}" class="imgs">
-                                            <img src="{{ $val->banner ? asset($val->banner) : defaultImage() }}">
+                                            <img class="{{ $val->banner ?  "" : 'margin-mage'}} " src="{{ $val->banner ? asset($val->banner) : defaultImage() }}">
                                         </a>
                                     </div>
                                 </div>
