@@ -139,7 +139,9 @@ class ProductController extends Controller
     public function update(ProductRequest $request, Product $product, ImageService $imageService)
     {
         if (!is_null($request->file)) {
-            unlink($product->image);
+            if(Storage::exists(storage_path($product->image))){
+                unlink($product->image);
+            }   
             Log::info('ProductObserver.deleted() ' . $product->image);
             $product->image = $imageService->store($request->file, config('constants.folder.product') . $product->id . '/');
         }
@@ -156,7 +158,10 @@ class ProductController extends Controller
         //remove image
         $images = json_decode($product->album);
         for ($i = 0; $i < count($list_remove) - 1; $i++) {
-            unlink($images[$list_remove[$i]]);
+            if(Storage::exists(storage_path($images[$list_remove[$i]]))){
+                unlink($images[$list_remove[$i]]);
+            }   
+           
             unset($images[$list_remove[$i]]);
         }
         //update image
