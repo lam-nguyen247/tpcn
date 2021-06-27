@@ -142,7 +142,7 @@ class ProductController extends Controller
         if (!is_null($request->file)) {
             if(Storage::exists(storage_path($product->image))){
                 unlink($product->image);
-            }   
+            }
             Log::info('ProductObserver.deleted() ' . $product->image);
             $product->image = $imageService->store($request->file, config('constants.folder.product') . $product->id . '/');
         }
@@ -161,8 +161,8 @@ class ProductController extends Controller
         for ($i = 0; $i < count($list_remove) - 1; $i++) {
             if(Storage::exists(storage_path($images[$list_remove[$i]]))){
                 unlink($images[$list_remove[$i]]);
-            }   
-           
+            }
+
             unset($images[$list_remove[$i]]);
         }
         //update image
@@ -208,7 +208,6 @@ class ProductController extends Controller
         $request->request->remove('number_device');
         $request->request->remove('list_remove');
         $product->update($request->except($except));
-        // dd($request->properties);
         $product->disease_id = json_encode($request->disease_id, JSON_UNESCAPED_UNICODE);
         $product->save();
         return redirect()->route('product.index')->with('success', 'Sửa thành công');
@@ -225,7 +224,9 @@ class ProductController extends Controller
     {
         $images = json_decode($product->album);
          foreach ($images as $value) {
-             unlink($value);
+             if(Storage::exists(storage_path($value))){
+                 unlink($value);
+             }
          }
         $product->delete();
         return redirect()->route('product.index');

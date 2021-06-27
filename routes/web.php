@@ -8,6 +8,7 @@ use App\Http\Controllers\Home\PaymentController;
 use App\Http\Controllers\Home\LocalizationController;
 use App\Http\Controllers\Home\CustomerController;
 use App\Http\Controllers\Home\AuthController;
+use App\Http\Controllers\Home\PageController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -43,6 +44,7 @@ Auth::routes(['register' => false, 'reset' => false, 'verify' => true]);
 Route::post('register-member', [CustomerController::class, 'registerMember'])->name('home.register-member');
 Route::get('tu-van', [HomeController::class, 'questionIndex'])->name('home.question');
 Route::post('new-question', [HomeController::class, 'addQuestion'])->name('home.new-question');
+Route::get('page/{slug}', [PageController::class, 'getPageBySlug'])->name('home.page-slug');
 Route::fallback(function () {
     return redirect('/');
 });

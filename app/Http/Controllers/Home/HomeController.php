@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Home;
 use App\Http\Controllers\Controller;
 use App\Jobs\SendMailNewOrder;
 use App\Models\Banner;
+use App\Models\Page;
 use App\Models\Post;
 use App\Models\Product;
 use App\Models\QuestionAnswer;
@@ -21,12 +22,14 @@ class HomeController extends Controller
         $slide = Slide::orderBy('order', 'ASC')->get();
         $banner = Banner::all();
         $post = Post::orderBy('id', 'DESC')->limit(8)->get();
+        $pageList = Page::whereNotIn('slug', ['giao-hang', 'cam-ket'])->get();
         return view('home.index', compact(
             'agent',
             'products',
             'slide',
             'banner',
-            'post'
+            'post',
+            'pageList'
         ));
     }
 

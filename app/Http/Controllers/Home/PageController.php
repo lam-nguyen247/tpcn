@@ -30,4 +30,11 @@ class PageController extends Controller
         $seo = $page->seo;
         return view('home.page.detail', compact('page', 'seo', 'postList'));
     }
+
+    public function getPageBySlug($slug) {
+        $pageList = Page::whereNotIn('slug', ['giao-hang', 'cam-ket'])->get();
+        $page = Page::where('slug', $slug)->first();
+
+        return view('home.page.index', compact('page', 'pageList'));
+    }
 }

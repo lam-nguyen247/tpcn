@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Home;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Home\CommentsRequest;
 use App\Models\Comment;
+use App\Models\Page;
 use App\Models\Product;
 use App\Services\ImageService;
 use App\Services\ProductService;
@@ -25,9 +26,11 @@ class ProductController extends Controller
     {
         $product = Product::withCount('comments')->find($id);
         $productDiff = Product::where('id', '<>', $id)->inRandomOrder()->limit(7)->get();
+        $page = Page::whereIn('slug', ['giao-hang', 'cam-ket'])->get();
         return view('home.product.detail', compact(
             'product',
             'productDiff',
+            'page'
         ));
     }
 

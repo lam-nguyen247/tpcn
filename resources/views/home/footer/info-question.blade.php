@@ -10,15 +10,11 @@
                         <div class="row">
                             <div class="col-xs-12 col-sm-8 noleft">
                                 <ul>
-                                    <li><a href="cham-soc-khach-hang.html">Các câu hỏi thường gặp</a></li>
-                                    <li><a href="nha-thuoc.html">Hệ thống nhà thuốc</a></li>
-                                    <li><a href="terms.html">Điều khoản sử dụng</a></li>
-                                    <li><a href="chinh-sach-bao-mat.html">Chính sách bảo mật</a></li>
-                                    <li><a href="hinh-thuc-giao-hang.html">Hình thức giao hàng</a></li>
-                                    <li><a href="huong-dan-mua-hang.html">Hướng dẫn mua hàng</a></li>
-                                    <li><a href="chinh-sach-doi-tra.html">Chính sách đổi - trả</a></li>
-                                    <li><a href="hinh-thuc-thanh-toan.html">Hình thức thanh toán</a></li>
-                                    <li><a href="lien-he.html">Liên hệ</a></li>
+                                    @if (count($pageList))
+                                        @foreach($pageList as $val)
+                                            <li><a href="{{ route('home.page-slug', $val->slug) }}">{!! ucfirst($val->name) !!}</a></li>
+                                        @endforeach
+                                    @endif
                                 </ul>
                             </div>
                             <div class="col-xs-12 col-sm-4 noright">

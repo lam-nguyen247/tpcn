@@ -311,14 +311,12 @@
                                     <li class="sidebar-item"><a href="{{route('page.create')}}" class="sidebar-link">
                                         <i class="mdi mdi-octagram"></i><span class="hide-menu">@lang('Add New')</span></a>
                                     </li>
+                                    <li class="sidebar-item"><a href="{{route('page.page-product')}}" class="sidebar-link">
+                                            <i class="mdi mdi-octagram"></i><span class="hide-menu">@lang('Page Product')</span></a>
+                                    </li>
                                 </ul>
                             </li>
                         @endif
-{{--                        <li class="sidebar-item">--}}
-{{--                            <a class="sidebar-link waves-effect waves-dark" href="{{route('cms.index')}}" aria-expanded="false">--}}
-{{--                                <i class="ti-write"></i><span class="hide-menu">@lang('CMS')</span>--}}
-{{--                            </a>--}}
-{{--                        </li>--}}
                         @if(Route::has('question-answer.index'))
                         <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark has-arrow" href="javascript:void(0)" aria-expanded="false">

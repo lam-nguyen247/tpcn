@@ -7,7 +7,9 @@ use App\Http\Requests\PageRequest;
 use App\Models\Page;
 use App\Services\PageService;
 use Exception;
+use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Str;
 
 class PageController extends Controller
 {
@@ -18,7 +20,7 @@ class PageController extends Controller
      */
     public function index()
     {
-        $pageList = Page::all();
+        $pageList = Page::whereNotIn('slug', ['giao-hang', 'cam-ket'])->get();
         return view('admin.page.index', compact('pageList'));
     }
 
@@ -93,5 +95,26 @@ class PageController extends Controller
     {
         $page->delete();
         return back()->with('success', trans('Deleted successfully'));
+    }
+
+    public function pageProduct()
+    {
+        $page = Page::whereIn('slug', ['giao-hang', 'cam-ket'])->get();
+
+        return view('admin.page.page-product', compact('page'));
+    }
+
+    public function savePageProduct(Request $request)
+    {
+        if (isset($request->page)) {
+            foreach ($request->page as $val) {
+                $val['slug'] = Str::slug($val['name']);
+                Page::updateOrCreate([
+                    'slug' => $val['slug']
+                ], $val);
+            }
+        }
+
+        return back()->with('success', trans('Saved successfully'));
     }
 }

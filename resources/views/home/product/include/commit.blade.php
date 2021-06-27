@@ -1,5 +1,8 @@
 <div id="camket" class="tab-content">
     <div class="col-md-12">
+        @if (count($page))
+            {!! $page->where('slug', 'cam-ket')->first()->content !!}
+        @endif
     </div>
     <div class="product-info">
         <div class="cart">
