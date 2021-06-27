@@ -16,6 +16,26 @@
 @endsection
 
 @section('breadcrumb')
+    <div class="breadcrumb full-width">
+        <div class="background-breadcrumb"></div>
+        <div class="background">
+            <div class="shadow"></div>
+            <div class="pattern">
+                <div class="container">
+                    <div class="clearfix">
+                        <ul>
+                            <li class="item ">
+                                <a href="{{ route('home.index') }}">Trang chủ</a>
+                            </li>
+                            <li class="item ">
+                                <a href="{{ route('home.group-post-category') }}">Tin Tức</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('content')

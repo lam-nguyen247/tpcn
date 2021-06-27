@@ -25,6 +25,7 @@
                                 </div>
                             </div>
                         </div>
+                        <x-summernote name="sort_description" value="{{$post->sort_description}}" label="Mô tả ngắn" />
                         <x-summernote name="content" value="{{$post->content}}" label="Content" />
                         @editseo
                         <button type="submit" class="btn btn-success waves-effect waves-light mr-2">@lang('Save')</button>

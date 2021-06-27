@@ -23,6 +23,11 @@ class ProductCategory extends Model
         return $this->hasMany(Product::class)->where('products.status', '1')->orderBy('products.purchase','desc');
     }
 
+    public function question()
+    {
+        return $this->hasMany(QuestionAnswer::class);
+    }
+
     public function getSlugAttribute($slug)
     {
         return  $slug;
@@ -31,11 +36,11 @@ class ProductCategory extends Model
     public static function incrementOrder($parent_id=0){
         return DB::statement("UPDATE product_categories SET order_display = (order_display+1) WHERE parent_id=$parent_id ");
      }
- 
+
      public static function decrementOrder($order_display,$parent_id=0){
         return DB::statement("UPDATE product_categories SET order_display = (order_display-1) where order_display > $order_display and parent_id=$parent_id");
       }
- 
+
      public static function updateOrder($data){
          foreach($data as $key=>$value){
              DB::statement("UPDATE product_categories SET order_display = $key+1 where id = $value ");

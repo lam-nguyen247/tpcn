@@ -7,8 +7,10 @@ use App\Http\Requests\QuestionAnswerRequest;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\QuestionAnswer;
+use App\Services\ImageService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Storage;
 
 class QuestionAnswerController extends Controller
 {
@@ -47,10 +49,17 @@ class QuestionAnswerController extends Controller
         return view('admin.question.edit', compact('question', 'productCategoryList'));
     }
 
-    public function update(QuestionAnswerRequest $request, $id)
+    public function update(QuestionAnswerRequest $request, $id, ImageService $imageService)
     {
         $question = QuestionAnswer::find($id);
-        $question->update($request->all());
+        if($request->image){
+            if(Storage::exists(storage_path($question->image))){
+                unlink($question->image);
+            }
+            $question->image = $imageService->store($request->image, config('constants.folder.question') . $question->id . '/');
+            $question->save();
+        }
+        $question->update($request->except(['image']));
         return redirect()->route('question-answer.index')->with('success', trans('Updated successfully'));
     }
 
@@ -59,9 +68,13 @@ class QuestionAnswerController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function store(QuestionAnswerRequest $request)
+    public function store(QuestionAnswerRequest $request, ImageService $imageService)
     {
-        QuestionAnswer::create($request->all());
+        $question = QuestionAnswer::create($request->except(['image']));
+        if($request->image){
+            $question->image = $imageService->store($request->image, config('constants.folder.question') . $question->id . '/');
+        }
+        $question->save();
         return back()->with('success', trans('Saved successfully'));
     }
 }

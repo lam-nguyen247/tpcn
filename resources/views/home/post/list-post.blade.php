@@ -19,13 +19,14 @@
                             </a>
                         </h2>
                         <div class="post-description">
-                            <p style="text-align: justify; ">
-                                {!! shorter($val->content, 100) !!}
-                            </p>
+                            {!! $val->sort_description !!}
                         </div>
-                        <a href="{{ route('home.detail-post', $val->id) }}" title="{{ $val->name }}" class=" more">Xem tiếp </a>
+                        <div class="row">
+                            <a href="{{ route('home.detail-post', $val->id) }}" title="{{ $val->name }}" class=" more">Xem tiếp </a>
+                        </div>
                     </div>
                     <div class="line_n"><span></span></div>
+
                 </div>
             </div>
         @endforeach

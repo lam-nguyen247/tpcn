@@ -37,8 +37,8 @@
                         </div>
                         <div class="col-sm-12 col-md-3 noleft10">
                             <div class="hst fadeIn"><div class="hidden-xs hidden-sm">
-                                    <a href="#"><img class="image-right-slider" src="{{ isset($isCheckBanner[2]) ? url($isCheckBanner[2]->image) : defaultImage()}}" alt="ship" style="margin-bottom:10px;"></a>
-                                    <a href="#"><img class="image-right-slider" src="{{ isset($isCheckBanner[3]) ? url($isCheckBanner[3]->image) : defaultImage()}}" alt="sale"></a>
+                                    <a href="#"><img class="image-right-slider" src="{{ isset($isCheckBanner[2]) ? (!is_null($isCheckBanner[2]->image) ? url($isCheckBanner[2]->image) : defaultImage()) : defaultImage()}}" alt="ship" style="margin-bottom:10px;"></a>
+                                    <a href="#"><img class="image-right-slider" src="{{ isset($isCheckBanner[3]) ? (!is_null($isCheckBanner[3]->image) ? url($isCheckBanner[3]->image) : defaultImage()) : defaultImage()}}" alt="sale"></a>
                                 </div>
                             </div>
                         </div>

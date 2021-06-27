@@ -8,6 +8,7 @@ use App\Models\Banner;
 use App\Models\Page;
 use App\Models\Post;
 use App\Models\Product;
+use App\Models\ProductCategory;
 use App\Models\QuestionAnswer;
 use App\Models\Slide;
 use Illuminate\Http\Request;
@@ -57,5 +58,31 @@ class HomeController extends Controller
         ]);
 
         return redirect()->route('home.question');
+    }
+
+    public function getQuestionOften()
+    {
+        $questions = ProductCategory::with(['question' => function ($query) {
+            return $query->orderBy('created_at', 'DESC')->limit(5);
+        }])->get();
+
+        return view('home.page.question-category', compact('questions'));
+    }
+
+    public function getQuestionCategory(Request $request)
+    {
+        $params = $request->all();
+        $questionCategory = QuestionAnswer::whereHas('productCategory', function($query) use ($params) {
+            return $query->where('slug', $params['search']);
+        })->with(['productCategory'])->paginate(12);
+
+        return view('home.page.index', compact('questionCategory'));
+    }
+
+    public function getQuestionDetail($id)
+    {
+        $questionDetail = QuestionAnswer::find($id);
+
+        return view('home.page.index', compact('questionDetail'));
     }
 }

@@ -29,6 +29,7 @@ class BannerController extends Controller
                 'image' => $nameImage ?? $val['image'],
                 'display_home' => 1
             ];
+            $nameImage = null;
         }
 
         if (!empty($arrInsert)) {

@@ -314,6 +314,12 @@
                                     <li class="sidebar-item"><a href="{{route('page.page-product')}}" class="sidebar-link">
                                             <i class="mdi mdi-octagram"></i><span class="hide-menu">@lang('Page Product')</span></a>
                                     </li>
+                                    <li class="sidebar-item"><a href="{{route('page.about-us')}}" class="sidebar-link">
+                                            <i class="mdi mdi-octagram"></i><span class="hide-menu">@lang('about us')</span></a>
+                                    </li>
+                                    <li class="sidebar-item"><a href="{{route('page.discount')}}" class="sidebar-link">
+                                            <i class="mdi mdi-octagram"></i><span class="hide-menu">@lang('Discount')</span></a>
+                                    </li>
                                 </ul>
                             </li>
                         @endif

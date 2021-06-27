@@ -16,6 +16,13 @@ if (!function_exists('shorter')) {
     }
 }
 
+if (!function_exists('getProductDescription')) {
+    function getProductDescription($text)
+    {
+        return new \Illuminate\Support\HtmlString($text);
+    }
+}
+
 if (!function_exists('defaultImage')) {
     function defaultImage()
     {

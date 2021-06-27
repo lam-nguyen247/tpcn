@@ -16,9 +16,9 @@
                                     <input type="hidden" name="banner[1][name]"  class="form-control " value="banner_home">
                                 </div>
                                 <div class="form-group mb-sm-4">
-                                    <p>Hình ảnh ( kích thước 586x545)</p>
+                                    <p>Hình ảnh ( kích thước 1200x100)</p>
                                     <input type="hidden" name="banner[1][image]" value="{{ isset($banners[0]->image) ? $banners[0]->image : '' }}">
-                                    <input type="file" class="form-control js-dropify" name="banner[1][file]" accept="image/*" data-default-file="{{ !is_null($banners[0]->image) ? url($banners[0]->image) : '' }}" data-show-remove="false" />
+                                    <input type="file" class="form-control js-dropify" name="banner[1][file]" accept="image/*" data-default-file="{{ isset($banners[0]->image) ? url($banners[0]->image) : '' }}" data-show-remove="false" />
                                 </div>
 
                                 <h4 class="card-title">Banner Blog</h4>
@@ -26,9 +26,9 @@
                                     <input type="hidden" name="banner[2][name]"  class="form-control " value="banner_blog">
                                 </div>
                                 <div class="form-group mb-sm-4">
-                                    <p>Hình ảnh ( kích thước 586x545)</p>
+                                    <p>Hình ảnh ( kích thước 1200x100)</p>
                                     <input type="hidden" name="banner[2][image]" value="{{ isset($banners[1]->image) ? $banners[1]->image : '' }}">
-                                    <input type="file" class="form-control js-dropify" name="banner[2][file]" accept="image/*" data-default-file="{{ !is_null($banners[1]->image) ? url($banners[1]->image) : '' }}" data-show-remove="false" />
+                                    <input type="file" class="form-control js-dropify" name="banner[2][file]" accept="image/*" data-default-file="{{ isset($banners[1]->image) ? url($banners[1]->image) : '' }}" data-show-remove="false" />
                                 </div>
                             </div>
 
@@ -38,9 +38,9 @@
                                     <input type="hidden" name="banner[3][name]"  class="form-control " value="banner_left">
                                 </div>
                                 <div class="form-group mb-sm-4">
-                                    <p>Hình ảnh ( kích thước 480x264)</p>
+                                    <p>Hình ảnh ( kích thước 275x151)</p>
                                     <input type="hidden" name="banner[3][image]" value="{{ isset($banners[2]->image) ? $banners[2]->image : '' }}">
-                                    <input type="file" class="form-control js-dropify" name="banner[3][file]" accept="image/*" data-default-file="{{ !is_null($banners[2]->image) ? url($banners[2]->image) : '' }}" data-show-remove="false" />
+                                    <input type="file" class="form-control js-dropify" name="banner[3][file]" accept="image/*" data-default-file="{{ isset($banners[2]->image) ? url($banners[2]->image) : '' }}" data-show-remove="false" />
                                 </div>
                                 <div class="form-group mb-5">
                                     <h4 class="card-title">Banner bên phải</h4>
@@ -48,9 +48,9 @@
                                         <input type="hidden" name="banner[4][name]"  class="form-control " value="banner_left2">
                                     </div>
                                     <div class="form-group mb-sm-4">
-                                        <p>Hình ảnh ( kích thước 480x264)</p>
+                                        <p>Hình ảnh ( kích thước 275x151)</p>
                                         <input type="hidden" name="banner[4][image]" value="{{ isset($banners[3]->image) ? $banners[3]->image : '' }}">
-                                        <input type="file" class="form-control js-dropify" name="banner[4][file]" accept="image/*" data-default-file="{{ !is_null($banners[3]->image) ? url($banners[3]->image) : '' }}" data-show-remove="false" />
+                                        <input type="file" class="form-control js-dropify" name="banner[4][file]" accept="image/*" data-default-file="{{ isset($banners[3]->image) ? url($banners[3]->image) : '' }}" data-show-remove="false" />
                                     </div>
                                 </div>
                             </div>

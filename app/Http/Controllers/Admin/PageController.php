@@ -20,7 +20,7 @@ class PageController extends Controller
      */
     public function index()
     {
-        $pageList = Page::whereNotIn('slug', ['giao-hang', 'cam-ket'])->get();
+        $pageList = Page::whereNotIn('slug', config('constants.pageException'))->get();
         return view('admin.page.index', compact('pageList'));
     }
 
@@ -102,6 +102,20 @@ class PageController extends Controller
         $page = Page::whereIn('slug', ['giao-hang', 'cam-ket'])->get();
 
         return view('admin.page.page-product', compact('page'));
+    }
+
+    public function pageAboutUs()
+    {
+        $page = Page::whereIn('slug', ['about-us'])->get();
+
+        return view('admin.page.about-us', compact('page'));
+    }
+
+    public function pageDiscount()
+    {
+        $page = Page::whereIn('slug', ['discount'])->get();
+
+        return view('admin.page.discount', compact('page'));
     }
 
     public function savePageProduct(Request $request)

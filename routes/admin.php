@@ -61,6 +61,8 @@ Route::resource('banner', BannerController::class);
 Route::resource('order', OrderController::class);
 Route::resource('comment', CommentController::class);
 Route::get('page-product', [PageController::class, 'pageProduct'])->name('page.page-product');
+Route::get('about-us', [PageController::class, 'pageAboutUs'])->name('page.about-us');
+Route::get('discount', [PageController::class, 'pageDiscount'])->name('page.discount');
 Route::post('page-product', [PageController::class, 'savePageProduct'])->name('page.save-page-product');
 Route::post('update-status-order/{id}', [OrderController::class, 'updateStatusOrder'])->name('order.update-status-order');
 

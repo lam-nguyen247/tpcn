@@ -4,9 +4,11 @@
         <div class="shadow"></div>
         <div class="pattern">
             <div class="container">
+                @if (isset($banner[0]) && !is_null($banner[0]))
                 <a href="#" target="_blank">
-                    <img src="{{isset($banner[0]) ? $banner[0]->image : ''}}" alt="banner">
+                    <img src="{{isset($banner[0]) ? url($banner[0]->image) : ''}}" alt="banner">
                 </a>
+                @endif
                 <div class="col-xs-12 col-sm-8 home_news noleft">
                     <div class="box blog-module box-no-advanced">
                         <div class="box-heading">Thông tin mới</div>

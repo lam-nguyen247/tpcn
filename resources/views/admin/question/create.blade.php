@@ -31,6 +31,10 @@
                                     <label for="category">Danh Mục Sản Phẩm</label>
                                 </div>
                                 @endif
+                                <div class="form-group mb-5">
+                                    <span>Ảnh bìa trang chủ</span>
+                                    <input type="file" class="form-control js-dropify" id="image" name="image" accept="image/*" data-show-remove="false" required />
+                                </div>
                                 <div class="form-group">
                                     <span for="title">Tiêu Đề</span>
                                     <textarea id="title" name="title" class="form-material editer"></textarea>

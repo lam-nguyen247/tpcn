@@ -29,9 +29,30 @@
                             <li class="item ">
                                 <a href="{{ route('home.index') }}">Trang chủ</a>
                             </li>
-                            <li class="item ">
-                                <a href="{{ route('home.question') }}">{!! ucfirst($page->name) !!}</a>
-                            </li>
+                            @if (isset($page))
+                                <li class="item ">
+                                    <a href="{{ route('home.page-slug', $page->slug) }}">{!! ucfirst($page->name) !!}</a>
+                                </li>
+                            @endif
+                            @if (isset($questionCategory))
+                                <li class="item ">
+                                    <a href="{{ route('home.group-post-category') }}">Tin Tức</a>
+                                </li>
+                                <li class="item ">
+                                    <a href="{{ route('question.list-question').'/?search='.isset($_GET['search']) ? $_GET['search'] : '' }}">Hỏi về {!! isset($_GET['search']) ? ucfirst($_GET['search']) : '' !!}</a>
+                                </li>
+                            @endif
+                            @if (isset($questionDetail))
+                                <li class="item ">
+                                    <a href="{{ route('home.group-post-category') }}">Tin Tức</a>
+                                </li>
+                                <li class="item ">
+                                    <a href="{{ route('question.list-question').'/?search='. $questionDetail->productCategory->slug}}">Hỏi về {!! ucfirst($questionDetail->productCategory->name) !!}</a>
+                                </li>
+                                <li class="item ">
+                                    <a href="{{ route('question.question-detail', $questionDetail->id)}}">{!! ucfirst($questionDetail->title) !!}</a>
+                                </li>
+                            @endif
                         </ul>
                     </div>
                 </div>
@@ -55,7 +76,11 @@
                         <div class="col-md-9">
                             <div class="row">
                                 <div class="col-md-12 center-column " id="content">
-                                    {!! $page->content !!}
+                                    @includeWhen(isset($questionCategory), 'home.page.list-question')
+                                    @includeWhen(isset($questionDetail), 'home.page.question-category-detail')
+                                    @if (isset($page))
+                                        {!! $page->content !!}
+                                    @endif
                                 </div>
                             </div>
                         </div>

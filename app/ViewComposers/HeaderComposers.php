@@ -5,6 +5,7 @@ namespace App\ViewComposers;
 use App\Models\Banner;
 use App\Models\Category;
 use App\Models\Disease;
+use App\Models\Page;
 use App\Models\ProductCategory;
 use Illuminate\View\View;
 
@@ -22,12 +23,14 @@ class HeaderComposers
         $categoryPost = Category::where('master_category_id', 1)->orderBy('id','DESC')->get();
         $disease = Disease::where('display_home', 1)->get();
         $banner = Banner::all();
+        $page = Page::whereIn('slug', ['about-us', 'discount'])->get();
 
         $view->with([
             'productCategory' => $productCategory,
             'categoryPost' => $categoryPost,
             'disease' => $disease,
-            'banner' => $banner
+            'banner' => $banner,
+            'page' => $page
         ]);
     }
 }

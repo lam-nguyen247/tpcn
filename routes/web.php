@@ -28,7 +28,7 @@ Route::get('', [HomeController::class, 'index'])->name('home.index');
 Route::get('product/{id}', [ProductController::class, 'show'])->name('home.product');
 Route::get('search',  [ProductController::class, 'searchProduct'])->name('home.search');
 Route::get('post', [PostController::class, 'searchPost'])->name('home.category-post');
-Route::get('post-group-category', [PostController::class, 'groupPostCategory'])->name('home.group-post-category');
+Route::get('tin-tuc', [PostController::class, 'groupPostCategory'])->name('home.group-post-category');
 Route::get('post/{id}', [PostController::class, 'detailPost'])->name('home.detail-post');
 Route::get('gio-hang', [HomeController::class, 'cart'])->name('home.cart');
 Route::get('thanh-toan', [HomeController::class, 'pay'])->name('home.pay');
@@ -45,6 +45,9 @@ Route::post('register-member', [CustomerController::class, 'registerMember'])->n
 Route::get('tu-van', [HomeController::class, 'questionIndex'])->name('home.question');
 Route::post('new-question', [HomeController::class, 'addQuestion'])->name('home.new-question');
 Route::get('page/{slug}', [PageController::class, 'getPageBySlug'])->name('home.page-slug');
+Route::get('cau-hoi-thuong-gap', [HomeController::class, 'getQuestionOften'])->name('question.question-often');
+Route::get('hoi-ve', [HomeController::class, 'getQuestionCategory'])->name('question.list-question');
+Route::get('cau-hoi-ve/{id}', [HomeController::class, 'getQuestionDetail'])->name('question.question-detail');
 Route::fallback(function () {
     return redirect('/');
 });

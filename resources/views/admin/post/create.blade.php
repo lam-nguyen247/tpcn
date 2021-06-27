@@ -23,6 +23,7 @@
                                 </div>
                             </div>
                         </div>
+                        <x-summernote name="sort_description" label="Mô tả ngắn" />
                         <x-summernote name="content" label="Content" />
                         @createseo
                         <button type="submit" class="btn btn-success waves-effect waves-light mr-2">@lang('Save')</button>

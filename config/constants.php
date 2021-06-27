@@ -12,6 +12,7 @@ return [
         'page' => '/images/upload/page/',
         'slide' => '/images/upload/slide/',
         'banner' => '/images/upload/banner/',
+        'question' => '/images/upload/question/',
     ],
     'url' => [
         'category' => '/danh-muc/',
@@ -23,6 +24,13 @@ return [
       "2" => "Internet Banking",
       "3" => "VISA, MASTERCARD",
       "4" => "Chuyển Khoản Ngân Hàng"
+    ],
+
+    'pageException' => [
+        'giao-hang',
+        'cam-ket',
+        'about-us',
+        'discount'
     ],
 
     'country' => [

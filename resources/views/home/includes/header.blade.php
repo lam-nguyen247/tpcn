@@ -181,7 +181,7 @@
                                         <li class='mnu_about' >
                                             <p class='close-menu'></p>
                                             <p class='open-menu'></p>
-                                            <a href='#' class='clearfix' >
+                                            <a href='{{ isset($page[0]) ? route('home.page-slug', $page[0]->slug) : '#' }}' class='clearfix' >
                                                 <span><strong>Về Ecogreen</strong>
                                                 </span>
                                             </a>
@@ -225,7 +225,7 @@
                                         <li class='mnu_pro' >
                                             <p class='close-menu'></p>
                                             <p class='open-menu'></p>
-                                            <a href='khuyen-mai.html' class='clearfix' >
+                                            <a href='{{ isset($page[1]) ? route('home.page-slug', $page[1]->slug) : '#' }}' class='clearfix' >
                                                 <span><strong>Khuyến mãi</strong>
                                                 </span>
                                             </a>
@@ -233,7 +233,7 @@
                                         <li class='mnu_faq with-sub-menu hover' >
                                             <p class='close-menu'></p>
                                             <p class='open-menu'></p>
-                                            <a href='duoc-si-tu-van.html' class='clearfix' >
+                                            <a href='#' class='clearfix' >
                                                 <span>
                                                     <strong>Tư vấn sức khỏe</strong>
                                                 </span>
@@ -248,7 +248,7 @@
                                                     <div class="border"></div>
                                                     <div class="row">
                                                         <div class="col-sm-12  mobile-enabled">
-                                                            <a href="#">Câu hỏi thường gặp</a>
+                                                            <a href="{{ route('question.question-often') }}">Câu hỏi thường gặp</a>
                                                         </div>
                                                     </div>
                                                 </div>

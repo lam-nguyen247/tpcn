@@ -19,7 +19,7 @@ class FooterComposers
      */
     public function compose(View $view)
     {
-        $pageList = Page::whereNotIn('slug', ['giao-hang', 'cam-ket'])->get();
+        $pageList = Page::whereNotIn('slug', config('constants.pageException'))->get();
 
         $view->with([
             'pageList' => $pageList

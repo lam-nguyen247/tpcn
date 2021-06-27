@@ -34,6 +34,6 @@ class PageController extends Controller
     public function getPageBySlug($slug) {
         $page = Page::where('slug', $slug)->first();
 
-        return view('home.page.index', compact('page', 'pageList'));
+        return view('home.page.index', compact('page'));
     }
 }

@@ -30,6 +30,7 @@ class ComposerServiceProvider extends ServiceProvider
             'home.sidebar.category',
             'home.sidebar.category-post',
             'home.post.index',
+            'home.page.question-category',
         ], 'App\ViewComposers\HeaderComposers');
 
         View::composer([
