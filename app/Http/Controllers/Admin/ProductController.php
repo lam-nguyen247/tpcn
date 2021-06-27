@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Storage;
 
 class ProductController extends Controller
 {
