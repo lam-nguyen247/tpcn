@@ -109,7 +109,7 @@ class ProductController extends Controller
         $product->image = $imageService->store($request->file, config('constants.folder.product') . $product->id . '/');
         $product->information = empty($request['information'])?$request['information']:$imageService->transformAll($request['information'], config('constants.folder.product') . $product->id . '/', 1024);
         $product->description = empty($request['description'])?$request['description']:$imageService->transformAll($request['description'], config('constants.folder.product') . $product->id . '/', 1024);
-        $product->disease_id = json_encode($request->desease, JSON_UNESCAPED_UNICODE);
+        $product->disease_id = isset($request->disease_id) ? implode(',', $request->disease_id) : '';
         $product->save();
         return redirect()->route('product.create')->with('success', 'Lưu thành công');
     }
@@ -208,7 +208,7 @@ class ProductController extends Controller
         $request->request->remove('number_device');
         $request->request->remove('list_remove');
         $product->update($request->except($except));
-        $product->disease_id = json_encode($request->disease_id, JSON_UNESCAPED_UNICODE);
+        $product->disease_id = isset($request->disease_id) ? implode(',', $request->disease_id) : '';
         $product->save();
         return redirect()->route('product.index')->with('success', 'Sửa thành công');
     }

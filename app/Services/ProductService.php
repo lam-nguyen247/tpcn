@@ -109,6 +109,9 @@ class ProductService
             if ((isset($price[0]) && $price[0]) && (isset($price[1]) && $price[1])) {
                 return $subQuery->whereBetween('price', [$price[0], $price[1]]);
             }
+            if ((isset($price[0]) && $price[0])) {
+                return $subQuery->where('price', '> ', $price[0]);
+            }
             return $subQuery->whereNull('price');
         });
 

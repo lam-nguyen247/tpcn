@@ -23,7 +23,7 @@
                 @if (!empty($disease))
                     @foreach($disease as $value)
                         <li>
-                            <a href="{{ route('home.search') .'?sick='.$item->slug  }}">{{ \Illuminate\Support\Str::upper($value->name) }}</a>
+                            <a href="{{ route('home.search') .'?sick='.$value->slug  }}">{{ \Illuminate\Support\Str::upper($value->name) }}</a>
                         </li>
                     @endforeach
                 @endif
@@ -33,11 +33,12 @@
             <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">TÌM THEO GIÁ<span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
-                <li><a href="gia-140-230.html">140.000 đ - 230.000 đ</a></li>
-                <li><a href="gia-240-300.html">240.000 đ - 300.000 đ</a></li>
-                <li><a href="gia-300-400.html">330.000 đ - 400.000 đ</a></li>
-                <li><a href="lic.html">450.000 đ - 675.000 đ</a></li>
-                <li><a href="gia-680-720.html">680.000 đ - 720.000 đ</a></li>
+                <li><a href="{{ route('home.search') .'?price=240000,300000' }}">140.000 đ - 230.000 đ</a></li>
+                <li><a href="{{ route('home.search') .'?price=240000,300000' }}">240.000 đ - 300.000 đ</a></li>
+                <li><a href="{{ route('home.search') .'?price=330000,400000' }}">330.000 đ - 400.000 đ</a></li>
+                <li><a href="{{ route('home.search') .'?price=450000,675000' }}">450.000 đ - 675.000 đ</a></li>
+                <li><a href="{{ route('home.search') .'?price=680000,720000' }}">680.000 đ - 720.000 đ</a></li>
+                <li><a href="{{ route('home.search') .'?price=720000' }}">Lớn hơn 720.000 đ</a></li>
             </ul>
         </div>
     </div>
