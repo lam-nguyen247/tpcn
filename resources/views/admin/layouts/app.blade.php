@@ -268,7 +268,7 @@
                                 </a>
                                 <ul aria-expanded="false" class="collapse first-level">
                                     <li class="sidebar-item"><a href="{{route('product.index')}}" class="sidebar-link">
-                                            <i class="mdi mdi-octagram"></i><span class="hide-menu">@lang('All Posts')</span></a>
+                                            <i class="mdi mdi-octagram"></i><span class="hide-menu">Thêm sản phẩm</span></a>
                                     </li>
                                     <li class="sidebar-item"><a href="{{route('product.create')}}" class="sidebar-link">
                                             <i class="mdi mdi-octagram"></i><span class="hide-menu">@lang('Add New')</span></a>
