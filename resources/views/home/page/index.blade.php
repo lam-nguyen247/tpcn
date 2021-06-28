@@ -27,7 +27,7 @@
                     <div class="clearfix">
                         <ul>
                             <li class="item ">
-                                <a href="{{ route('home.index') }}">Trang chủ</a>
+                                <a href="/">Trang chủ</a>
                             </li>
                             @if (isset($page))
                                 <li class="item ">
