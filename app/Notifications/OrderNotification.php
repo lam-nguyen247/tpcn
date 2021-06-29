@@ -55,7 +55,7 @@ class OrderNotification extends Notification
             'items'=> $this->cart,
             'subTotal'=> $this->order->subTotal,
             'ship'=> $this->order->ship,
-            'method'=> $this->order->method
+            'method'=> config('constants.method-payments')[$this->order->method] ?? null
         ])
         ->from(config('mail.from.address'), config('mail.from.name'))
         ->subject('Bạn có đơn đặt hàng')
