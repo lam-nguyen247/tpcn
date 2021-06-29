@@ -53,7 +53,7 @@ class OrderNotification extends Notification
             'address'=>$this->order->address,
             'note'=>$this->order->note,
             'items'=> $this->cart,
-            'subTotal'=> $this->order->total,
+            'subTotal'=> $this->order->subTotal,
             'ship'=> $this->order->ship,
             'method'=> $this->order->method
         ])
