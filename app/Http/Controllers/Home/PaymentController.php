@@ -3,12 +3,13 @@
 namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Controller;
-use App\Jobs\SendMailNewOrder;
 use App\Models\AddressPaypal;
 use App\Models\Order;
 use App\Models\OrderDetail;
+use App\Notifications\OrderNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Notification;
 
 class PaymentController extends Controller
 {
@@ -42,7 +43,19 @@ class PaymentController extends Controller
                 // create order detail
                 $this->createOrderDetail($products, $order);
 
-                dispatch(new SendMailNewOrder(env('MAIL_TO')));
+                // cart Item
+                $data = [];
+                $cartProduct = OrderDetail::with('product')->where('order_id', $order->id)->get();
+                foreach ($cartProduct as $value) {
+                    $data[] = [
+                        'name' => $value->product->title,
+                        'image' => $value->product->image,
+                        'qty' => $value->qty,
+                        'price' => $value->product->price
+                    ];
+                }
+
+                Notification::route('mail', env('MAIL_USERNAME'))->notify(new OrderNotification($order, $data));
             });
 
             return response()->json([

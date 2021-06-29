@@ -18,10 +18,12 @@ class OrderNotification extends Notification
      */
 
     private $order;
+    private $cart;
 
-    public function __construct($order)
+    public function __construct($order, $cart)
     {
         $this->order = $order;
+        $this->cart = $cart;
     }
 
     /**
@@ -44,11 +46,21 @@ class OrderNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-        ->view('mail.order', ['order_id' => $this->order->id, 'customer'=>$this->order->customer, 'items'=> $this->order->cart, 'subTotal'=> $this->order->total, 'ship'=> $this->order->ship, 'method'=> $this->order->method])
+        ->view('mail.order', [
+            'order_id' => $this->order->id,
+            'customer'=>$this->order->name,
+            'phone'=>$this->order->phone,
+            'address'=>$this->order->address,
+            'note'=>$this->order->note,
+            'items'=> $this->cart,
+            'subTotal'=> $this->order->total,
+            'ship'=> $this->order->ship,
+            'method'=> $this->order->method
+        ])
         ->from(config('mail.from.address'), config('mail.from.name'))
         ->subject('Bạn có đơn đặt hàng')
         ->line('The introduction to the notification.')
-        ->action('Thông báo đặt hàng', url('/admin/order/'.$this->order->id));
+        ->action('Thông báo đặt hàng', route('order.show', $this->order->id));
     }
 
     /**

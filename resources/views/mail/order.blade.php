@@ -367,7 +367,7 @@
                                                   color: #333333;
                                                 "
                                               >
-                                                Bạn có thể kiểm tra trong phần quản trị tại <a href="{{url('/admin/order/detail/'.$order_id)}}">đây</a>.
+                                                Bạn có thể kiểm tra trong phần quản trị tại <a href="{{ route('order.show', $order_id) }}">đây</a>.
                                               </p>
                                             </td>
                                           </tr>
@@ -445,11 +445,11 @@
                                                   </tr>
                                                   <tr style="border-collapse: collapse;">
                                                     <td style="padding: 0; margin: 0;"><span style="font-size: 14px; line-height: 21px;">Tên khách hàng:</span></td>
-                                                    <td style="padding: 0; margin: 0;"><span style="font-size: 14px; line-height: 21px;"> {{$customer['last_name']}} {{$customer['first_name']}}</span></td>
+                                                    <td style="padding: 0; margin: 0;"><span style="font-size: 14px; line-height: 21px;">{{ $customer }}</span></td>
                                                   </tr>
                                                   <tr style="border-collapse: collapse;">
                                                     <td style="padding: 0; margin: 0;"><span style="font-size: 14px; line-height: 21px;">Số điện thoại:</span></td>
-                                                    <td style="padding: 0; margin: 0;"><span style="font-size: 14px; line-height: 21px;">{{$customer['phone']}}</span></td>
+                                                    <td style="padding: 0; margin: 0;"><span style="font-size: 14px; line-height: 21px;">{{ $phone }}</span></td>
                                                   </tr>
                                                   <tr style="border-collapse: collapse;">
                                                     <td style="padding: 0; margin: 0;"><span style="font-size: 14px; line-height: 21px;">Hình thức thanh toán:</span></td>
@@ -457,11 +457,11 @@
                                                   </tr>
                                                   <tr style="border-collapse: collapse;">
                                                     <td style="padding: 0; margin: 0;"><span style="font-size: 14px; line-height: 21px;">Địa chỉ:</span></td>
-                                                    <td style="padding: 0; margin: 0;"><span style="font-size: 14px; line-height: 21px;">{{$customer['address']}}</span></td>
+                                                    <td style="padding: 0; margin: 0;"><span style="font-size: 14px; line-height: 21px;">{{$address}}</span></td>
                                                   </tr>
                                                   <tr style="border-collapse: collapse;">
                                                     <td style="padding: 0; margin: 0;"><span style="font-size: 14px; line-height: 21px;">Ghi chú:</span></td>
-                                                    <td style="padding: 0; margin: 0;"><span style="font-size: 14px; line-height: 21px;">{{$customer['note']}}</span></td>
+                                                    <td style="padding: 0; margin: 0;"><span style="font-size: 14px; line-height: 21px;">{{$note}}</span></td>
                                                   </tr>
                                                 </tbody>
                                               </table>
@@ -735,10 +735,6 @@
                                               >
                                                 <tbody>
                                                   <tr style="border-collapse: collapse;">
-                                                    <td style="padding: 0; margin: 0; text-align: right; font-size: 18px; line-height: 27px;">Ưu đãi:</td>
-                                                    <td style="padding: 0; margin: 0; text-align: right; font-size: 18px; line-height: 27px;">-{{number_format($method=='Trực tiếp'?$configuration['offline']:$configuration['online'],0,'.',',')}}đ</td>
-                                                  </tr>
-                                                  <tr style="border-collapse: collapse;">
                                                     <td style="padding: 0; margin: 0; text-align: right; font-size: 18px; line-height: 27px;">Phí vận chuyển:</td>
                                                     <td style="padding: 0; margin: 0; text-align: right; font-size: 18px; line-height: 27px; color: #d48344;"><strong>Liên hệ</strong></td>
                                                   </tr>
@@ -770,199 +766,6 @@
                                   </tr>
                                 </tbody>
                               </table>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-              <table
-                cellpadding="0"
-                cellspacing="0"
-                class="es-footer"
-                align="center"
-                style="
-                  mso-table-lspace: 0pt;
-                  mso-table-rspace: 0pt;
-                  border-collapse: collapse;
-                  border-spacing: 0px;
-                  table-layout: fixed !important;
-                  width: 100%;
-                  background-color: transparent;
-                  background-repeat: repeat;
-                  background-position: center top;
-                "
-              >
-                <tbody>
-                  <tr style="border-collapse: collapse;">
-                    <td align="center" style="padding: 0; margin: 0;">
-                      <table
-                        class="es-footer-body"
-                        cellspacing="0"
-                        cellpadding="0"
-                        align="center"
-                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-collapse: collapse; border-spacing: 0px; background-color: #fef5e4; width: 600px;"
-                      >
-                        <tbody>
-                          <tr style="border-collapse: collapse;">
-                            <td align="left" style="padding: 20px; margin: 0;">
-                              <!--[if mso]><table style="width:560px" cellpadding="0" cellspacing="0"><tr><td style="width:178px" valign="top"><![endif]-->
-                              <table class="es-left" cellspacing="0" cellpadding="0" align="left" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-collapse: collapse; border-spacing: 0px; float: left;">
-                                <tbody>
-                                  <tr style="border-collapse: collapse;">
-                                    <td class="es-m-p0r es-m-p20b" valign="top" align="center" style="padding: 0; margin: 0; width: 178px;">
-                                      <table width="100%" cellspacing="0" cellpadding="0" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-collapse: collapse; border-spacing: 0px;">
-                                        <tbody>
-                                          <tr style="border-collapse: collapse;">
-                                            <td class="es-m-p0l es-m-txt-c" align="left" style="padding: 0; margin: 0; font-size: 0;">
-                                              <img
-                                                src="{{url($configuration['logo'])}}"
-                                                alt="{{env('APP_NAME')}} logo"
-                                                title="{{env('APP_NAME')}} logo"
-                                                width="108"
-                                                style="display: block; border: 0; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic;"
-                                              />
-                                            </td>
-                                          </tr>
-                                          <tr style="border-collapse: collapse;">
-                                            <td class="es-m-txt-c" align="left" style="padding: 0; margin: 0; padding-bottom: 5px; padding-top: 10px;">
-                                              <p
-                                                style="
-                                                  margin: 0;
-                                                  -webkit-text-size-adjust: none;
-                                                  -ms-text-size-adjust: none;
-                                                  mso-line-height-rule: exactly;
-                                                  font-size: 14px;
-                                                  font-family: arial, 'helvetica neue', helvetica, sans-serif;
-                                                  line-height: 21px;
-                                                  color: #333333;
-                                                "
-                                              >
-                                                {{env('APP_NAME')}}
-                                              </p>
-                                              <p
-                                                style="
-                                                  margin: 0;
-                                                  -webkit-text-size-adjust: none;
-                                                  -ms-text-size-adjust: none;
-                                                  mso-line-height-rule: exactly;
-                                                  font-size: 14px;
-                                                  font-family: arial, 'helvetica neue', helvetica, sans-serif;
-                                                  line-height: 21px;
-                                                  color: #333333;
-                                                "
-                                              >
-                                                {{$configuration['address']}}
-                                              </p>
-                                            </td>
-                                          </tr>
-                                          <tr style="border-collapse: collapse;">
-                                            <td class="es-m-txt-c" align="left" style="padding: 0; margin: 0; padding-top: 5px;">
-                                              <p
-                                                style="
-                                                  margin: 0;
-                                                  -webkit-text-size-adjust: none;
-                                                  -ms-text-size-adjust: none;
-                                                  mso-line-height-rule: exactly;
-                                                  font-size: 14px;
-                                                  font-family: arial, 'helvetica neue', helvetica, sans-serif;
-                                                  line-height: 21px;
-                                                  color: #333333;
-                                                "
-                                              >
-                                                <a
-                                                  target="_blank"
-                                                  href="tel:{{$configuration['phone_number']}}"
-                                                  style="
-                                                    -webkit-text-size-adjust: none;
-                                                    -ms-text-size-adjust: none;
-                                                    mso-line-height-rule: exactly;
-                                                    font-family: arial, 'helvetica neue', helvetica, sans-serif;
-                                                    font-size: 14px;
-                                                    text-decoration: underline;
-                                                    color: #333333;
-                                                  "
-                                                >
-                                                  {{$configuration['phone_text']}}
-                                                </a>
-                                                <br />
-                                                <a
-                                                  target="_blank"
-                                                  href="mailto:{{$configuration['email']}}"
-                                                  style="
-                                                    -webkit-text-size-adjust: none;
-                                                    -ms-text-size-adjust: none;
-                                                    mso-line-height-rule: exactly;
-                                                    font-family: arial, 'helvetica neue', helvetica, sans-serif;
-                                                    font-size: 14px;
-                                                    text-decoration: underline;
-                                                    color: #333333;
-                                                  "
-                                                >
-                                                {{$configuration['email']}}
-                                                </a>
-                                              </p>
-                                            </td>
-                                          </tr>
-                                        </tbody>
-                                      </table>
-                                    </td>
-                                  </tr>
-                                </tbody>
-                              </table>
-                              <!--[if mso]></td><td style="width:20px"></td><td style="width:362px" valign="top"><![endif]-->
-                              <table cellspacing="0" cellpadding="0" align="right" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-collapse: collapse; border-spacing: 0px;">
-                                <tbody>
-                                  <tr style="border-collapse: collapse;">
-                                    <td align="left" style="padding: 0; margin: 0; width: 362px;">
-                                      <table width="100%" cellspacing="0" cellpadding="0" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-collapse: collapse; border-spacing: 0px;">
-                                        <tbody>
-                                          <tr style="border-collapse: collapse;">
-                                            <td class="es-m-txt-c" align="left" style="padding: 0; margin: 0; padding-top: 15px; padding-bottom: 20px;">
-                                              <p
-                                                style="
-                                                  margin: 0;
-                                                  -webkit-text-size-adjust: none;
-                                                  -ms-text-size-adjust: none;
-                                                  mso-line-height-rule: exactly;
-                                                  font-size: 14px;
-                                                  font-family: arial, 'helvetica neue', helvetica, sans-serif;
-                                                  line-height: 21px;
-                                                  color: #333333;
-                                                "
-                                              >
-                                                <span style="font-size: 20px; line-height: 30px;">Information</span>
-                                              </p>
-                                            </td>
-                                          </tr>
-                                          <tr style="border-collapse: collapse;">
-                                            <td class="es-m-txt-c" align="left" style="padding: 0; margin: 0;">
-                                              <p
-                                                style="
-                                                  margin: 0;
-                                                  -webkit-text-size-adjust: none;
-                                                  -ms-text-size-adjust: none;
-                                                  mso-line-height-rule: exactly;
-                                                  font-size: 14px;
-                                                  font-family: arial, 'helvetica neue', helvetica, sans-serif;
-                                                  line-height: 21px;
-                                                  color: #333333;
-                                                "
-                                              >
-                                              (Tham khảo hướng dẫn đổi, trả, bảo hành hoặc liên hệ {{$configuration['phone_text']}} để được hướng dẫn thêm)
-                                              
-                                              </p>
-                                            </td>
-                                          </tr>
-                                        </tbody>
-                                      </table>
-                                    </td>
-                                  </tr>
-                                </tbody>
-                              </table>
-                              <!--[if mso]></td></tr></table><![endif]-->
                             </td>
                           </tr>
                         </tbody>
