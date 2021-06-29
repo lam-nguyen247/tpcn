@@ -34,7 +34,7 @@ class OrderNotification extends Notification
      */
     public function via($notifiable)
     {
-        return ['tranduyhoa94@gmail.com'];
+        return ['mail'];
     }
 
     /**
