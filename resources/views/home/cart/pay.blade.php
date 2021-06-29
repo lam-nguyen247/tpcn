@@ -133,20 +133,20 @@
                                         Mua hàng không cần đăng nhập.
                                     </label>
                                 </div>
-                                <div class="radio">
-                                    <label class="">
-                                            <input type="radio" id="ar-account-register" value="register" name="ar-account-name" style="position: absolute; opacity: 0;">
-                                        <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
-                                        Đăng kí thành viên <i>(để được nhận ưu đãi).</i>
-                                    </label>
-                                </div>
-                                <div class="radio">
-                                    <label class="">
-                                        <input type="radio" id="ar-account-login" value="login" name="ar-account-name" style="position: absolute; opacity: 0;">
-                                        <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
-                                        Đăng nhập <i>(nếu bạn đã đăng ký thành viên)</i>.
-                                    </label>
-                                </div>
+{{--                                <div class="radio">--}}
+{{--                                    <label class="">--}}
+{{--                                            <input type="radio" id="ar-account-register" value="register" name="ar-account-name" style="position: absolute; opacity: 0;">--}}
+{{--                                        <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>--}}
+{{--                                        Đăng kí thành viên <i>(để được nhận ưu đãi).</i>--}}
+{{--                                    </label>--}}
+{{--                                </div>--}}
+{{--                                <div class="radio">--}}
+{{--                                    <label class="">--}}
+{{--                                        <input type="radio" id="ar-account-login" value="login" name="ar-account-name" style="position: absolute; opacity: 0;">--}}
+{{--                                        <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>--}}
+{{--                                        Đăng nhập <i>(nếu bạn đã đăng ký thành viên)</i>.--}}
+{{--                                    </label>--}}
+{{--                                </div>--}}
                             </div>
                         </div>
                     </div>

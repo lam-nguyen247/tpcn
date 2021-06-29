@@ -15,38 +15,27 @@
                         <div class="strip-line"></div>
                         <div class="box-content">
                             <div class="news v2 row">
-                                <div class="col-sm-6 col-xs-12">
-                                    <div class="article_media">
-                                        <div class="thumb-article">
-                                            <a class="article_img" title="Làm thế nào để chọn đúng sản phẩm tăng hormone nữ an toàn?" href="lam-the-nao-de-chon-dung-san-pham-tang-hormone-nu-an-toan.html">
-                                                <img width="100%" height="auto" alt="" src="image/cache/catalog/anh%20SAG/melan-cholia-277731-360x220.jpg">
-                                            </a>
-                                        </div>
-                                        <div class="article-body">
-                                            <div class="content_p">
-                                                <div><a class="article_title" title="Làm thế nào để chọn đúng sản phẩm tăng hormone nữ an toàn?" href="lam-the-nao-de-chon-dung-san-pham-tang-hormone-nu-an-toan.html">Làm thế nào để chọn đúng sản phẩm tăng hormone nữ an toàn?</a></div>
-                                                <div class="article_description">Sức khỏe, đời sống chăn gối, nhan sắc rủ nhau xuống dốc khi bạn bắt đầu đặt chân sang...</div>
-                                                <a class="article_more" title="Làm thế nào để chọn đúng sản phẩm tăng hormone nữ an toàn?" href="lam-the-nao-de-chon-dung-san-pham-tang-hormone-nu-an-toan.html">Xem tiếp </a>
+                                @if (count($postNew))
+                                    @foreach($postNew as $val)
+                                        <div class="col-sm-6 col-xs-12">
+                                            <div class="article_media">
+                                                <div class="thumb-article">
+                                                    <a class="article_img" title="{{ $val->name }}" href="{{ $val->name }}">
+                                                        <img width="100%" height="auto" alt="" src="{{ !is_null($val->image) ? url($val->image) : defaultImage() }}">
+                                                    </a>
+                                                </div>
+                                                <div class="article-body">
+                                                    <div class="content_p">
+                                                        <div><a class="article_title" title="{{ $val->name }}"
+                                                                href="{{ route('home.detail-post', $val->id) }}">{{ $val->name }}</a></div>
+                                                        <div class="article_description">{{ $val->sort_description }}</div>
+                                                        <a class="article_more" title="{{ $val->name }}" href="{{ route('home.detail-post', $val->id) }}">Xem tiếp </a>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-xs-12">
-                                    <div class="article_media">
-                                        <div class="thumb-article">
-                                            <a class="article_img" title="PEPTAN thiên nhiên - giải pháp mới chăm sóc khớp toàn diện" href="peptan-thien-nhien-giai-phap-moi-cham-soc-khop-toan-dien.html">
-                                                <img width="100%" height="auto" alt="" src="image/cache/catalog/2450-cham-soc-khop2-360x220.jpg">
-                                            </a>
-                                        </div>
-                                        <div class="article-body">
-                                            <div class="content_p">
-                                                <div><a class="article_title" title="PEPTAN thiên nhiên - giải pháp mới chăm sóc khớp toàn diện" href="peptan-thien-nhien-giai-phap-moi-cham-soc-khop-toan-dien.html">PEPTAN thiên nhiên - giải pháp mới chăm sóc khớp toàn diện</a></div>
-                                                <div class="article_description">Một loại dưỡng chất sinh học thiên nhiên thế hệ mới do các nhà khoa học Mỹ phát minh có tên...</div>
-                                                <a class="article_more" title="PEPTAN thiên nhiên - giải pháp mới chăm sóc khớp toàn diện" href="peptan-thien-nhien-giai-phap-moi-cham-soc-khop-toan-dien.html">Xem tiếp </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                    @endforeach
+                                @endif
                             </div>
                         </div>
                     </div>

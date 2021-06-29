@@ -15,11 +15,10 @@
         <div class="box-content">
             <div class="hidden-xs hidden-sm">
                 <p>Để nhận được ưu đãi đặc biệt<br>và bản tin sức khỏe hữu ích</p>
-                <form action="http://sendy.ecogreen.com.vn/subscribe" method="POST" accept-charset="utf-8">
-                    <input value="user_ecogreen.com.vn" name="name" id="name" type="hidden">
-                    <input name="list" value="V5AywuahQ2oJTAkCLAL892uw" type="hidden">
+                <form id="" action="{{route('home.register-email')}}" method="post" enctype="multipart/form-data">
+                    @csrf
                     <input placeholder="Nhập địa chỉ mail" class="txtmail" name="email" id="email" type="text"><br>
-                    <input value="ĐĂNG KÝ" type="submit">
+                    <button type="submit" class="btn btn-success waves-effect waves-light mr-2">ĐĂNG KÝ</button>
                 </form>
             </div>
         </div>

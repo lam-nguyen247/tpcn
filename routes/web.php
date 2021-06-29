@@ -48,6 +48,7 @@ Route::get('page/{slug}', [PageController::class, 'getPageBySlug'])->name('home.
 Route::get('cau-hoi-thuong-gap', [HomeController::class, 'getQuestionOften'])->name('question.question-often');
 Route::get('hoi-ve', [HomeController::class, 'getQuestionCategory'])->name('question.list-question');
 Route::get('cau-hoi-ve/{id}', [HomeController::class, 'getQuestionDetail'])->name('question.question-detail');
+Route::post('register-email', [CustomerController::class, 'registerEmail'])->name('home.register-email');
 Route::fallback(function () {
     return redirect('/');
 });

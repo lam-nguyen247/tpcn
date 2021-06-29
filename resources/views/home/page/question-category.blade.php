@@ -85,7 +85,7 @@
                                                                                 <div class="boxs{{++$key}}">
                                                                                     <a href="{{ route('question.question-detail', $item->id)}}"
                                                                                        class="title" title="{!! $item->title !!} ">
-                                                                                        {!! $item->title !!}\product\edit.blade.php
+                                                                                        {!! $item->title !!}
                                                                                     </a>
                                                                                 </div>
                                                                             @endif

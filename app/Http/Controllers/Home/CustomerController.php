@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Home;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Home\CustomerRequest;
 use App\Models\Customer;
+use App\Models\Subscribe;
 use App\Notifications\CustomerNotification;
 use Exception;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Hash;
@@ -35,5 +37,12 @@ class CustomerController extends Controller
         }catch(Exception $err){
             Log::log("Email", $err);
         }
+    }
+
+    public function registerEmail(Request $request)
+    {
+        Subscribe::create($request->all());
+
+        return redirect()->route('home.index');
     }
 }

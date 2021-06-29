@@ -22,13 +22,15 @@ class HomeController extends Controller
         $products = Product::orderBy('id', 'DESC')->simplePaginate(12);
         $slide = Slide::orderBy('order', 'ASC')->get();
         $banner = Banner::all();
-        $post = Post::orderBy('id', 'DESC')->limit(8)->get();
+        $post = Post::inRandomOrder()->limit(8)->get();
+        $postNew = Post::orderBy('id', 'DESC')->limit(2)->get();
         return view('home.index', compact(
             'agent',
             'products',
             'slide',
             'banner',
             'post',
+            'postNew'
         ));
     }
 

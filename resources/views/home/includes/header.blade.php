@@ -82,17 +82,17 @@
                                                         </span>
                                                     </a>
                                                 </li>
-                                                <li class='mnu_trochuyen' >
-                                                    <p class='close-menu'></p>
-                                                    <p class='open-menu'></p>
-                                                    <a href='#' class='clearfix' >
-                                                        <span>
-                                                            <strong>
-                                                                <img src="{{url('/images/home/ico-chat.png')}}" alt="">Trò chuyện
-                                                            </strong>
-                                                        </span>
-                                                    </a>
-                                                </li>
+{{--                                                <li class='mnu_trochuyen' >--}}
+{{--                                                    <p class='close-menu'></p>--}}
+{{--                                                    <p class='open-menu'></p>--}}
+{{--                                                    <a href='#' class='clearfix' >--}}
+{{--                                                        <span>--}}
+{{--                                                            <strong>--}}
+{{--                                                                <img src="{{url('/images/home/ico-chat.png')}}" alt="">Trò chuyện--}}
+{{--                                                            </strong>--}}
+{{--                                                        </span>--}}
+{{--                                                    </a>--}}
+{{--                                                </li>--}}
                                                 <li class='mnu_muahang' >
                                                     <p class='close-menu'></p>
                                                     <p class='open-menu'></p>
