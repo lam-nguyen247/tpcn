@@ -26,7 +26,7 @@
                             <!-- Header Left -->
                             <div class="col-xs-12 col-sm-2 col-md-3 noright" id="header-left">
                                 <!-- Logo -->
-                                <div class="logo vvv"><a href="https://ecogreen.com.vn"><img src="image/catalog/logo.png" title="EcoShop" alt="EcoShop"></a></div>
+                                <div class="logo vvv"><a href="{{ route('home.index') }}"><img src="{{url('/images/home/logo.png')}}" title="EcoShop" alt="EcoShop" /></a></div>
                             </div>
                         </div>
                     </div>
