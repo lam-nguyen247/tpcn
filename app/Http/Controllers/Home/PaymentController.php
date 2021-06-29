@@ -51,7 +51,7 @@ class PaymentController extends Controller
                         'name' => $value->product->title,
                         'image' => $value->product->image,
                         'qty' => $value->qty,
-                        'price' => $value->product->price
+                        'price' => (int)$value->product->price
                     ];
                 }
 
