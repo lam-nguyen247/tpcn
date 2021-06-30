@@ -14,6 +14,8 @@
         <meta name="description" content="@yield('description') ">
     @endif
     @cms
+    <meta property="og:image" content="@yield('cover')"/>
+    <meta name="twitter:image" content="@yield('cover')"/>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="/images/admin/favicon.png">
     <link rel="canonical" href="{{request()->url()}}">

@@ -1,7 +1,6 @@
 @extends('home.layouts.app')
 
-@section('title', env('NAME_LOGO'))
-@section('description', 'asdfasdf')
+@section('cover', url('/images/home/logo.PNG'))
 @section('css')
     <link href="/css/home/settings.css" rel="stylesheet">
     <link href="/css/home/static-captions.css" rel="stylesheet">
