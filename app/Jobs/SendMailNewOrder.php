@@ -33,7 +33,7 @@ class SendMailNewOrder implements ShouldQueue
      */
     public function handle()
     {
-        Mail::to('tranduyhoa94@gmail.com', env('MAIL_FROM_NAME'))->send(new MailNewOrder());
+        Mail::to('euecopharma@gmail.com', env('MAIL_FROM_NAME'))->send(new MailNewOrder());
     }
 
     /**

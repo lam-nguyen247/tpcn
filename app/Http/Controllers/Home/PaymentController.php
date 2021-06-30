@@ -55,7 +55,7 @@ class PaymentController extends Controller
                     ];
                 }
 
-                Notification::route('mail', 'tranduyhoa94@gmail.com')->notify(new OrderNotification($order, $data));
+                Notification::route('mail', 'euecopharma@gmail.com')->notify(new OrderNotification($order, $data));
             });
 
             return response()->json([
