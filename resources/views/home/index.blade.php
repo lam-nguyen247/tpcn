@@ -1,6 +1,6 @@
 @extends('home.layouts.app')
 
-@section('cover', '/images/home/logo.PNG')
+@section('cover', '/images/home/logo.png')
 @section('css')
     <link href="/css/home/settings.css" rel="stylesheet">
     <link href="/css/home/static-captions.css" rel="stylesheet">
