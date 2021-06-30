@@ -18,6 +18,8 @@ class HomeController extends Controller
 {
     public function index()
     {
+        $page = Page::find(1);
+        $seo = $page->seo;
         $agent = new Agent();
         $products = Product::orderBy('id', 'DESC')->simplePaginate(12);
         $slide = Slide::orderBy('order', 'ASC')->get();
