@@ -32,7 +32,8 @@ class HomeController extends Controller
             'slide',
             'banner',
             'post',
-            'postNew'
+            'postNew',
+            'seo'
         ));
     }
 
