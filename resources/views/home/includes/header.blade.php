@@ -278,8 +278,8 @@
                                         <li class='' >
                                             <p class='close-menu'></p>
                                             <p class='open-menu'></p>
-                                            <a href='tel:+1800556889' class='clearfix' >
-                                                <span><strong>HOTLINE 1800 556 889</strong></span>
+                                            <a href='tel:+84325793433' class='clearfix' >
+                                                <span><strong>HOTLINE: 0325 793 433</strong></span>
                                             </a>
                                         </li>
                                     </ul>
