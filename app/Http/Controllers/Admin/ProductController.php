@@ -24,6 +24,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Storage;
 use App\Models\Seo;
+use App\Services\SeoService;
 
 class ProductController extends Controller
 {
@@ -169,10 +170,10 @@ class ProductController extends Controller
 
             unset($images[$list_remove[$i]]);
         }
-        
+
         //update image
         $except = array_merge(['file', 'files', 'multi_img_device_1', 'combo_product_id', 'combo_product_title', 'properties'], Seo::META_LIST);
-        
+
         for ($i = 1; $i <= count($images); $i++) {
             $var = 'image_device_' . $i;
             if (isset($request->$var)) {
