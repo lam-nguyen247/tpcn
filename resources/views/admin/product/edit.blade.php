@@ -179,19 +179,20 @@
                         <div class="col-md-12 mb-5">
                             <p class="mr-2" >Loại Bệnh</p>
                             <div class="row">
-                                @php
-                                    $list = $product->disease_id==null?[-1]:explode(',', $product->disease_id);
-                                @endphp
-                                @if(!empty($diseases))
-                                    @foreach($diseases as $key => $val)
-                                        <div class="col-md-3 proper desease{{$val->id}}" >
-                                            <input type="checkbox" id="desease_{{$val->id}}_{{$key}}" {{ (!empty($list) && in_array($val->id, $list)) ? 'checked' : '' }} name="disease_id[]" value="{{$val->id}}" class="material-inputs chk-col-red">
-                                            <label for="desease_{{$val->id}}_{{$key}}">{{$val->name}}</label>
-                                        </div>
-                                    @endforeach
-                                @endif
+                            @php
+                                $list = $product->disease_id==null?[-1]:explode(',', $product->disease_id);
+                            @endphp
+                            @if(!empty($diseases))
+                                @foreach($diseases as $key => $val)
+                                    <div class="col-md-3 proper desease{{$val->id}}" >
+                                        <input type="checkbox" id="desease_{{$val->id}}_{{$key}}" {{ (!empty($list) && in_array($val->id, $list)) ? 'checked' : '' }} name="disease_id[]" value="{{$val->id}}" class="material-inputs chk-col-red">
+                                        <label for="desease_{{$val->id}}_{{$key}}">{{$val->name}}</label>
+                                    </div>
+                                @endforeach
+                            @endif
                             </div>
-                           @editseo
+                        </div>
+                        @editseo
                         <button type="submit" id="save" class="btn btn-success waves-effect waves-light mr-2 mt-5">Lưu</button>
                     </form>
                 </div>

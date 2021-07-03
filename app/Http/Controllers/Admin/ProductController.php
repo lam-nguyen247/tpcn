@@ -95,7 +95,7 @@ class ProductController extends Controller
             'sale' => $request->sale,
             'purchase' => $request->purchase,
             'status' => $request->status,
-            'title' => $request->title,
+            'title' => $request->product_title,
             'sort_description' => $request->sort_description,
             'album' => $list_img,
             'address' => $request->address,
@@ -115,6 +115,7 @@ class ProductController extends Controller
         $product->information = empty($request['information'])?$request['information']:$imageService->transformAll($request['information'], config('constants.folder.product') . $product->id . '/', 1024);
         $product->disease_id = isset($request->disease_id) ? implode(',', $request->disease_id) : '';
         $product->save();
+        $this->seoService->save($product, $request);
         return redirect()->route('product.create')->with('success', 'Lưu thành công');
     }
 
