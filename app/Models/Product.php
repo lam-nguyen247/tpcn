@@ -8,9 +8,13 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use App\Models\ProductCategory;
 use App\Models\Store;
+use App\Models\Traits\SeoableTrait;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product extends Model
 {
+    use HasFactory, SeoableTrait;
+
     protected $guarded = [];
 
     public function productCategory()
