@@ -29,7 +29,7 @@
                                 <tr>
                                     <td>{{$product->id}}</td>
                                     <td><img src="{{asset($product->image)}}" width="80" /></td>
-                                    @if(Route::has('product-category.index'))<td>{{$product->productCategory->name}}</td>@endif
+                                    @if(Route::has('product-category.index'))<td>{{$product->productCategory?$product->productCategory->name:''}}</td>@endif
                                     <td>{{$product->title}}</td>
                                     <td>
                                         <input id="price{{$product->id}}" onchange="updatePrice({{$product->id}})" type="number" min="1" pattern="[0-9]*" name="price{{$product->id}}" class="form-control " step="0.01"  min="0" value="{{old('price')??$product->price}}">
