@@ -25,12 +25,14 @@ class ProductController extends Controller
     public function show($id)
     {
         $product = Product::withCount('comments')->find($id);
+        $seo = $product->seo;
         $productDiff = Product::where('id', '<>', $id)->inRandomOrder()->limit(7)->get();
         $page = Page::whereIn('slug', ['giao-hang', 'cam-ket'])->get();
         return view('home.product.detail', compact(
             'product',
             'productDiff',
-            'page'
+            'page',
+            'seo'
         ));
     }
 
