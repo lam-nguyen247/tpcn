@@ -32,7 +32,6 @@ class ProductController extends Controller
     private $seoService;
     public function __construct( SeoService $seoService)
     {
-        $this->imageService = $imageService;
         $this->seoService = $seoService;
     }
     /**
