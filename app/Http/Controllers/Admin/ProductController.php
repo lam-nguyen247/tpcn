@@ -125,8 +125,9 @@ class ProductController extends Controller
         $productCategoryList = ProductCategory::orderBy('order_display','asc')->get();
         $productList = Product::where('id','<>', $product->id)->get();
         $diseases = Disease::all();
+        $seo = $product->seo;
         session(['productList'=>$productList]);
-        return view('admin.product.edit', compact('product', 'productCategoryList', 'productList', 'diseases'));
+        return view('admin.product.edit', compact('product', 'productCategoryList', 'productList', 'diseases', 'seo'));
     }
 
     /**

@@ -143,7 +143,7 @@
                                 @endif
                             </div>
                         </div>
-{{--                        @createseo--}}
+                        @createseo
                         <button type="submit" id="save" class="btn btn-success waves-effect waves-light mr-2 mt-5">Lưu</button>
                     </form>
                 </div>
