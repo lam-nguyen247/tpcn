@@ -23,11 +23,17 @@ use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Storage;
+use App\Models\Seo;
 
 class ProductController extends Controller
 {
     private $folder = 'images/upload/product';
-
+    private $seoService;
+    public function __construct( SeoService $seoService)
+    {
+        $this->imageService = $imageService;
+        $this->seoService = $seoService;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -92,7 +98,6 @@ class ProductController extends Controller
             'title' => $request->title,
             'sort_description' => $request->sort_description,
             'album' => $list_img,
-            'description' => '',
             'address' => $request->address,
             'information' => '',
             'qty' => $request->qty,
@@ -108,7 +113,6 @@ class ProductController extends Controller
         }
         $product->image = $imageService->store($request->file, config('constants.folder.product') . $product->id . '/');
         $product->information = empty($request['information'])?$request['information']:$imageService->transformAll($request['information'], config('constants.folder.product') . $product->id . '/', 1024);
-        $product->description = empty($request['description'])?$request['description']:$imageService->transformAll($request['description'], config('constants.folder.product') . $product->id . '/', 1024);
         $product->disease_id = isset($request->disease_id) ? implode(',', $request->disease_id) : '';
         $product->save();
         return redirect()->route('product.create')->with('success', 'Lưu thành công');
@@ -155,7 +159,6 @@ class ProductController extends Controller
             }
         }
         $product->information = empty($request['information'])?$request['information']:$imageService->transformAll($request['information'], config('constants.folder.product') . $product->id . '/', 1024);
-        $product->description = empty($request['description'])?$request['description']:$imageService->transformAll($request['description'], config('constants.folder.product') . $product->id . '/', 1024);
         $list_remove = explode(',', $request->list_remove);
         //remove image
         $images = json_decode($product->album);
@@ -166,8 +169,10 @@ class ProductController extends Controller
 
             unset($images[$list_remove[$i]]);
         }
+        
         //update image
-        $except = array('file', 'files', 'multi_img_device_1', 'combo_product_id', 'combo_product_title', 'properties');
+        $except = array_merge(['file', 'files', 'multi_img_device_1', 'combo_product_id', 'combo_product_title', 'properties'], Seo::META_LIST);
+        
         for ($i = 1; $i <= count($images); $i++) {
             $var = 'image_device_' . $i;
             if (isset($request->$var)) {
@@ -211,6 +216,7 @@ class ProductController extends Controller
         $product->update($request->except($except));
         $product->disease_id = isset($request->disease_id) ? implode(',', $request->disease_id) : '';
         $product->save();
+        $this->seoService->save($product, $request);
         return redirect()->route('product.index')->with('success', 'Sửa thành công');
     }
 

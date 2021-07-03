@@ -78,7 +78,7 @@
                             <div class="col-sm-12 col-md-8 col-xl-9 d-flex ">
                                 <div class="card card-body px-0 mb-0">
                                     <div class="form-group focused mb-5 @error('title') has-error @enderror">
-                                        <input id="title" type="text"  maxlength="190" name="title" class="form-control @error('title') is-invalid @enderror" value="{{old('title') ?? $product->title}}" required>
+                                        <input id="title" type="text"  maxlength="190" name="product_title" class="form-control @error('title') is-invalid @enderror" value="{{old('title') ?? $product->title}}" required>
                                         <input type="hidden" name="id" value="{{$product->id}}">
                                         <span class="bar"></span>
                                         <label for="title">Tên Sản Phẩm</label>
@@ -176,8 +176,6 @@
                         <div style="clear: both"></div>
                         <span for="information">Thông tin chi tiết</span>
                         <textarea id="information" name="information" class="js-summernote form-material">{{$product->information}}</textarea>
-                        <span for="description">Mô tả sản phẩm</span>
-                        <textarea id="description" name="description" class="js-summernote form-material">{{$product->description}}</textarea>
                         <div class="col-md-12 mb-5">
                             <p class="mr-2" >Loại Bệnh</p>
                             <div class="row">

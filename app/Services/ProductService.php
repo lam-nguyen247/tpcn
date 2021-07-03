@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Http\Requests\PostRequest;
+use App\Http\Requests\ProductRequest;
 use App\Models\MasterCategory;
 use App\Models\Post;
 use App\Models\Product;
@@ -31,7 +31,7 @@ class ProductService
 
     public function getPostList()
     {
-        return Post::where('language', app()->getLocale())->latest();
+        return Product::where('language', app()->getLocale())->latest();
     }
 
     public function getCategoryList()
@@ -42,41 +42,41 @@ class ProductService
     /**
      * Store post
      *
-     * @param PostRequest $request
+     * @param ProductRequest $request
      */
-    public function store(PostRequest $request)
+    public function store(ProductRequest $request)
     {
-        $post = Post::create($request->except(array_merge(Seo::META_LIST, ['image', 'content'])));
-        $this->save($post, $request);
+        $product = Product::create($request->except(array_merge(Seo::META_LIST, ['image', 'content'])));
+        $this->save($product, $request);
     }
 
     /**
      * Update post
      *
-     * @param Post $post
-     * @param PostRequest $request
+     * @param Post $product
+     * @param ProductRequest $request
      */
-    public function update(Post $post, PostRequest $request)
+    public function update(Post $product, ProductRequest $request)
     {
-        $post->update($request->except(array_merge(Seo::META_LIST, ['image', 'content'])));
-        $this->save($post, $request);
+        $product->update($request->except(array_merge(Seo::META_LIST, ['image', 'content'])));
+        $this->save($product, $request);
     }
 
     /**
      * Save post
      *
-     * @param Post $post
-     * @param PostRequest $request
+     * @param Post $product
+     * @param ProductRequest $request
      */
-    private function save(Post $post, PostRequest $request)
+    private function save(Post $product, ProductRequest $request)
     {
         if ($request->file) {
-            $post->image = $this->imageService->store($request->file, config('constants.folder.post') . $post->id);
+            $product->image = $this->imageService->store($request->file, config('constants.folder.post') . $product->id);
         }
-        $post->content = $this->imageService->transformAll($request['content'], config('constants.folder.post') . $post->id);
-        $post->save();
-        $post->category()->sync($request->category_id);
-        $this->seoService->save($post, $request);
+        $product->content = $this->imageService->transformAll($request['content'], config('constants.folder.post') . $product->id);
+        $product->save();
+        $product->category()->sync($request->category_id);
+        $this->seoService->save($product, $request);
     }
 
     public function search($request)
