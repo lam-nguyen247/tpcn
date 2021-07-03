@@ -171,7 +171,7 @@ class ProductController extends Controller
         }
 
         //update image
-        $except = array_merge(['file', 'files', 'multi_img_device_1', 'combo_product_id', 'combo_product_title', 'properties'], Seo::META_LIST);
+        $except = array_merge(['file', 'files', 'multi_img_device_1', 'combo_product_id', 'combo_product_title', 'properties', 'product_title'], Seo::META_LIST);
 
         for ($i = 1; $i <= count($images); $i++) {
             $var = 'image_device_' . $i;
@@ -215,6 +215,7 @@ class ProductController extends Controller
         $request->request->remove('list_remove');
         $product->update($request->except($except));
         $product->disease_id = isset($request->disease_id) ? implode(',', $request->disease_id) : '';
+        $product->title =  $request->product_title;
         $product->save();
         $this->seoService->save($product, $request);
         return redirect()->route('product.index')->with('success', 'Sửa thành công');
