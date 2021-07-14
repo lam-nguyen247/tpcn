@@ -19,7 +19,7 @@
                                 @if(Route::has('product-category.index'))<th>Danh mục sản phẩm</th>@endif
                                 <th>Tên Sản Phẩm</th>
                                 <th>Giá</th>
-                                <th>Giá Khuyến Mãi</th>
+                                {{-- <th>Giá Khuyến Mãi</th> --}}
                                 <th>Trạng thái</th>
                                 <th>Chức năng</th>
                             </tr>
@@ -34,9 +34,9 @@
                                     <td>
                                         <input id="price{{$product->id}}" onchange="updatePrice({{$product->id}})" type="number" min="1" pattern="[0-9]*" name="price{{$product->id}}" class="form-control " step="0.01"  min="0" value="{{old('price')??$product->price}}">
                                     </td>
-                                    <td>
+                                    {{-- <td>
                                         <input id="sale{{$product->id}}" type="number" onchange="updatePrice({{$product->id}})" min="0" pattern="[0-9]*" name="sale{{$product->id}}" class="form-control " step="0.01" min="0"  value="{{old('sale')??$product->sale}}">
-                                    </td>
+                                    </td> --}}
                                     <td class="{{$product->status==1?'text-primary':'text-danger'}}">{{$product->statusString}}</td>
                                     <td>
 
