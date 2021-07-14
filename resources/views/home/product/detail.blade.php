@@ -1,7 +1,8 @@
 @extends('home.layouts.app')
 
-@section('title', null)
-@section('description',null)
+@section('title', $seo->title)
+@section('description',$seo->description)
+@section('cover', url($product->image))
 @section('css')
     <link href="/css/home/settings.css" rel="stylesheet">
     <link href="/css/home/static-captions.css" rel="stylesheet">
