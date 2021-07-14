@@ -68,7 +68,7 @@
                             <div class="col-sm-12 col-md-8 col-xl-9 d-flex ">
                                 <div class="card card-body px-0 mb-0">
                                     <div class="form-group focused  mb-5 @error('title') has-error @enderror">
-                                        <input id="title" type="text" maxlength="190" name="product_title" class="form-control @error('title') is-invalid @enderror" value="{{old('title')}}" required>
+                                        <input id="title" type="text" maxlength="190" name="product_title" class="form-control @error('product_title') is-invalid @enderror" value="{{old('product_title')}}" required>
                                         <span class="bar"></span>
                                         <label for="title">Tên Sản Phẩm</label>
                                         @error('title')

@@ -24,7 +24,7 @@ class ProductRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => ['required', 'unique:products,title,'.$this->id],
+            'product_title' => ['required', 'unique:products,title,'.$this->id],
             'code' => ['required', 'unique:products,code,'.$this->id],
         ];
     }
@@ -32,7 +32,7 @@ class ProductRequest extends FormRequest
     public function messages()
     {
         return [
-            'title.unique' => trans('validation.custom.title.product'),
+            'product_title.unique' => trans('validation.custom.title.product'),
             'code.unique' => trans('validation.custom.code.product')
         ];
     }
