@@ -20,7 +20,7 @@
                                                         <div class="left">
                                                             <div class="image ">
                                                                 <a class="sss" href="{{ route('home.product', $product->id) }}">
-                                                                    <img src="{{ url($product->image) }}" title="{{ $product->title }}" alt="{{ $product->title }}" class="">
+                                                                    <img style="max-width: 194px; max-height:194px" src="{{ url($product->image) }}" title="{{ $product->title }}" alt="{{ $product->title }}" class="">
                                                                 </a>
                                                             </div>
                                                         </div>
