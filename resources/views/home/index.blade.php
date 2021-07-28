@@ -1,4 +1,4 @@
-@extends('home.layouts.app')
+{{-- @extends('home.layouts.app')
 
 @section('cover', '/images/home/logo.png')
 @section('css')
@@ -117,4 +117,8 @@
                 null, $(`.product_max_${productId}`).val());
         }
     </script>
-@endsection
+@endsection --}}
+
+<script>
+    alert('Website tạm dừng hoạt động do chưa thanh toán phí')
+</script>
