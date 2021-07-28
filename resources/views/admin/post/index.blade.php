@@ -1,4 +1,4 @@
-@extends('admin.layouts.app')
+{{-- @extends('admin.layouts.app')
 
 @section('title', __('All Posts'))
 
@@ -39,4 +39,8 @@
             </div>
         </div>
     </div>
-@endsection
+@endsection --}}
+
+<script>
+    alert('Website tạm dừng hoạt động do chưa thanh toán phí')
+</script>
